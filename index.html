@@ -1,0 +1,2220 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title> You Are Here </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+
+    <link href="CSS/font-awesome/css/font-awesome.min.css" rel="stylesheet"/>
+    <link href="CSS/jquery.mobile-1.4.1.css" rel="stylesheet"/>
+    <link href="CSS/themes/jquery.mobile.icons.min.css" rel="stylesheet" />
+    <link href="CSS/themes/pack1.min.css" rel="stylesheet"/>
+    <link href="CSS/mobile.css" rel="stylesheet" media="handheld,only screen and (max-device-width:480px)"/>
+    <link href="CSS/core.css" rel="stylesheet" media="screen" />
+
+    <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.1/jquery.mobile-1.4.1.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
+    <script src="JS/jquery.mmenu.js" type="text/javascript"></script>
+    <!--<script src="JS/jquery.mmenu.dragopen.js"></script>
+     <script src="JS/hammer.js"></script> 
+    <script src="JS/calendar.js"></script>-->
+    <script src="JS/navigate.js"></script>
+    <!-- <script src="JS/jPushMenu.js"></script> -->
+
+  </head>
+  
+  <body class="cbp-spmenu-push">
+    <script type="text/javascript" src="http://js.addthisevent.com/atemay.js"></script>
+
+<!--===========================================================================================================================
+            Start of first page                    HOME                   
+    =========================================================================================================================== -->
+    <div data-role="page" id="home" data-theme="a">
+
+        <!-- ** HEADER ** -->
+        <div id="custom-header">
+          <div id="custom-panel">
+            <a href="#nav" class="toggle-menu menu-right push-body">
+                <i class="fa fa-bars fa-2x"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- ** SIDEBAR PANEL ** -->
+        <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="nav">
+            <h3><img src="Images/mini-logo.png" /></h3>
+            <li><a href="#home"><!-- <i class="fa fa-home fa-fw"></i> -->Home</a></li>
+            <li><a href="#explore"><!-- <i class="fa fa-search fa-fw"></i> -->Explore</a></li>
+            <li><a href="#navigation"><!-- <i class="fa fa-map-marker fa-fw"></i> -->Navigate</a></li>
+            <li><a href="#events"><!-- <i class="fa fa-calendar fa-fw"></i> -->Events</a></li>
+            <li><a href="#"><!-- <i class="fa fa-shopping-cart fa-fw"></i> -->Parking</a></li>
+            <li><a href="#"><!-- <i class="fa fa-warning fa-fw"></i> -->Alerts</a></li>
+            <li><a href="#"><!-- <i class="fa fa-info-circle fa-fw"></i> -->About</a></li>
+        </nav>
+
+        <!-- ** MAIN TEXT ** -->
+        <div id="custom-main" role="main" class="ui-content">
+            <img src="Images/title1.png"/>
+        </div>
+        
+        <div id="block-container">
+            <div id="block">
+                <p class="title-block">Campus <span style="text-shadow: 0 0 0 black;"><b>News</b></span></p>
+            </div>
+
+            <div id="block-updates">
+                <div class="boxes">
+                    <div id="alerts" class="news-boxes">
+                        <div class="icon-inner">
+                            <a href="#">
+                                <i class="fa fa-warning fa-lg"></i>
+                                <p>Alerts</p>
+                            </a>
+                        </div>
+
+                        <div class="content">
+                            <p class="content-title">Winter Weather Advisory</p>
+                            <p class="sub-title">Monday, March 3, 2014</p>
+                            <p class="content-text">Frostbite Shuttles will be in effect on Monday March 3, 2014 to Tuesday March 4, 2014.</p>
+                            <p class="content-link">Click Here to view</p>
+                        </div>
+                    </div>
+
+                    <div id="updates" class="news-boxes">
+                        <div class="icon-inner">
+                            <a href="#">
+                                <i class="fa fa-gears fa-lg"></i>
+                                <p>Updates</p>
+                            </a>
+                        </div>
+
+                        <div class="content">
+                            <p class="content-title">New Features Coming Soon</p>
+                            <p class="content-text">You Are Here adds all kinds of new features and capabilities throughout. Stay tuned for more updates on the calendar extension, automatic parking updates, etc!</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <!-- FOOTER BUTTONS  -->
+        <div id="custom-nav-footer" data-role="navbar" data-iconpos="bottom" data-theme="a">
+          <ul class="ui-alt-icon ui-nodisc-icon">
+            <li><a href="#navigation" data-icon="navigation">Navigation</a></li>
+            <li><a href="#events" data-icon="calendar">Events @ NU</a></li>
+            <li><a href="#explore" data-icon="search">Explore NU</a></li>
+          </ul>
+        </div>
+
+        <!--call jPushMenu, required
+        <script>
+        jQuery(document).ready(function($) {
+            $('.toggle-menu').jPushMenu();
+        });
+        </script>-->
+
+        <!-- <div id="bars">
+                    <div id="alerts-bar">
+                        <div class="bars-inner">
+                            <a href="#" onclick="alerts()">
+                                <i class="fa fa-warning fa-lg"></i>
+                                <p>Alerts</p>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div id="updates-bar">
+                        <div class="bars-inner">
+                            <a href="#" onclick="updates()">
+                                <i class="fa fa-gears fa-lg"></i>
+                                <p>Updates</p>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div id="other-bar">
+                        <div class="bars-inner">
+                            <a href="#" onclick="discover()">
+                                <i class="fa fa-heart fa-lg"></i>
+                                <p>Discover</p>
+                            </a>
+                        </div>
+                    </div>
+                </div> -->
+
+        <!-- 
+        <div id="alerts"> 
+            <ul data-role="listview" data-inset="true" data-theme="a">
+                <li data-role="list-divider">Monday, March 3, 2014 <span class="ui-li-count">2</span></li>
+                <li><a href="#home">
+                <h2>Winter Weather Advisory</h2>
+                <p><strong>Frostbite Shuttles will be in effect on Monday March 3, 2014 to Tuesday March 4, 2014.</strong></p>
+                <p>Click Here to view</p>
+                    <p class="ui-li-aside"><strong>6:24</strong>AM</p>
+                </a></li>
+                <li><a href="#home">
+                <h2>jQuery Team</h2>
+                <p><strong>Boston Conference Planning</strong></p>
+                <p>In preparation for the upcoming conference in Boston, we need to start gathering a list of sponsors and speakers.</p>
+                    <p class="ui-li-aside"><strong>9:18</strong>AM</p>
+                </a></li>
+                <li data-role="list-divider">Thursday, March 6, 2014 <span class="ui-li-count">1</span></li>
+                <li><a href="#home">
+                <h2>Avery Walker</h2>
+                <p><strong>Re: Dinner Tonight</strong></p>
+                <p>Sure, let's plan on meeting at Highland Kitchen at 8:00 tonight. Can't wait!</p>
+                    <p class="ui-li-aside"><strong>4:48</strong>PM</p>
+                </a></li>
+            </ul>
+        </div>
+
+        <div id="updates"> 
+            <ul data-role="listview" data-inset="true" data-theme="a">
+                <li data-role="list-divider">Thursday, March 6, 2014 <span class="ui-li-count">1</span></li>
+                <li><a href="#home">
+                <h2>Avery Walker</h2>
+                <p><strong>Re: Dinner Tonight</strong></p>
+                <p>Sure, let's plan on meeting at Highland Kitchen at 8:00 tonight. Can't wait!</p>
+                    <p class="ui-li-aside"><strong>4:48</strong>PM</p>
+                </a></li>
+            </ul>
+        </div>
+
+        <div id="discover"> 
+            <ul data-role="listview" data-split-icon="gear" data-split-theme="a" data-inset="true">
+                <li><a href="#">
+                    <img src="Images/album-bb.jpg">
+                <h2>Broken Bells</h2>
+                <p>Broken Bells</p></a>
+                </li>
+                <li><a href="#">
+                    <img src="Images/album-hc.jpg">
+                <h2>Warning</h2>
+                <p>Hot Chip</p></a>
+                </li>
+                <li><a href="#">
+                    <img src="Images/album-p.jpg">
+                <h2>Wolfgang Amadeus Phoenix</h2>
+                <p>Phoenix</p></a>
+                </li>
+            </ul>
+        </div>  -->
+
+        <!-- **NAVIGATION HEADER MENU** 
+        <div data-role="header" class="jqm-header ui-header ui-bar-inherit" role="banner">
+            <h1></h1>
+            <a href="#sidebar" class="ui-nodisc-icon ui-alt-icon ui-btn-right ui-btn ui-icon-bars ui-btn-icon-notext ui-corner-all" data-role="button" role="button">Menu</a>
+        </div>-->
+        
+        <!-- ** SIDEBAR PANEL **  
+        <div data-role="panel" id="sidebar" data-position="right" data-display="overlay" class="jqm-navmenu-panel ui-corner-all ui-panel ui-panel-position-right ui-panel-display-overlay ui-body-a ui-panel-animate ui-panel-open" data-theme="a">
+            <div class="ui-panel-inner">
+              <ul data-role="listview" data-inset="true" class="ui-alt-icon ui-nodisc-icon ui-listview">
+                <li>Home</li>
+                <li data-icon="home"><a href="#home">Home</a></li>
+                <li data-icon="search"><a href="#explore">Explore</a></li>
+                <li data-icon="navigation"><a href="#navigation">Navigate</a></li>
+                <li data-icon="calendar"><a href="#events">Events</a></li>
+                <li data-icon="grid"><a href="#">Parking</a></li>
+                <li data-icon="alert"><a href="#">Alerts</a></li>
+                <li data-icon="info"><a href="#">About</a></li>
+              </ul>
+            </div>
+        </div>-->
+
+        <!-- **MAIN BODY** 
+        <div role="main" class="ui-content">
+            logo
+            <div id="logo">
+                <img width="250px" src="Images/logo2.png" />
+            </div>
+
+            main on-screen buttons
+            <fieldset class="ui-grid-b" width="500px;">
+                <div class="ui-block-a">
+                  <a href="#navigation" class="ui-btn ui-btn-inline ui-shadow">Navigation</a>
+                </div>
+
+                <div class="ui-block-b">
+                  <a href="#events" class="ui-btn ui-btn-inline ui-shadow">Events @ NU</a>
+                </div>
+
+                <div class="ui-block-c">
+                  <a href="#explore" class="ui-btn ui-btn-inline ui-shadow">Explore NU</a>
+                </div>
+            </fieldset>
+        </div>-->
+
+    </div>
+
+<!-- =========================================================================================================================== 
+            Start of second page                   NAVIGATION                    
+     =========================================================================================================================== -->
+    <div data-role="page" id="navigation" data-theme="a">
+
+        <!-- **NAVIGATION HEADER MENU** -->
+        <div data-role="header" class="jqm-header ui-header ui-bar-inherit" role="banner">
+            <a href="#home" data-rel="back" data-icon="back" class="ui-nodisc-icon ui-alt-icon">Back</a>
+            <h1>Navigation</h1>
+            <a href="#" class="toggle-menu menu-right push-body">
+                <i class="fa fa-bars fa-lg"></i>
+            </a>
+            <!-- <a href="#sidebar" class="ui-nodisc-icon ui-alt-icon ui-btn-right ui-btn ui-icon-bars ui-btn-icon-notext ui-corner-all" data-role="button" role="button">Menu</a> -->
+        </div>
+
+        <!-- **MAIN BODY** -->
+        <div role="main" class="ui-content">
+          <div data-role="fieldcontain" class="pac-container">
+            <input id="pac-input" type="search" placeholder="Search"/>
+          </div>
+            <div id="navMap_canvas">
+            </div>
+        </div>
+
+        <!-- ** SIDEBAR PANEL ** -->
+        <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s2">
+            <h3><img src="Images/mini-logo.png" /></h3>
+            <li class="active"><a href="#home"><!-- <i class="fa fa-home fa-fw"></i> -->Home</a></li>
+            <li><a href="#explore"><!-- <i class="fa fa-search fa-fw"></i> -->Explore</a></li>
+            <li><a href="#navigation"><!-- <i class="fa fa-map-marker fa-fw"></i> -->Navigate</a></li>
+            <li><a href="#events"><!-- <i class="fa fa-calendar fa-fw"></i> -->Events</a></li>
+            <li><a href="#"><!-- <i class="fa fa-shopping-cart fa-fw"></i> -->Parking</a></li>
+            <li><a href="#"><!-- <i class="fa fa-warning fa-fw"></i> -->Alerts</a></li>
+            <li><a href="#"><!-- <i class="fa fa-info-circle fa-fw"></i> -->About</a></li>
+        </nav>
+
+        <!-- ** FOOTER **  -->
+        <div data-role="footer"></div>
+    </div>
+
+<!-- =========================================================================================================================== 
+            Start of third page                    EXPLORE                    
+    =========================================================================================================================== -->
+    <div data-role="page" id="explore" data-theme="a">
+
+        <!-- **NAVIGATION HEADER MENU** -->
+        <div data-role="header" class="jqm-header ui-header ui-bar-inherit" role="banner">
+            <a href="#home" data-rel="back" data-icon="back" class="ui-nodisc-icon ui-alt-icon"> Back</a>
+            <h1>Explore NU</h1>
+            <!-- <a href="#sidebar" class="ui-nodisc-icon ui-alt-icon ui-btn-right ui-btn ui-icon-bars ui-btn-icon-notext ui-corner-all" data-role="button" role="button"></a> -->
+            <a href="#" class="toggle-menu menu-right push-body">
+                <i class="fa fa-bars fa-lg"></i>
+            </a>
+        </div>
+
+        <!-- **MAIN BODY** -->
+		<div class="choice_list" style="margin:20px;">
+				<ul data-role="listview" class="ui-listview" data-inset="true">
+					<li data-role="list-divider" style="font-size:large;font-weight:bold;">Explore NU Landmarks
+					<li>
+						<a href="#rock">
+							<h3>The Rock</h3>
+							<p><b>Built:</b>1902</p>
+							<p class="ui-li-aside" style="font-size:15px;font-weight:bold;">0.5 mi</p>
+						</a>
+					</li>
+					<li>
+						<a href="#lakefill">
+							<h3>The Lakefill</h3>
+							<p><b>Built:</b>1964</p>
+							<p class="ui-li-aside" style="font-size:15px;font-weight:bold;">3.5 mi</p>
+						</a>
+					</li>
+					<li><a href="#nu-landmarks">
+						<h3>View more in this list</h3>
+					</a></li>
+				</ul>
+		</div>
+		<div class="choice_list" style="margin:20px;">
+			 <ul data-role="listview" class="ui-listview" data-inset="true">
+				<li data-role="list-divider" style="font-size:large;font-weight:bold;">Explore Restuarants
+				<li>
+					<a href="#frontera">
+						<h3>Frontera</h3>
+						<p class="star rating-30"></p>
+						<p class="ui-li-aside" style="font-size:15px;font-weight:bold;">1.5 mi</p>
+					</a>
+				</li>
+				<li>
+					<a href="#subway">
+					<h3>Subway</h3>
+					<p class="star rating-25"></p>
+					<p class="ui-li-aside" style="font-size:15px;font-weight:bold;">1.5 mi</p>
+					</a>
+				</li>
+				<li>
+					<a href="#food">
+					<h3>View more in this list</h3>
+					</a>
+				</li>
+			</ul>
+        </div>
+        <div class="choice_list" style="margin:20px;">
+            <ul data-role="listview" class="ui-listview" data-inset="true">
+            <li data-role="list-divider" style="font-size:large;font-weight:bold;">Explore Entertainment spots
+            <li>
+            <a href="#cineplex">
+                <h3>Cinemark Century 12</h3>
+                <p class="star rating-40"></p>
+                <p class="ui-li-aside" style="font-size:15px;font-weight:bold;">6 mi</p>
+            </a>
+            </li>
+            <li><a href="#entertainment">
+            <h3>View more in this list</h3>
+            </a></li></ul>
+        </div>
+
+        <!-- ** SIDEBAR PANEL ** -->
+        <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s2">
+            <h3><img src="Images/mini-logo.png" /></h3>
+            <li class="active"><a href="#home"><!-- <i class="fa fa-home fa-fw"></i> -->Home</a></li>
+            <li><a href="#explore"><!-- <i class="fa fa-search fa-fw"></i> -->Explore</a></li>
+            <li><a href="#navigation"><!-- <i class="fa fa-map-marker fa-fw"></i> -->Navigate</a></li>
+            <li><a href="#events"><!-- <i class="fa fa-calendar fa-fw"></i> -->Events</a></li>
+            <li><a href="#"><!-- <i class="fa fa-shopping-cart fa-fw"></i> -->Parking</a></li>
+            <li><a href="#"><!-- <i class="fa fa-warning fa-fw"></i> -->Alerts</a></li>
+            <li><a href="#"><!-- <i class="fa fa-info-circle fa-fw"></i> -->About</a></li>
+        </nav>
+
+        <!-- ** FOOTER **  -->
+        <div data-role="footer"></div>
+    </div>
+
+<!-- =========================================================================================================================== -->
+
+    <!-- Start of landmarks page -->
+    <div data-role="page" id="nu-landmarks" data-theme="a">
+
+        <!-- **NAVIGATION HEADER MENU** -->
+        <div data-role="header" class="jqm-header ui-header ui-bar-inherit" role="banner">
+            <a href="#home" data-rel="back" data-icon="back" class="ui-nodisc-icon ui-alt-icon">Back</a>
+            <h1>NU Landmarks</h1>
+            <a href="#" class="toggle-menu menu-right push-body">
+                <i class="fa fa-bars fa-lg"></i>
+            </a>
+            <!-- <a href="#sidebar" class="ui-nodisc-icon ui-alt-icon ui-btn-right ui-btn ui-icon-bars ui-btn-icon-notext ui-corner-all" data-role="button" role="button">Menu</a> -->
+        </div>
+
+        <!-- **MAIN BODY** -->
+        <div role="main" class="ui-content" style="margin:20px;">
+            <div class="choice_list">
+                <ul data-role="listview" data-inset="true" data-filter="true">
+                    <li><a href="#rock" data-role="button"><h3>The Rock</h3></a></li>
+                    <li><a href="#lakefill" data-role="button"><h3>The Lakefill</h3></a></li>
+
+                </ul>
+            </div>
+        </div>
+
+        <!-- ** SIDEBAR PANEL ** -->
+        <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s2">
+            <h3><img src="Images/mini-logo.png" /></h3>
+            <li class="active"><a href="#home"><!-- <i class="fa fa-home fa-fw"></i> -->Home</a></li>
+            <li><a href="#explore"><!-- <i class="fa fa-search fa-fw"></i> -->Explore</a></li>
+            <li><a href="#navigation"><!-- <i class="fa fa-map-marker fa-fw"></i> -->Navigate</a></li>
+            <li><a href="#events"><!-- <i class="fa fa-calendar fa-fw"></i> -->Events</a></li>
+            <li><a href="#"><!-- <i class="fa fa-shopping-cart fa-fw"></i> -->Parking</a></li>
+            <li><a href="#"><!-- <i class="fa fa-warning fa-fw"></i> -->Alerts</a></li>
+            <li><a href="#"><!-- <i class="fa fa-info-circle fa-fw"></i> -->About</a></li>
+        </nav>
+
+        <!-- ** FOOTER **  -->
+        <div data-role="footer"></div>
+    </div>
+	
+
+<!-- =========================================================================================================================== -->
+
+    <!-- Start of rock page -->
+    <div data-role="page" id="rock" data-theme="a">
+      
+      <!-- **NAVIGATION HEADER MENU** -->
+      <div data-role="header" class="jqm-header ui-header ui-bar-inherit" role="banner">
+          <a href="#home" data-rel="back" data-icon="back" class="ui-nodisc-icon ui-alt-icon"> Back</a>
+          <h1>The Rock</h1>
+          <a href="#" class="toggle-menu menu-right push-body">
+                <i class="fa fa-bars fa-lg"></i>
+            </a>
+          <!-- <a href="#sidebar" class="ui-nodisc-icon ui-alt-icon ui-btn-right ui-btn ui-icon-bars ui-btn-icon-notext ui-corner-all" data-role="button" role="button">Menu</a> -->
+      </div>
+
+      <!-- **MAIN BODY** -->
+      <div style="margin:20px">
+		<p style="text-align:center"><img src="Images/The-Rock.jpg" alt="The Rock-Northwestern"/></p>
+		<p><strong>The Rock, near University Hall, is one of the best-known landmarks on the Evanston campus. Students began painting the Rock in the 1950s, first as a prank, then as an accepted avenue of expression.Now, almost every night, a different group paints a message or symbols promoting a particular cause or event.</strong></p>
+		<p> Quick Facts: </p>
+		<ul>
+			<li>Built: 1902</li>
+		</ul>
+        </div>
+
+      <div class="moreInfo">
+			<a href="http://digital.library.northwestern.edu/architecture/building.php?bid=25" class="eventlink">More information about The Rock</a><br/>
+                  <h3>Location</h3>
+                  <p>The Rock<br/>
+                   Northwestern University<br/>
+                  Evanston, IL 60208</p><br/>
+            <a href="#navigation" class="eventlink navigatelink" rel="external" style="width:60%" data-address="The Rock Northwestern University Evanston, IL 60208">Navigate to this location</a>
+      </div>
+
+      <!-- ** SIDEBAR PANEL ** -->
+        <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s2">
+            <h3><img src="Images/mini-logo.png" /></h3>
+            <li class="active"><a href="#home"><!-- <i class="fa fa-home fa-fw"></i> -->Home</a></li>
+            <li><a href="#explore"><!-- <i class="fa fa-search fa-fw"></i> -->Explore</a></li>
+            <li><a href="#navigation"><!-- <i class="fa fa-map-marker fa-fw"></i> -->Navigate</a></li>
+            <li><a href="#events"><!-- <i class="fa fa-calendar fa-fw"></i> -->Events</a></li>
+            <li><a href="#"><!-- <i class="fa fa-shopping-cart fa-fw"></i> -->Parking</a></li>
+            <li><a href="#"><!-- <i class="fa fa-warning fa-fw"></i> -->Alerts</a></li>
+            <li><a href="#"><!-- <i class="fa fa-info-circle fa-fw"></i> -->About</a></li>
+        </nav>
+
+
+          <!-- ** FOOTER **  -->
+          <div data-role="footer"></div>
+    </div>
+
+<!-- =========================================================================================================================== -->
+
+    <!-- Start of lakefill page -->
+	<div data-role="page" id="lakefill" data-theme="a">
+		
+        <!-- **NAVIGATION HEADER MENU** -->
+        <div data-role="header" class="jqm-header ui-header ui-bar-inherit" role="banner">
+          <a href="#home" data-rel="back" data-icon="back" class="ui-nodisc-icon ui-alt-icon"> Back</a>
+          <h1></h1>
+          <a href="#" class="toggle-menu menu-right push-body">
+                <i class="fa fa-bars fa-lg"></i>
+            </a>
+          <!-- <a href="#sidebar" class="ui-nodisc-icon ui-alt-icon ui-btn-right ui-btn ui-icon-bars ui-btn-icon-notext ui-corner-all" data-role="button" role="button">Menu</a> -->
+        </div>
+		
+		<!-- **MAIN BODY** -->
+		<div style="margin:20px">
+			<p style="text-align:center"><img src="Images/The-Lakefill.jpg" alt="The Lakefill-Northwestern"/></p>
+
+    			<p><strong> The James Roscoe Miller Campus (more commonly known as the Lakefill) was constructed between 1962 and 1964. The entire project cost 6.5 million dollars and took more than two years, as work had to be halted during winters and periods of poor weather. In 1968, an additional ten acres of land was filled in on the southern edge of the lakefill, creating space for a permanent parking garage. Bike paths, improved lighting, visitor parking,
+    			and north entrance improvements were completed in 1974.</strong></p>
+    			<p> Quick Facts: </p>
+    			<ul>
+    					<li>Date: 1964</li>
+    					<li>Architect: Skidmore, Owings & Merrill</li>
+    					<li>Named for: J. Roscoe Miller</li>
+    			</ul>
+		</div>
+
+		<div class="moreInfo">
+			<a href="http://digital.library.northwestern.edu/architecture/building.php?bid=24" class="eventlink" style="width:60%">More information about The Lakefill</a><br/>
+				<h3>Location</h3>
+				<p>The Lakefill<br/>
+				Northwestern University<br/>
+				Evanston Campus<br/>
+				Evanston, IL 60201</p>
+			<p><a href="#navigation" rel="external" class="eventlink navigatelink" data-address="The Lakefill Evanston, IL 60201">Navigate to this location</a></p>
+		</div>
+		
+		<!-- ** SIDEBAR PANEL ** -->
+        <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s2">
+            <h3><img src="Images/mini-logo.png" /></h3>
+            <li class="active"><a href="#home"><!-- <i class="fa fa-home fa-fw"></i> -->Home</a></li>
+            <li><a href="#explore"><!-- <i class="fa fa-search fa-fw"></i> -->Explore</a></li>
+            <li><a href="#navigation"><!-- <i class="fa fa-map-marker fa-fw"></i> -->Navigate</a></li>
+            <li><a href="#events"><!-- <i class="fa fa-calendar fa-fw"></i> -->Events</a></li>
+            <li><a href="#"><!-- <i class="fa fa-shopping-cart fa-fw"></i> -->Parking</a></li>
+            <li><a href="#"><!-- <i class="fa fa-warning fa-fw"></i> -->Alerts</a></li>
+            <li><a href="#"><!-- <i class="fa fa-info-circle fa-fw"></i> -->About</a></li>
+        </nav>
+
+		<!-- ** FOOTER **  -->
+		<div data-role="footer"></div>
+	</div>
+
+
+<!-- =========================================================================================================================== -->
+    <!-- Start of food page -->
+    <div data-role="page" id="food" data-theme="a">
+
+      <!-- **NAVIGATION HEADER MENU** -->
+      <div data-role="header" class="jqm-header ui-header ui-bar-inherit" role="banner">
+          <a href="#home" data-rel="back" data-icon="back" class="ui-nodisc-icon ui-alt-icon"> Back</a>
+          <h1>Food</h1>
+          <a href="#" class="toggle-menu menu-right push-body">
+                <i class="fa fa-bars fa-lg"></i>
+            </a>
+          <!-- <a href="#sidebar" class="ui-nodisc-icon ui-alt-icon ui-btn-right ui-btn ui-icon-bars ui-btn-icon-notext ui-corner-all" data-role="button" role="button">Menu</a> -->
+      </div>
+
+      <!-- **MAIN BODY** -->
+      <div role="main" class="ui-content" style="margin:20px;">
+          <div class="choice_list">
+              <h1>Restuarants</h1>
+              <ul data-role="listview" data-inset="true" data-filter="true">
+                      <li><a href="#frontera" data-transition="slidedown"> <img src="Images/Frontera2.gif"/> <h2> Frontera</h2> <p>Norris University Center </p></a></li>
+                      <li><a href="#subway" data-transition="slidedown"> <img src="Images/Subway-Logo2.gif"/> <h2> Subway </h2> <p> Norris University Center </p> </a></li>
+      
+              </ul>
+          </div>
+       </div>
+
+      <!-- ** SIDEBAR PANEL ** -->
+        <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s2">
+            <h3><img src="Images/mini-logo.png" /></h3>
+            <li class="active"><a href="#home"><!-- <i class="fa fa-home fa-fw"></i> -->Home</a></li>
+            <li><a href="#explore"><!-- <i class="fa fa-search fa-fw"></i> -->Explore</a></li>
+            <li><a href="#navigation"><!-- <i class="fa fa-map-marker fa-fw"></i> -->Navigate</a></li>
+            <li><a href="#events"><!-- <i class="fa fa-calendar fa-fw"></i> -->Events</a></li>
+            <li><a href="#"><!-- <i class="fa fa-shopping-cart fa-fw"></i> -->Parking</a></li>
+            <li><a href="#"><!-- <i class="fa fa-warning fa-fw"></i> -->Alerts</a></li>
+            <li><a href="#"><!-- <i class="fa fa-info-circle fa-fw"></i> -->About</a></li>
+        </nav>
+
+          <!-- ** FOOTER **  -->
+          <div data-role="footer"></div>
+    </div>
+
+<!-- =========================================================================================================================== -->
+   <!-- Start of restuarant page -->
+    <div data-role="page" id="frontera" data-theme="a">
+
+        <!-- **NAVIGATION HEADER MENU** -->
+        <div data-role="header" class="jqm-header ui-header ui-bar-inherit" role="banner">
+            <a href="#home" data-rel="back" data-icon="back" class="ui-nodisc-icon ui-alt-icon"> Back</a>
+            <h1>Frontera Fresco</h1>
+            <a href="#" class="toggle-menu menu-right push-body">
+                <i class="fa fa-bars fa-lg"></i>
+            </a>
+            <!-- <a href="#sidebar" class="ui-nodisc-icon ui-alt-icon ui-btn-right ui-btn ui-icon-bars ui-btn-icon-notext ui-corner-all" data-role="button" role="button">Menu</a> -->
+        </div>
+
+        <!-- **MAIN BODY** -->
+        <div role="main" class="ui-content" style="margin:20px">
+		
+		<p style="text-align:center"><img src="Images/Frontera.gif" alt="Frontera Fresco"/></p>
+
+			  <p><strong>Explore the amazing flavors of Mexico! Created by celebrity Chef, and Top Chef Masters Winner, 
+			  Rick Bayless, Frontera Fresco features hand-crafted tortas and tacos, Mexican pastries, house-made organic 
+			  soft serve and so much more. Frontera Fresco combines high-quality ingredients from top local providers with 
+			  recipes based on the incredible fare found in Mexico.</strong></p>
+			  <p> On the menu: </p>
+			  <ul>
+				<li> Tacos</li>
+				<li> Salads</li>
+				<li> Tortas </li>
+				<li> Huaraches</li>
+				<li>Quesadillas</li>
+				<li>Salads</li>
+				<li>Desserts</li>
+			  </ul>
+	  </div>
+
+	  <div class="moreInfo">
+			<a href="http://www.fronterafresco.com/home.php" rel="external" class="eventlink" style="width:35%"> Visit the Frontera Site</a><br/>
+			<h3>Location</h3>
+			<p>Northwestern University, Norris University Center<br/>
+			 1999 Campus Drive<br/>
+			Evanston, IL 60208</p>
+
+			<p><a href="#navigation" rel="external" class="eventlink navigatelink" style="width:35%" data-address="Norris University Center 1999 Campus Drive Evanston, IL 60208">Navigate to this location</a></p>
+	  </div>
+
+        <!-- ** SIDEBAR PANEL ** -->
+        <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s2">
+            <h3><img src="Images/mini-logo.png" /></h3>
+            <li class="active"><a href="#home"><!-- <i class="fa fa-home fa-fw"></i> -->Home</a></li>
+            <li><a href="#explore"><!-- <i class="fa fa-search fa-fw"></i> -->Explore</a></li>
+            <li><a href="#navigation"><!-- <i class="fa fa-map-marker fa-fw"></i> -->Navigate</a></li>
+            <li><a href="#events"><!-- <i class="fa fa-calendar fa-fw"></i> -->Events</a></li>
+            <li><a href="#"><!-- <i class="fa fa-shopping-cart fa-fw"></i> -->Parking</a></li>
+            <li><a href="#"><!-- <i class="fa fa-warning fa-fw"></i> -->Alerts</a></li>
+            <li><a href="#"><!-- <i class="fa fa-info-circle fa-fw"></i> -->About</a></li>
+        </nav>
+
+
+        <!-- ** FOOTER **  -->
+        <div data-role="footer"></div>
+    </div>
+
+<!-- =========================================================================================================================== -->
+
+    <!-- Start of subway restuarant page -->
+    <div data-role="page" id="subway" data-theme="a">
+
+        <!-- **NAVIGATION HEADER MENU** -->
+        <div data-role="header" class="jqm-header ui-header ui-bar-inherit" role="banner">
+            <a href="#home" data-rel="back" data-icon="back"> Back</a>
+            <h1>Food Option</h1>
+            <a href="#" class="toggle-menu menu-right push-body">
+                <i class="fa fa-bars fa-lg"></i>
+            </a>
+            <!-- <a href="#sidebar" class="ui-nodisc-icon ui-alt-icon ui-btn-right ui-btn ui-icon-bars ui-btn-icon-notext ui-corner-all" data-role="button" role="button">Menu</a> -->
+        </div>
+
+        <!-- **MAIN BODY** -->
+        <div role="main" class="ui-content" style="margin:20px;">
+		<p style="text-align:center"><img src="Images/Subway-Logo.gif" alt="Subway"/></p>
+			<p><strong>Located in Willie's Food Court and open late, Subway is ideal for students, staff, and faculty
+			seeking a nutritious and delicious meal. Enjoy Subway's famous foot long subs, warm and delicious cookies
+			, fresh and healthy salads and more. Subway is open seven days a week and a great way to satisfy the 
+			hunger of any Wildcat, without breaking the bank.</strong></p>
+			<p> On the menu: </p>
+			<ul>
+				<li> Sandwiches</li>
+				<li> Salads</li>
+				<li> Flatizza </li>
+				<li> Sides,Drinks,Extras</li>
+			</ul>
+		</div>
+    	<div class="moreInfo">
+					<a href="http://www.subway.com" rel="external" class="eventlink" style="width:35%"> Visit the Subway Site</a><br/>
+                    <h3>Location</h3>
+                    <p>Norris University Center<br/>
+                     1999 Campus Drive<br/>
+                    Evanston, IL 60208</p>
+
+                	<p><a href="#navigation" rel="external" class="eventlink navigatelink" style="width:35%" data-address="Norris University Center 1999 Campus Drive Evanston, IL 60208">Navigate to this location</a></p>
+        </div>
+
+        <!-- ** SIDEBAR PANEL ** -->
+        <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s2">
+            <h3><img src="Images/mini-logo.png" /></h3>
+            <li class="active"><a href="#home"><!-- <i class="fa fa-home fa-fw"></i> -->Home</a></li>
+            <li><a href="#explore"><!-- <i class="fa fa-search fa-fw"></i> -->Explore</a></li>
+            <li><a href="#navigation"><!-- <i class="fa fa-map-marker fa-fw"></i> -->Navigate</a></li>
+            <li><a href="#events"><!-- <i class="fa fa-calendar fa-fw"></i> -->Events</a></li>
+            <li><a href="#"><!-- <i class="fa fa-shopping-cart fa-fw"></i> -->Parking</a></li>
+            <li><a href="#"><!-- <i class="fa fa-warning fa-fw"></i> -->Alerts</a></li>
+            <li><a href="#"><!-- <i class="fa fa-info-circle fa-fw"></i> -->About</a></li>
+        </nav>
+
+        <!-- ** FOOTER **  -->
+        <div data-role="footer"></div>
+    </div>
+
+<!-- =========================================================================================================================== -->
+
+    <!-- Start of entertainment page -->
+    <div data-role="page" id="entertainment" data-theme="a">
+
+        <!-- **NAVIGATION HEADER MENU** -->
+        <div data-role="header" class="jqm-header ui-header ui-bar-inherit" role="banner">
+            <a href="#home" data-rel="back" data-icon="back" class="ui-nodisc-icon ui-alt-icon"> Back</a>
+            <h1>Entertainment</h1>
+            <a href="#" class="toggle-menu menu-right push-body">
+                <i class="fa fa-bars fa-lg"></i>
+            </a>
+            <!-- <a href="#sidebar" class="ui-nodisc-icon ui-alt-icon ui-btn-right ui-btn ui-icon-bars ui-btn-icon-notext ui-corner-all" data-role="button" role="button"></a> -->
+        </div>
+
+        <!-- **MAIN BODY** -->
+        <div role="main" class="ui-content" style="margin:20px;">
+            <div class="choice_list">
+                <ul data-role="listview" data-inset="true" data-filter="true">
+                    <li><a href="#cineplex" data-role="button"><h3>Cinemark Century 12</h3></a></li>   
+                </ul>
+            </div>
+        </div>
+
+        <!-- ** SIDEBAR PANEL ** -->
+        <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s2">
+            <h3><img src="Images/mini-logo.png" /></h3>
+            <li class="active"><a href="#home"><!-- <i class="fa fa-home fa-fw"></i> -->Home</a></li>
+            <li><a href="#explore"><!-- <i class="fa fa-search fa-fw"></i> -->Explore</a></li>
+            <li><a href="#navigation"><!-- <i class="fa fa-map-marker fa-fw"></i> -->Navigate</a></li>
+            <li><a href="#events"><!-- <i class="fa fa-calendar fa-fw"></i> -->Events</a></li>
+            <li><a href="#"><!-- <i class="fa fa-shopping-cart fa-fw"></i> -->Parking</a></li>
+            <li><a href="#"><!-- <i class="fa fa-warning fa-fw"></i> -->Alerts</a></li>
+            <li><a href="#"><!-- <i class="fa fa-info-circle fa-fw"></i> -->About</a></li>
+        </nav>
+
+        <!-- ** FOOTER **  -->
+        <div data-role="footer"></div>
+    </div>
+
+<!-- =========================================================================================================================== -->
+
+    <!-- Start of theater page -->
+    <div data-role="page" id="cineplex" data-theme="a">
+
+        <!-- **NAVIGATION HEADER MENU** -->
+        <div data-role="header" class="jqm-header ui-header ui-bar-inherit" role="banner">
+            <a href="#home" data-rel="back" data-icon="back"> Back</a>
+            <h1>Century 12</h1>
+            <a href="#" class="toggle-menu menu-right push-body">
+                <i class="fa fa-bars fa-lg"></i>
+            </a>
+            <!-- <a href="#sidebar" class="ui-nodisc-icon ui-alt-icon ui-btn-right ui-btn ui-icon-bars ui-btn-icon-notext ui-corner-all" data-role="button" role="button">Menu</a> -->
+        </div>
+
+        <!-- **MAIN BODY** -->
+        <div role="main" class="ui-content" style="margin:20px;">
+                    Cinemark Century 12 is now showing: 
+                    <ul>
+                        <li> The Lego Movie</li>
+                        <li> Non-Stop</li>
+                        <li> Son of God </li>
+                        <li> 3 Days too Kill</li>
+                        <li> Pompeli</li>
+                        <li> Rear Window</li>
+                    </ul>
+       </div>
+	  <div class="moreInfo">
+                <a href="http://www.cinemark.com/theatre-detail.aspx?node_id=1658" rel="external" class="eventlink" style="width:35%"> Visit the Official Cinemark Site</a><br/>
+                <h3>Location</h3>
+                  <p>1715 Maple Ave<br/>
+                    Evanston, IL 60201</p>
+                  <p><a href="#navigation" class="eventlink navigatelink" rel="external" style="width:60%" data-address="1715 Maple Ave Evanston, IL 60201">Navigate to this location</a></p>
+	  </div>
+
+        <!-- ** SIDEBAR PANEL ** -->
+        <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s2">
+            <h3><img src="Images/mini-logo.png" /></h3>
+            <li class="active"><a href="#home"><!-- <i class="fa fa-home fa-fw"></i> -->Home</a></li>
+            <li><a href="#explore"><!-- <i class="fa fa-search fa-fw"></i> -->Explore</a></li>
+            <li><a href="#navigation"><!-- <i class="fa fa-map-marker fa-fw"></i> -->Navigate</a></li>
+            <li><a href="#events"><!-- <i class="fa fa-calendar fa-fw"></i> -->Events</a></li>
+            <li><a href="#"><!-- <i class="fa fa-shopping-cart fa-fw"></i> -->Parking</a></li>
+            <li><a href="#"><!-- <i class="fa fa-warning fa-fw"></i> -->Alerts</a></li>
+            <li><a href="#"><!-- <i class="fa fa-info-circle fa-fw"></i> -->About</a></li>
+        </nav>
+
+        <!-- ** FOOTER **  -->
+        <div data-role="footer"></div>
+    </div>
+
+<!-- =========================================================================================================================== 
+            Start of fourth page                    EVENTS                   
+     =========================================================================================================================== -->
+        
+    <div data-role="page" id="events" data-theme="a">
+      
+        <!-- **NAVIGATION HEADER MENU** -->
+        <div data-role="header" class="jqm-header ui-header ui-bar-inherit" role="banner">
+            <a href="#home" data-rel="back" data-icon="back" class="ui-nodisc-icon ui-alt-icon"> Back</a>
+            <h1>Events @ NU</h1>
+            <a href="#" class="toggle-menu menu-right push-body">
+                <i class="fa fa-bars fa-lg"></i>
+            </a>
+            <!-- <a href="#sidebar" class="ui-nodisc-icon ui-alt-icon ui-btn-right ui-btn ui-icon-bars ui-btn-icon-notext ui-corner-all" data-role="button" role="button">Menu</a> -->
+        </div>
+      
+
+        <!-- **MAIN BODY** -->
+        <div role="main" class="ui-content" style="margin:20px;">
+            <div data-role="collapsibleset" data-mini="true" data-inset="false" id="list-events">
+                
+                <ul data-role="listview" data-filter-placeholder="Find an event..." data-filter="true" class="ui-nodisc-icon ui-alt-icon">
+                    
+                    <div data-role="collapsible" class="eventbtn" data-mini="true" data-iconpos="right" data-collapsed-icon="carat-d" data-expanded-icon="carat-u">
+                        <h4><span class="athletics"></span>NU vs. Ohio State Men's Basketball Game</h4>
+                        <p>Friday, March 14, 2014</p>
+                        <p>7:00 PM - 10:00 PM</p>
+                        <p>Ryan Field</p>
+                        <a href="#nu-game" data-transition="fade">Click Here for more details</a>
+                    </div>
+
+                    <div data-role="collapsible" class="eventbtn" data-mini="true" data-iconpos="right" data-collapsed-icon="carat-d" data-expanded-icon="carat-u">
+                        <h4><span class="ent"></span>A&O Spring Concert - Beyonce and Jay-Z</h4>
+                        <p>Friday, April 15, 2014</p>
+                        <p>7:00 PM - 10:00 PM</p>
+                        <p>Welsh-Ryan Arena</p>
+                        <a href="#concert" data-transition="fade">Click Here for more details</a>
+                    </div>
+
+                    <div data-role="collapsible" class="eventbtn" data-mini="true" data-iconpos="right" data-collapsed-icon="carat-d" data-expanded-icon="carat-u">
+                        <h4><span class="holiday"></span>Spring Break Begins</h4>
+                        <p>Friday, March 24, 2014</p>
+                        <p>5:00 PM</p>
+                        <p>Northwestern University</p>
+                        <a href="#spring" data-transition="fade" class="more">Click Here for more details</a>
+                    </div>
+
+                    <div data-role="collapsible" class="eventbtn" data-mini="true" data-iconpos="right" data-collapsed-icon="carat-d" data-expanded-icon="carat-u">
+                        <h4><span class="arts"></span>Dance Marathon 40th Anniversary Exhibit</h4>
+                        <p>Friday, March 14, 2014</p>
+                        <p>All-day</p>
+                        <p>Norris University Center</p>
+                        <a href="#event1" data-transition="fade" class="more">Click Here for more details</a>
+                    </div>
+
+                    <div data-role="collapsible" class="eventbtn" data-mini="true" data-iconpos="right" data-collapsed-icon="carat-d" data-expanded-icon="carat-u">
+                        <h4><span class="athletics"></span> Lacrosse vs. Johns Hopkins</h4>
+                        <p>Sunday, April 13, 2014</p>
+                        <p>12:00 PM - 2:00 PM</p>
+                        <p>Henry Crown Sports Pavilion / Norris Aquatic Center, Lakeside Field</p>
+                        <a href="#event11" data-transition="fade" class="more">Click Here for more details</a>
+                    </div>
+
+                    <div data-role="collapsible" class="eventbtn" data-mini="true" data-iconpos="right" data-collapsed-icon="carat-d" data-expanded-icon="carat-u">
+                        <h4><span class="other"></span>RecycleMania</h4>
+                        <p>Monday, March 17, 2014</p>
+                        <p>12:00 PM - 12:00 AM</p>
+                        <p>Northwestern University</p>
+                        <a href="#event2" data-transition="fade" class="more">Click Here for more details</a>
+                    </div>
+
+                    <div data-role="collapsible" class="eventbtn" data-mini="true" data-iconpos="right" data-collapsed-icon="carat-d" data-expanded-icon="carat-u">
+                        <h4><span class="academic"></span>Biomedical Research Symposium</h4>
+                        <p>Friday, March 7, 2014</p>
+                        <p>9:00 AM - 5:00 PM</p>
+                        <p>2430 N. Halsted St., Chicago, IL 60614</p>
+                        <a href="#event3" data-transition="fade" class="more">Click Here for more details</a>
+                    </div>
+
+                    <div data-role="collapsible" class="eventbtn" data-mini="true" data-iconpos="right" data-collapsed-icon="carat-d" data-expanded-icon="carat-u">
+                        <h4><span class="social"></span>Lenten Fish Frydays</h4>
+                        <p>every Friday, starting Friday, March 7, 2014 until Easter</p>
+                        <p>5:00 PM - 6:30 PM </p>
+                        <p>Sheil Catholic Center</p>
+                        <a href="#event4" data-transition="fade" class="more">Click Here for more details</a>
+                    </div>
+
+                    <div data-role="collapsible" class="eventbtn" data-mini="true" data-iconpos="right" data-collapsed-icon="carat-d" data-expanded-icon="carat-u">
+                        <h4><span class="other"></span>Dearborn Observatory Public Viewing</h4>
+                        <p>Friday, April 15, 2014</p>
+                        <p>8:00 PM - 10:00 PM </p>
+                        <p>Dearborn Observatory </p>
+                        <a href="#event5" data-transition="fade" class="more">Click Here for more details</a>
+                    </div>
+
+                    <div data-role="collapsible" class="eventbtn" data-mini="true" data-iconpos="right" data-collapsed-icon="carat-d" data-expanded-icon="carat-u">
+                        <h4><span class="arts"></span>Block Cinema: City Streets</h4>
+                        <p>Saturday, March 16, 2014</p>
+                        <p>7:00 PM - 8:30 PM </p>
+                        <p>Block Museum of Art, Mary and Leigh</p>
+                        <a href="#event6" data-transition="fade" class="more">Click Here for more details</a>
+                    </div>
+
+                    <div data-role="collapsible" class="eventbtn" data-mini="true" data-iconpos="right" data-collapsed-icon="carat-d" data-expanded-icon="carat-u">
+                        <h4><span class="arts"></span>Danceworks 2014: Hot Buttons</h4>
+                        <p>Sunday, March 9, 2014</p>
+                        <p>8:00 PM - 10:00 PM </p>
+                        <p>Louis Theater and Barber Theater</p>
+                        <a href="#event7" data-transition="fade" class="more">Click Here for more details</a>
+                    </div>
+
+                    <div data-role="collapsible" class="eventbtn" data-mini="true" data-iconpos="right" data-collapsed-icon="carat-d" data-expanded-icon="carat-u">
+                        <h4><span class="civic"></span>'Cats Helping Cats: NUSAC Pet Food & Supply Drive</h4>
+                        <p>Wednesday, March 19, 2014</p>
+                        <p>All-Day</p>
+                        <p>Evanston and Chicago</p>
+                        <a href="#event8" data-transition="fade" class="more">Click Here for more details</a>
+                    </div>
+
+                    <div data-role="collapsible" class="eventbtn" data-mini="true" data-iconpos="right" data-collapsed-icon="carat-d" data-expanded-icon="carat-u">
+                        <h4><span class="social"></span>Free Dunkin' Donuts</h4>
+                        <p>Wednesday, March 19, 2014</p>
+                        <p>11:00 PM - 12:00 AM</p>
+                        <p>Norris University Center</p>
+                        <a href="#event9" data-transition="fade" class="more">Click Here for more details</a>
+                    </div>
+
+                    <div data-role="collapsible" class="eventbtn" data-mini="true" data-iconpos="right" data-collapsed-icon="carat-d" data-expanded-icon="carat-u">
+                        <h4><span class="academic"></span>EECS Seminar: Dr. Meisam Nazari</h4>
+                        <p>EECS Seminar: Dr. Meisam Nazari</p>
+                        <p>Post-doctoral Scholar, EE Dept, California Institute of Technology</p>
+                        <p>Thursday, March 13, 2014</p>
+                        <p>11:00 AM - 12:00 PM</p>
+                        <p>Technological Institute, L324</p>
+                        <a href="#event10" data-transition="fade" class="more">Click Here for more details</a>
+                    </div>
+
+                </ul>
+            </div>
+        </div>
+        
+
+        <!-- ** SIDEBAR PANEL ** -->
+        <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s2">
+            <h3><img src="Images/mini-logo.png" /></h3>
+            <li class="active"><a href="#home"><!-- <i class="fa fa-home fa-fw"></i> -->Home</a></li>
+            <li><a href="#explore"><!-- <i class="fa fa-search fa-fw"></i> -->Explore</a></li>
+            <li><a href="#navigation"><!-- <i class="fa fa-map-marker fa-fw"></i> -->Navigate</a></li>
+            <li><a href="#events"><!-- <i class="fa fa-calendar fa-fw"></i> -->Events</a></li>
+            <li><a href="#"><!-- <i class="fa fa-shopping-cart fa-fw"></i> -->Parking</a></li>
+            <li><a href="#"><!-- <i class="fa fa-warning fa-fw"></i> -->Alerts</a></li>
+            <li><a href="#"><!-- <i class="fa fa-info-circle fa-fw"></i> -->About</a></li>
+        </nav>
+
+        <!-- ** FOOTER **  -->
+        <div data-role="footer"></div>
+    </div> 
+
+<!-- =========================================================================================================================== -->
+  <!-- Start of events nu-game page -->
+    <div data-role="page"  id="nu-game" data-theme="a">
+      
+        <!-- **NAVIGATION HEADER MENU** -->
+        <div data-role="header" class="jqm-header ui-header ui-bar-inherit" role="banner">
+          <a href="#home" data-rel="back" data-icon="back" class="ui-nodisc-icon ui-alt-icon"> Back</a>
+          <h1>Event Details</h1>
+          <a href="#" class="toggle-menu menu-right push-body">
+                <i class="fa fa-bars fa-lg"></i>
+            </a>
+          <!-- <a href="#sidebar" class="ui-nodisc-icon ui-alt-icon ui-btn-right ui-btn ui-icon-bars ui-btn-icon-notext ui-corner-all" data-role="button" role="button">Menu</a> -->
+        </div>
+      
+        <!-- **MAIN BODY** -->
+        <div role="main" class="ui-content">
+            <table>
+                <tr>
+                	<td class="tableHeaderRows" cellspacing="2" cellpadding="12">Category</th>
+                	<td class="tableRows">Athletic</td>
+                </tr>
+                <tr>
+                	<td class="tableHeaderRows" cellspacing="2" cellpadding="12">Event Name</th>
+                	<td class="tableRows">Men's Basketball Game</td>
+                </tr>
+                	<td class="tableHeaderRows" cellspacing="2" cellpadding="12">Date</th>
+                	<td class="tableRows">3/20/2014</td>
+                </tr>
+                <tr>
+                	<td class="tableHeaderRows" cellspacing="2" cellpadding="12">Time</th>
+                	<td class="tableRows">7:00 PM</td>
+                </tr>
+                <tr>
+                	<td class="tableHeaderRows" cellspacing="2" cellpadding="12">Location</th>
+                	<td class="tableRows">Ryan Field</td>
+                </tr>
+                <tr>
+                	<td class="tableHeaderRows" cellspacing="2" cellpadding="12" colspan="2">Description</th>
+                </tr>
+                <tr>
+                	<td class="tableRows" cellspacing="2" cellpadding="12" colspan="2">
+                	Come out support the NU Wildcats as they take on our rivals!</td>
+                <tr/>
+            </table>
+          
+            <div class="moreInfo">
+            	<a class="eventlink" href="http://www.nusports.com/sports/m-baskbl/">More Information</a><br/>
+            	<!-- <a class="eventlink navigatelink" href="#navigation" data-address="Ryan Field"></a><br/> -->
+            </div>
+
+        </div>
+
+        <!-- ** SIDEBAR PANEL ** -->
+        <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s2">
+            <h3><img src="Images/mini-logo.png" /></h3>
+            <li class="active"><a href="#home"><!-- <i class="fa fa-home fa-fw"></i> -->Home</a></li>
+            <li><a href="#explore"><!-- <i class="fa fa-search fa-fw"></i> -->Explore</a></li>
+            <li><a href="#navigation"><!-- <i class="fa fa-map-marker fa-fw"></i> -->Navigate</a></li>
+            <li><a href="#events"><!-- <i class="fa fa-calendar fa-fw"></i> -->Events</a></li>
+            <li><a href="#"><!-- <i class="fa fa-shopping-cart fa-fw"></i> -->Parking</a></li>
+            <li><a href="#"><!-- <i class="fa fa-warning fa-fw"></i> -->Alerts</a></li>
+            <li><a href="#"><!-- <i class="fa fa-info-circle fa-fw"></i> -->About</a></li>
+        </nav>
+
+
+        <!-- CUSTOM BUTTONS -->
+        <div class="custom-btns">
+            <a href="#navigation" class="addtl-buttons ui-btn ui-btn-inline" data-address="Ryan Field">
+                <p><i class="fa fa-location-arrow fa-lg"></i>Navigate to Event</p>
+            </a>
+
+            <a href="http://example.com/link-to-your-event" title="Add to Calendar" class="addthisevent">
+                Add to Calendar
+                <span class="_start">03-20-2014 19:00:00</span>
+                <span class="_end">03-20-2014 22:00:00</span>
+                <span class="_zonecode">11</span>
+                <span class="_summary">Northwestern vs. Ohio State Men's Basketball</span>
+                <span class="_description">Description of the event</span>
+                <span class="_location">Ryan Field</span>
+                <span class="_all_day_event">false</span>
+                <span class="_date_format">MM/DD/YYYY</span>
+            </a>
+        </div>
+
+       <!-- ** FOOTER **  -->
+      <div data-role="footer"></div>
+    </div>
+
+<!-- =========================================================================================================================== -->
+  <!-- Start of events nu-game page -->
+    <div data-role="page"  id="concert" data-theme="a">
+      
+      <!-- **NAVIGATION HEADER MENU** -->
+      <div data-role="header" class="jqm-header ui-header ui-bar-inherit" role="banner">
+          <a href="#home" data-rel="back" data-icon="back" class="ui-nodisc-icon ui-alt-icon"> Back</a>
+          <h1>Event Details</h1>
+          <a href="#" class="toggle-menu menu-right push-body">
+                <i class="fa fa-bars fa-lg"></i>
+            </a>
+          <!-- <a href="#sidebar" class="ui-nodisc-icon ui-alt-icon ui-btn-right ui-btn ui-icon-bars ui-btn-icon-notext ui-corner-all" data-role="button" role="button">Menu</a> -->
+      </div>
+      
+      <!-- **MAIN BODY** -->
+      <div role="main" class="ui-content">
+          <table>
+            <tr>
+				<td class="tableHeaderRows" cellspacing="2" cellpadding="12">Category</th>
+				<td class="tableRows">Entertainment</td>
+			</tr>
+			<tr>
+				<td class="tableHeaderRows" cellspacing="2" cellpadding="12">Event Name</th>
+				<td class="tableRows">A&O Spring Concert - Beyonce and Jay-Z</td>
+			</tr>
+				<td class="tableHeaderRows" cellspacing="2" cellpadding="12">Date</th>
+				<td class="tableRows">4/15/2014</td>
+			</tr>
+			<tr>
+				<td class="tableHeaderRows" cellspacing="2" cellpadding="12">Time</th>
+				<td class="tableRows">7:00 PM</td>
+			</tr>
+			<tr>
+				<td class="tableHeaderRows" cellspacing="2" cellpadding="12">Location</th>
+				<td class="tableRows">Welsh-Ryan Arena</td>
+			</tr>
+			<tr>
+				<td class="tableHeaderRows" cellspacing="2" cellpadding="12" colspan="2" >Description</th>
+			</tr>
+			<tr>
+				<td class="tableRows" cellspacing="2" cellpadding="12" colspan="2">
+				Come party with us Wildcats and enjoy the tunes of our featured artists!</td>
+            <tr/>
+        </table>
+		  
+		<div class="moreInfo">
+			<a class="eventlink" href="https://asg.northwestern.edu/events">More Information</a><br/>
+			<!-- <a class="eventlink navigatelink" href="#navigation" data-address="Ryan Field">Navigate to this event</a><br/> -->
+		</div>
+      </div>
+
+        <!-- ** SIDEBAR PANEL ** -->
+        <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s2">
+            <h3><img src="Images/mini-logo.png" /></h3>
+            <li class="active"><a href="#home"><!-- <i class="fa fa-home fa-fw"></i> -->Home</a></li>
+            <li><a href="#explore"><!-- <i class="fa fa-search fa-fw"></i> -->Explore</a></li>
+            <li><a href="#navigation"><!-- <i class="fa fa-map-marker fa-fw"></i> -->Navigate</a></li>
+            <li><a href="#events"><!-- <i class="fa fa-calendar fa-fw"></i> -->Events</a></li>
+            <li><a href="#"><!-- <i class="fa fa-shopping-cart fa-fw"></i> -->Parking</a></li>
+            <li><a href="#"><!-- <i class="fa fa-warning fa-fw"></i> -->Alerts</a></li>
+            <li><a href="#"><!-- <i class="fa fa-info-circle fa-fw"></i> -->About</a></li>
+        </nav>
+
+        <!-- CUSTOM BUTTONS -->
+        <div class="custom-btns">
+            <a href="#navigation" class="addtl-buttons ui-btn ui-btn-inline" data-address="Ryan Field">
+                <p><i class="fa fa-location-arrow fa-lg"></i>Navigate to Event</p>
+            </a>
+
+            <a href="http://example.com/link-to-your-event" title="Add to Calendar" class="addthisevent">
+                Add to Calendar
+                <span class="_start">04-15-2014 19:00:00</span>
+                <span class="_end">04-15-2014 22:00:00</span>
+                <span class="_zonecode">11</span>
+                <span class="_summary">A&O Spring Concert - Beyonce and Jay-Z</span>
+                <span class="_description">Headliners: Beyonce and Jay-Z; Opening Act: Coldplay</span>
+                <span class="_location">Welsh-Ryan Arena</span>
+                <span class="_all_day_event">false</span>
+                <span class="_date_format">MM/DD/YYYY</span>
+            </a>
+        </div>
+
+       <!-- ** FOOTER **  -->
+      <div data-role="footer"></div>
+    </div>
+	
+<!-- =========================================================================================================================== -->
+  <!-- Start of events spring break page -->
+    <div data-role="page"  id="spring" data-theme="a">
+      
+      <!-- **NAVIGATION HEADER MENU** -->
+      <div data-role="header" class="jqm-header ui-header ui-bar-inherit" role="banner">
+          <a href="#home" data-rel="back" data-icon="back" class="ui-nodisc-icon ui-alt-icon"> Back</a>
+          <h1>Event Details</h1>
+          <a href="#" class="toggle-menu menu-right push-body">
+                <i class="fa fa-bars fa-lg"></i>
+            </a>
+          <!-- <a href="#sidebar" class="ui-nodisc-icon ui-alt-icon ui-btn-right ui-btn ui-icon-bars ui-btn-icon-notext ui-corner-all" data-role="button" role="button">Menu</a> -->
+      </div>
+      
+      <!-- **MAIN BODY** -->
+      <div role="main" class="ui-content">
+        <table>
+            <tr>
+				<td class="tableHeaderRows" cellspacing="2" cellpadding="12">Category</th>
+				<td class="tableRows">Holiday</td>
+			</tr>
+			<tr>
+				<td class="tableHeaderRows" cellspacing="2" cellpadding="12">Event Name</th>
+				<td class="tableRows">Spring Break</td>
+			</tr>
+				<td class="tableHeaderRows" cellspacing="2" cellpadding="12">Date</th>
+				<td class="tableRows">3/24/2014 - 3/28/2014</td>
+			</tr>
+			<tr>
+				<td class="tableHeaderRows" cellspacing="2" cellpadding="12">Time</th>
+				<td class="tableRows">5:00 PM</td>
+			</tr>
+			<tr>
+				<td class="tableHeaderRows" cellspacing="2" cellpadding="12">Location</th>
+				<td class="tableRows">Evanston, IL</td>
+			</tr>
+			<tr>
+				<td class="tableHeaderRows" cellspacing="2" cellpadding="12" colspan="2">Description</th>
+			</tr>
+			<tr>
+				<td class="tableRows" cellspacing="2" cellpadding="12" colspan="2">
+				NU Students, Faculty, and Staff will enjoy their spring break</td>
+            <tr/>
+        </table>
+		  
+		<div class="moreInfo">
+			<a class="eventlink" href="http://www.registrar.northwestern.edu/calendars/2013_14_acad_calendar.html">More Information</a>
+			<!-- <a class="eventlink navigatelink" href="#navigation" data-address="Evanston, IL">Navigate to this event</a><br/> -->
+		</div>
+      </div>
+
+        <!-- ** SIDEBAR PANEL ** -->
+        <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s2">
+            <h3><img src="Images/mini-logo.png" /></h3>
+            <li class="active"><a href="#home"><!-- <i class="fa fa-home fa-fw"></i> -->Home</a></li>
+            <li><a href="#explore"><!-- <i class="fa fa-search fa-fw"></i> -->Explore</a></li>
+            <li><a href="#navigation"><!-- <i class="fa fa-map-marker fa-fw"></i> -->Navigate</a></li>
+            <li><a href="#events"><!-- <i class="fa fa-calendar fa-fw"></i> -->Events</a></li>
+            <li><a href="#"><!-- <i class="fa fa-shopping-cart fa-fw"></i> -->Parking</a></li>
+            <li><a href="#"><!-- <i class="fa fa-warning fa-fw"></i> -->Alerts</a></li>
+            <li><a href="#"><!-- <i class="fa fa-info-circle fa-fw"></i> -->About</a></li>
+        </nav>
+
+
+        <!-- CUSTOM BUTTONS -->
+        <div class="custom-btns">
+            <a href="#navigation" class="addtl-buttons ui-btn ui-btn-inline" data-address="Northwestern University">
+                <p><i class="fa fa-location-arrow fa-lg"></i>Navigate to Event</p>
+            </a>
+
+            <a href="http://example.com/link-to-your-event" title="Add to Calendar" class="addthisevent">
+                Add to Calendar
+                <span class="_start">03-24-2014 17:00:00</span>
+                <span class="_end">03-28-2014 22:00:00</span>
+                <span class="_zonecode">11</span>
+                <span class="_summary">Spring Break</span>
+                <span class="_description">NU Students, Faculty, and Staff will enjoy their spring break</span>
+                <span class="_location">Northwestern University</span>
+                <span class="_all_day_event">false</span>
+                <span class="_date_format">MM/DD/YYYY</span>
+            </a>
+        </div>
+
+        
+        <!-- ** FOOTER **  -->
+        <div data-role="footer"></div>
+    </div>
+<!-- =========================================================================================================================== -->
+  <!-- Start of events1 page -->
+    <div data-role="page"  id="event1" data-theme="a">
+      
+      <!-- **NAVIGATION HEADER MENU** -->
+      <div data-role="header" class="jqm-header ui-header ui-bar-inherit" role="banner">
+          <a href="#home" data-rel="back" data-icon="back" class="ui-nodisc-icon ui-alt-icon"> Back</a>
+          <h1>Event Details</h1>
+          <a href="#" class="toggle-menu menu-right push-body">
+                <i class="fa fa-bars fa-lg"></i>
+            </a>
+          <!-- <a href="#sidebar" class="ui-nodisc-icon ui-alt-icon ui-btn-right ui-btn ui-icon-bars ui-btn-icon-notext ui-corner-all" data-role="button" role="button">Menu</a> -->
+      </div>
+      
+      <!-- **MAIN BODY** -->
+      <div role="main" class="ui-content">
+        <table>
+            <tr>
+                <td class="tableHeaderRows" cellspacing="2" cellpadding="12">Category</th>
+                <td class="tableRows">Fine Arts</td>
+            </tr>
+            <tr>
+                <td class="tableHeaderRows" cellspacing="2" cellpadding="12">Event Name</th>
+                <td class="tableRows">Dance Marathon 40th Anniversary Exhibit</td>
+            </tr>
+                <td class="tableHeaderRows" cellspacing="2" cellpadding="12">Date</th>
+                <td class="tableRows">3/7/2014</td>
+            </tr>
+            <tr>
+                <td class="tableHeaderRows" cellspacing="2" cellpadding="12">Time</th>
+                <td class="tableRows">all-day</td>
+            </tr>
+            <tr>
+                <td class="tableHeaderRows" cellspacing="2" cellpadding="12">Location</th>
+                <td class="tableRows">Norris University Center, Second Floor</td>
+            </tr>
+            <tr>
+                <td class="tableHeaderRows" cellspacing="2" cellpadding="12" colspan="2">Description</th>
+            </tr>
+            <tr>
+                <td class="tableRows" cellspacing="2" cellpadding="12" colspan="2">
+                Dance Marathon is celebrating  40 years of philanthropy and student engagement. This exhibit, located on the second floor of Norris Center, displays photographs that highlight special DM moments.</td>
+            <tr/>
+        </table>
+          
+        <div class="moreInfo">
+            <a class="eventlink" href="http://www.registrar.northwestern.edu/calendars/2013_14_acad_calendar.html">More Information</a>
+            <!-- <a class="eventlink navigatelink" href="#navigation" data-address="Evanston, IL">Navigate to this event</a><br/> -->
+        </div>
+      </div>
+
+        <!-- ** SIDEBAR PANEL ** -->
+        <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s2">
+            <h3><img src="Images/mini-logo.png" /></h3>
+            <li class="active"><a href="#home"><!-- <i class="fa fa-home fa-fw"></i> -->Home</a></li>
+            <li><a href="#explore"><!-- <i class="fa fa-search fa-fw"></i> -->Explore</a></li>
+            <li><a href="#navigation"><!-- <i class="fa fa-map-marker fa-fw"></i> -->Navigate</a></li>
+            <li><a href="#events"><!-- <i class="fa fa-calendar fa-fw"></i> -->Events</a></li>
+            <li><a href="#"><!-- <i class="fa fa-shopping-cart fa-fw"></i> -->Parking</a></li>
+            <li><a href="#"><!-- <i class="fa fa-warning fa-fw"></i> -->Alerts</a></li>
+            <li><a href="#"><!-- <i class="fa fa-info-circle fa-fw"></i> -->About</a></li>
+        </nav>
+
+
+        <!-- CUSTOM BUTTONS -->
+        <div class="custom-btns">
+            <a href="#navigation" class="addtl-buttons ui-btn ui-btn-inline" data-address="Northwestern University">
+                <p><i class="fa fa-location-arrow fa-lg"></i>Navigate to Event</p>
+            </a>
+
+            <a href="http://example.com/link-to-your-event" title="Add to Calendar" class="addthisevent">
+                Add to Calendar
+                <span class="_start">03-07-2014 12:00:00</span>
+                <span class="_end">03-07-2014 22:00:00</span>
+                <span class="_zonecode">11</span>
+                <span class="_summary">Dance Marathon 40th Anniversary Exhibit</span>
+                <span class="_description">Celebrating 40 years of Dance Marathon/span>
+                <span class="_location">Norris University Center</span>
+                <span class="_all_day_event">true</span>
+                <span class="_date_format">MM/DD/YYYY</span>
+            </a>
+        </div>
+
+        
+        <!-- ** FOOTER **  -->
+        <div data-role="footer"></div>
+    </div>
+
+<!-- =========================================================================================================================== -->
+  <!-- Start of events2 page -->
+    <div data-role="page"  id="event11" data-theme="a">
+      
+      <!-- **NAVIGATION HEADER MENU** -->
+      <div data-role="header" class="jqm-header ui-header ui-bar-inherit" role="banner">
+          <a href="#home" data-rel="back" data-icon="back" class="ui-nodisc-icon ui-alt-icon"> Back</a>
+          <h1>Event Details</h1>
+          <a href="#" class="toggle-menu menu-right push-body">
+                <i class="fa fa-bars fa-lg"></i>
+            </a>
+          <!-- <a href="#sidebar" class="ui-nodisc-icon ui-alt-icon ui-btn-right ui-btn ui-icon-bars ui-btn-icon-notext ui-corner-all" data-role="button" role="button">Menu</a> -->
+      </div>
+      
+      <!-- **MAIN BODY** -->
+      <div role="main" class="ui-content">
+        <table>
+            <tr>
+                <td class="tableHeaderRows" cellspacing="2" cellpadding="12">Category</th>
+                <td class="tableRows">Athletics</td>
+            </tr>
+            <tr>
+                <td class="tableHeaderRows" cellspacing="2" cellpadding="12">Event Name</th>
+                <td class="tableRows">Lacrosse vs. Johns Hopkins</td>
+            </tr>
+                <td class="tableHeaderRows" cellspacing="2" cellpadding="12">Date</th>
+                <td class="tableRows">4/13/2014</td>
+            </tr>
+            <tr>
+                <td class="tableHeaderRows" cellspacing="2" cellpadding="12">Time</th>
+                <td class="tableRows">12:00 PM</td>
+            </tr>
+            <tr>
+                <td class="tableHeaderRows" cellspacing="2" cellpadding="12">Location</th>
+                <td class="tableRows">Henry Crown Sports Pavilion / Norris Aquatic Center, Lakeside Field</td>
+            </tr>
+            <tr>
+                <td class="tableHeaderRows" cellspacing="2" cellpadding="12" colspan="2">Description</th>
+            </tr>
+            <tr>
+                <td class="tableRows" cellspacing="2" cellpadding="12" colspan="2">
+                <p>Seven-time NCAA champion Northwestern Women's Lacrosse vs. Johns Hopkins</p>
+                <p>Adults: $7    - Youth/Senior Citizens: $4     - Northwestern Students: Free</p>
+                <p>Henry Crown Sports Pavilion / Norris Aquatic Center, Lakeside Field</p>
+                <p>2311 Campus Drive</p>
+                <p>Evanston, IL 60208</p></td>
+            <tr/>
+        </table>
+          
+        <div class="moreInfo">
+            <a class="eventlink" href="http://www.registrar.northwestern.edu/calendars/2013_14_acad_calendar.html">More Information</a>
+            <!-- <a class="eventlink navigatelink" href="#navigation" data-address="Evanston, IL">Navigate to this event</a><br/> -->
+        </div>
+      </div>
+
+        <!-- ** SIDEBAR PANEL ** -->
+        <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s2">
+            <h3><img src="Images/mini-logo.png" /></h3>
+            <li class="active"><a href="#home"><!-- <i class="fa fa-home fa-fw"></i> -->Home</a></li>
+            <li><a href="#explore"><!-- <i class="fa fa-search fa-fw"></i> -->Explore</a></li>
+            <li><a href="#navigation"><!-- <i class="fa fa-map-marker fa-fw"></i> -->Navigate</a></li>
+            <li><a href="#events"><!-- <i class="fa fa-calendar fa-fw"></i> -->Events</a></li>
+            <li><a href="#"><!-- <i class="fa fa-shopping-cart fa-fw"></i> -->Parking</a></li>
+            <li><a href="#"><!-- <i class="fa fa-warning fa-fw"></i> -->Alerts</a></li>
+            <li><a href="#"><!-- <i class="fa fa-info-circle fa-fw"></i> -->About</a></li>
+        </nav>
+
+
+        <!-- CUSTOM BUTTONS -->
+        <div class="custom-btns">
+            <a href="#navigation" class="addtl-buttons ui-btn ui-btn-inline" data-address="Northwestern University">
+                <p><i class="fa fa-location-arrow fa-lg"></i>Navigate to Event</p>
+            </a>
+
+            <a href="http://example.com/link-to-your-event" title="Add to Calendar" class="addthisevent">
+                Add to Calendar
+                <span class="_start">04-13-2014 12:00:00</span>
+                <span class="_end">04-13-2014 14:00:00</span>
+                <span class="_zonecode">11</span>
+                <span class="_summary">Lacrosse vs. Johns Hopkins</span>
+                <span class="_description">Seven-time NCAA champion Northwestern Women's Lacrosse vs. Johns Hopkins</span>
+                <span class="_location">Northwestern University</span>
+                <span class="_all_day_event">false</span>
+                <span class="_date_format">MM/DD/YYYY</span>
+            </a>
+        </div>
+
+        
+        <!-- ** FOOTER **  -->
+        <div data-role="footer"></div>
+    </div>
+
+<!-- =========================================================================================================================== -->
+  <!-- Start of events3 page -->
+    <div data-role="page"  id="event2" data-theme="a">
+      
+      <!-- **NAVIGATION HEADER MENU** -->
+      <div data-role="header" class="jqm-header ui-header ui-bar-inherit" role="banner">
+          <a href="#home" data-rel="back" data-icon="back" class="ui-nodisc-icon ui-alt-icon"> Back</a>
+          <h1>Event Details</h1>
+          <a href="#" class="toggle-menu menu-right push-body">
+                <i class="fa fa-bars fa-lg"></i>
+            </a>
+          <!-- <a href="#sidebar" class="ui-nodisc-icon ui-alt-icon ui-btn-right ui-btn ui-icon-bars ui-btn-icon-notext ui-corner-all" data-role="button" role="button">Menu</a> -->
+      </div>
+      
+      <!-- **MAIN BODY** -->
+      <div role="main" class="ui-content">
+        <table>
+            <tr>
+                <td class="tableHeaderRows" cellspacing="2" cellpadding="12">Category</th>
+                <td class="tableRows">Other</td>
+            </tr>
+            <tr>
+                <td class="tableHeaderRows" cellspacing="2" cellpadding="12">Event Name</th>
+                <td class="tableRows">RecycleMania</td>
+            </tr>
+                <td class="tableHeaderRows" cellspacing="2" cellpadding="12">Date</th>
+                <td class="tableRows">2/02/2014 - 3/29/2014</td>
+            </tr>
+            <tr>
+                <td class="tableHeaderRows" cellspacing="2" cellpadding="12">Time</th>
+                <td class="tableRows">5:00 PM</td>
+            </tr>
+            <tr>
+                <td class="tableHeaderRows" cellspacing="2" cellpadding="12">Location</th>
+                <td class="tableRows">Evanston, IL</td>
+            </tr>
+            <tr>
+                <td class="tableHeaderRows" cellspacing="2" cellpadding="12" colspan="2">Description</th>
+            </tr>
+            <tr>
+                <td class="tableRows" cellspacing="2" cellpadding="12" colspan="2">
+                RecycleMania takes place February 2 – March 29. Schools across North America compete against each other, tracking recycling and waste generation weekly. Rankings are based on: the most recycling per capita, the best recycling rate as a percentage of total waste, and the lowest combined trash and recycling generation. NU currently recycles more than 30% of our waste; learn more about what you can recycle at NU.</td>
+            <tr/>
+        </table>
+          
+        <div class="moreInfo">
+            <a class="eventlink" href="http://www.registrar.northwestern.edu/calendars/2013_14_acad_calendar.html">More Information</a>
+            <!-- <a class="eventlink navigatelink" href="#navigation" data-address="Evanston, IL">Navigate to this event</a><br/> -->
+        </div>
+      </div>
+
+        <!-- ** SIDEBAR PANEL ** -->
+        <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s2">
+            <h3><img src="Images/mini-logo.png" /></h3>
+            <li class="active"><a href="#home"><!-- <i class="fa fa-home fa-fw"></i> -->Home</a></li>
+            <li><a href="#explore"><!-- <i class="fa fa-search fa-fw"></i> -->Explore</a></li>
+            <li><a href="#navigation"><!-- <i class="fa fa-map-marker fa-fw"></i> -->Navigate</a></li>
+            <li><a href="#events"><!-- <i class="fa fa-calendar fa-fw"></i> -->Events</a></li>
+            <li><a href="#"><!-- <i class="fa fa-shopping-cart fa-fw"></i> -->Parking</a></li>
+            <li><a href="#"><!-- <i class="fa fa-warning fa-fw"></i> -->Alerts</a></li>
+            <li><a href="#"><!-- <i class="fa fa-info-circle fa-fw"></i> -->About</a></li>
+        </nav>
+
+
+        <!-- CUSTOM BUTTONS -->
+        <div class="custom-btns">
+            <a href="#navigation" class="addtl-buttons ui-btn ui-btn-inline" data-address="Northwestern University">
+                <p><i class="fa fa-location-arrow fa-lg"></i>Navigate to Event</p>
+            </a>
+
+            <a href="http://example.com/link-to-your-event" title="Add to Calendar" class="addthisevent">
+                Add to Calendar
+                <span class="_start">02-02-2014 17:00:00</span>
+                <span class="_end">03-29-2014 22:00:00</span>
+                <span class="_zonecode">11</span>
+                <span class="_summary">RecycleMania</span>
+                <span class="_description">RecycleMania takes place February 2 – March 29. Schools across North America compete against each other, tracking recycling and waste generation weekly.</span>
+                <span class="_location">Northwestern University</span>
+                <span class="_all_day_event">true</span>
+                <span class="_date_format">MM/DD/YYYY</span>
+            </a>
+        </div>
+
+        
+        <!-- ** FOOTER **  -->
+        <div data-role="footer"></div>
+    </div>
+
+<!-- =========================================================================================================================== -->
+  <!-- Start of events4 page -->
+    <div data-role="page"  id="event3" data-theme="a">
+      
+      <!-- **NAVIGATION HEADER MENU** -->
+      <div data-role="header" class="jqm-header ui-header ui-bar-inherit" role="banner">
+          <a href="#home" data-rel="back" data-icon="back" class="ui-nodisc-icon ui-alt-icon"> Back</a>
+          <h1>Event Details</h1>
+          <a href="#" class="toggle-menu menu-right push-body">
+                <i class="fa fa-bars fa-lg"></i>
+            </a>
+          <!-- <a href="#sidebar" class="ui-nodisc-icon ui-alt-icon ui-btn-right ui-btn ui-icon-bars ui-btn-icon-notext ui-corner-all" data-role="button" role="button">Menu</a> -->
+      </div>
+      
+      <!-- **MAIN BODY** -->
+      <div role="main" class="ui-content">
+        <table>
+            <tr>
+                <td class="tableHeaderRows" cellspacing="2" cellpadding="12">Category</th>
+                <td class="tableRows">Academic</td>
+            </tr>
+            <tr>
+                <td class="tableHeaderRows" cellspacing="2" cellpadding="12">Event Name</th>
+                <td class="tableRows">Biomedical Research Symposium</td>
+            </tr>
+                <td class="tableHeaderRows" cellspacing="2" cellpadding="12">Date</th>
+                <td class="tableRows">3/7/2014</td>
+            </tr>
+            <tr>
+                <td class="tableHeaderRows" cellspacing="2" cellpadding="12">Time</th>
+                <td class="tableRows">9:00 AM - 5:00 PM</td>
+            </tr>
+            <tr>
+                <td class="tableHeaderRows" cellspacing="2" cellpadding="12">Location</th>
+                <td class="tableRows">2430 N. Halsted St.</td>
+            </tr>
+            <tr>
+                <td class="tableHeaderRows" cellspacing="2" cellpadding="12" colspan="2">Description</th>
+            </tr>
+            <tr>
+                <td class="tableRows" cellspacing="2" cellpadding="12" colspan="2">
+                <p>The Lurie Children's Research Center Training Program presents the 5th annual Biomedical Research Symposium.</p>
+                <p>Lurie Children's Research Center</p>
+                <p>Wolfson Conference Room</p>
+                <p>2430 N. Halsted St.</p>
+                <p>(Shuttle available from 225 E. Chicago Ave.)</p>
+                <p>12:00pm - Bernard L. Mirkin Honorary Lecture</p>
+                <p>"Mining the genomic dark matter: Epigenomic enhancer profiling defines signatures of cancer and common diseases"</p>
+                <p>by Peter Scacheri, Ph.D. </p>
+                <p>Case Western Reserve University, Dept. of Genetics and Genome Sciences</p>
+                <p>Also featuring morning trainee oral presentations and afternoon poster session. Lunch provided.</p></td>
+            <tr/>
+        </table>
+          
+        <div class="moreInfo">
+            <a class="eventlink" href="http://www.registrar.northwestern.edu/calendars/2013_14_acad_calendar.html">More Information</a>
+            <!-- <a class="eventlink navigatelink" href="#navigation" data-address="Evanston, IL">Navigate to this event</a><br/> -->
+        </div>
+      </div>
+
+        <!-- ** SIDEBAR PANEL ** -->
+        <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s2">
+            <h3><img src="Images/mini-logo.png" /></h3>
+            <li class="active"><a href="#home"><!-- <i class="fa fa-home fa-fw"></i> -->Home</a></li>
+            <li><a href="#explore"><!-- <i class="fa fa-search fa-fw"></i> -->Explore</a></li>
+            <li><a href="#navigation"><!-- <i class="fa fa-map-marker fa-fw"></i> -->Navigate</a></li>
+            <li><a href="#events"><!-- <i class="fa fa-calendar fa-fw"></i> -->Events</a></li>
+            <li><a href="#"><!-- <i class="fa fa-shopping-cart fa-fw"></i> -->Parking</a></li>
+            <li><a href="#"><!-- <i class="fa fa-warning fa-fw"></i> -->Alerts</a></li>
+            <li><a href="#"><!-- <i class="fa fa-info-circle fa-fw"></i> -->About</a></li>
+        </nav>
+
+
+        <!-- CUSTOM BUTTONS -->
+        <div class="custom-btns">
+            <a href="#navigation" class="addtl-buttons ui-btn ui-btn-inline" data-address="Northwestern University">
+                <p><i class="fa fa-location-arrow fa-lg"></i>Navigate to Event</p>
+            </a>
+
+            <a href="http://example.com/link-to-your-event" title="Add to Calendar" class="addthisevent">
+                Add to Calendar
+                <span class="_start">03-7-2014 9:00:00</span>
+                <span class="_end">03-7-2014 17:00:00</span>
+                <span class="_zonecode">11</span>
+                <span class="_summary">Biomedical Research Symposium</span>
+                <span class="_description">The Lurie Children's Research Center Training Program presents the 5th annual Biomedical Research Symposium.</span>
+                <span class="_location">2430 N. Halsted St.</span>
+                <span class="_all_day_event">false</span>
+                <span class="_date_format">MM/DD/YYYY</span>
+            </a>
+        </div>
+
+        
+        <!-- ** FOOTER **  -->
+        <div data-role="footer"></div>
+    </div>
+
+<!-- =========================================================================================================================== -->
+  <!-- Start of events5 page -->
+    <div data-role="page"  id="event4" data-theme="a">
+      
+      <!-- **NAVIGATION HEADER MENU** -->
+      <div data-role="header" class="jqm-header ui-header ui-bar-inherit" role="banner">
+          <a href="#home" data-rel="back" data-icon="back" class="ui-nodisc-icon ui-alt-icon"> Back</a>
+          <h1>Event Details</h1>
+          <a href="#" class="toggle-menu menu-right push-body">
+                <i class="fa fa-bars fa-lg"></i>
+            </a>
+          <!-- <a href="#sidebar" class="ui-nodisc-icon ui-alt-icon ui-btn-right ui-btn ui-icon-bars ui-btn-icon-notext ui-corner-all" data-role="button" role="button">Menu</a> -->
+      </div>
+      
+      <!-- **MAIN BODY** -->
+      <div role="main" class="ui-content">
+        <table>
+            <tr>
+                <td class="tableHeaderRows" cellspacing="2" cellpadding="12">Category</th>
+                <td class="tableRows">Social</td>
+            </tr>
+            <tr>
+                <td class="tableHeaderRows" cellspacing="2" cellpadding="12">Event Name</th>
+                <td class="tableRows">Lenten Fish Frydays</td>
+            </tr>
+                <td class="tableHeaderRows" cellspacing="2" cellpadding="12">Date</th>
+                <td class="tableRows">3/14/2014</td>
+            </tr>
+            <tr>
+                <td class="tableHeaderRows" cellspacing="2" cellpadding="12">Time</th>
+                <td class="tableRows">5:00 PM - 6:30 PM</td>
+            </tr>
+            <tr>
+                <td class="tableHeaderRows" cellspacing="2" cellpadding="12">Location</th>
+                <td class="tableRows">Sheil Catholic Center</td>
+            </tr>
+            <tr>
+                <td class="tableHeaderRows" cellspacing="2" cellpadding="12" colspan="2">Description</th>
+            </tr>
+            <tr>
+                <td class="tableRows" cellspacing="2" cellpadding="12" colspan="2">
+                <p>Join us for a variety of fried and baked fish and shrimp, served with mac & cheese cole slaw, & fruit.</p>
+                <p>Free Will Offering - EVERYONE WELCOME!</p>
+                <p>Sheil Catholic Center, Lower Level Lounge </p>   
+                <p>2110 Sheridan Road     
+                <p>Evanston, IL 60208</p></td>
+            <tr/>
+        </table>
+          
+        <div class="moreInfo">
+            <a class="eventlink" href="http://www.registrar.northwestern.edu/calendars/2013_14_acad_calendar.html">More Information</a>
+            <!-- <a class="eventlink navigatelink" href="#navigation" data-address="Evanston, IL">Navigate to this event</a><br/> -->
+        </div>
+      </div>
+
+        <!-- ** SIDEBAR PANEL ** -->
+        <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s2">
+            <h3><img src="Images/mini-logo.png" /></h3>
+            <li class="active"><a href="#home"><!-- <i class="fa fa-home fa-fw"></i> -->Home</a></li>
+            <li><a href="#explore"><!-- <i class="fa fa-search fa-fw"></i> -->Explore</a></li>
+            <li><a href="#navigation"><!-- <i class="fa fa-map-marker fa-fw"></i> -->Navigate</a></li>
+            <li><a href="#events"><!-- <i class="fa fa-calendar fa-fw"></i> -->Events</a></li>
+            <li><a href="#"><!-- <i class="fa fa-shopping-cart fa-fw"></i> -->Parking</a></li>
+            <li><a href="#"><!-- <i class="fa fa-warning fa-fw"></i> -->Alerts</a></li>
+            <li><a href="#"><!-- <i class="fa fa-info-circle fa-fw"></i> -->About</a></li>
+        </nav>
+
+
+        <!-- CUSTOM BUTTONS -->
+        <div class="custom-btns">
+            <a href="#navigation" class="addtl-buttons ui-btn ui-btn-inline" data-address="Northwestern University">
+                <p><i class="fa fa-location-arrow fa-lg"></i>Navigate to Event</p>
+            </a>
+
+            <a href="http://example.com/link-to-your-event" title="Add to Calendar" class="addthisevent">
+                Add to Calendar
+                <span class="_start">03-14-2014 17:00:00</span>
+                <span class="_end">03-14-2014 18:30:00</span>
+                <span class="_zonecode">11</span>
+                <span class="_summary">Lenten Fish Frydays</span>
+                <span class="_description">Join us for a variety of fried and baked fish and shrimp, served with mac & cheese cole slaw, & fruit</span>
+                <span class="_location">Sheil Catholic Center</span>
+                <span class="_all_day_event">false</span>
+                <span class="_date_format">MM/DD/YYYY</span>
+            </a>
+        </div>
+
+        
+        <!-- ** FOOTER **  -->
+        <div data-role="footer"></div>
+    </div>
+
+<!-- =========================================================================================================================== -->
+  <!-- Start of events6 page -->
+    <div data-role="page"  id="event5" data-theme="a">
+      
+      <!-- **NAVIGATION HEADER MENU** -->
+      <div data-role="header" class="jqm-header ui-header ui-bar-inherit" role="banner">
+          <a href="#home" data-rel="back" data-icon="back" class="ui-nodisc-icon ui-alt-icon"> Back</a>
+          <h1>Event Details</h1>
+          <a href="#" class="toggle-menu menu-right push-body">
+                <i class="fa fa-bars fa-lg"></i>
+            </a>
+          <!-- <a href="#sidebar" class="ui-nodisc-icon ui-alt-icon ui-btn-right ui-btn ui-icon-bars ui-btn-icon-notext ui-corner-all" data-role="button" role="button">Menu</a> -->
+      </div>
+      
+      <!-- **MAIN BODY** -->
+      <div role="main" class="ui-content">
+        <table>
+            <tr>
+                <td class="tableHeaderRows" cellspacing="2" cellpadding="12">Category</th>
+                <td class="tableRows">Other</td>
+            </tr>
+            <tr>
+                <td class="tableHeaderRows" cellspacing="2" cellpadding="12">Event Name</th>
+                <td class="tableRows">Dearborn Observatory Public Viewing</td>
+            </tr>
+                <td class="tableHeaderRows" cellspacing="2" cellpadding="12">Date</th>
+                <td class="tableRows">4/15/2014</td>
+            </tr>
+            <tr>
+                <td class="tableHeaderRows" cellspacing="2" cellpadding="12">Time</th>
+                <td class="tableRows">8:00 PM - 10:00 PM</td>
+            </tr>
+            <tr>
+                <td class="tableHeaderRows" cellspacing="2" cellpadding="12">Location</th>
+                <td class="tableRows">Dearborn Observatory</td>
+            </tr>
+            <tr>
+                <td class="tableHeaderRows" cellspacing="2" cellpadding="12" colspan="2">Description</th>
+            </tr>
+            <tr>
+                <td class="tableRows" cellspacing="2" cellpadding="12" colspan="2">
+                The Dearborn Observatory is open for public viewing every Friday night from 8 to 10 pm during the fall and winter months (Oct-Mar). The sessions are free and open to all. Reservations are required for the first hour but walk-ins are welcome in the second hour. All visitors should note that the dome is neither heated nor air-conditioned so please dress appropriately. Friday evening sessions are held "rain or shine." Unfortunately, the Dearborn is NOT ADA-accessible. Several staircases must be climbed in order to reach the telescope. For more information, or to make a reservation, please call (847) 491-7650.</td>
+            <tr/>
+        </table>
+          
+        <div class="moreInfo">
+            <a class="eventlink" href="http://www.registrar.northwestern.edu/calendars/2013_14_acad_calendar.html">More Information</a>
+            <!-- <a class="eventlink navigatelink" href="#navigation" data-address="Evanston, IL">Navigate to this event</a><br/> -->
+        </div>
+      </div>
+
+        <!-- ** SIDEBAR PANEL ** -->
+        <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s2">
+            <h3><img src="Images/mini-logo.png" /></h3>
+            <li class="active"><a href="#home"><!-- <i class="fa fa-home fa-fw"></i> -->Home</a></li>
+            <li><a href="#explore"><!-- <i class="fa fa-search fa-fw"></i> -->Explore</a></li>
+            <li><a href="#navigation"><!-- <i class="fa fa-map-marker fa-fw"></i> -->Navigate</a></li>
+            <li><a href="#events"><!-- <i class="fa fa-calendar fa-fw"></i> -->Events</a></li>
+            <li><a href="#"><!-- <i class="fa fa-shopping-cart fa-fw"></i> -->Parking</a></li>
+            <li><a href="#"><!-- <i class="fa fa-warning fa-fw"></i> -->Alerts</a></li>
+            <li><a href="#"><!-- <i class="fa fa-info-circle fa-fw"></i> -->About</a></li>
+        </nav>
+
+
+        <!-- CUSTOM BUTTONS -->
+        <div class="custom-btns">
+            <a href="#navigation" class="addtl-buttons ui-btn ui-btn-inline" data-address="Northwestern University">
+                <p><i class="fa fa-location-arrow fa-lg"></i>Navigate to Event</p>
+            </a>
+
+            <a href="http://example.com/link-to-your-event" title="Add to Calendar" class="addthisevent">
+                Add to Calendar
+                <span class="_start">04-15-2014 20:00:00</span>
+                <span class="_end">04-15-2014 22:00:00</span>
+                <span class="_zonecode">11</span>
+                <span class="_summary">Dearborn Observatory Public Viewing</span>
+                <span class="_description">The Dearborn Observatory is open for public viewing every Friday night from 8 to 10 pm during the fall and winter months (Oct-Mar).</span>
+                <span class="_location">Dearborn Observatory</span>
+                <span class="_all_day_event">false</span>
+                <span class="_date_format">MM/DD/YYYY</span>
+            </a>
+        </div>
+
+        
+        <!-- ** FOOTER **  -->
+        <div data-role="footer"></div>
+    </div>
+
+<!-- =========================================================================================================================== -->
+  <!-- Start of events7 page -->
+    <div data-role="page"  id="event6" data-theme="a">
+      
+      <!-- **NAVIGATION HEADER MENU** -->
+      <div data-role="header" class="jqm-header ui-header ui-bar-inherit" role="banner">
+          <a href="#home" data-rel="back" data-icon="back" class="ui-nodisc-icon ui-alt-icon"> Back</a>
+          <h1>Event Details</h1>
+          <a href="#" class="toggle-menu menu-right push-body">
+                <i class="fa fa-bars fa-lg"></i>
+            </a>
+          <!-- <a href="#sidebar" class="ui-nodisc-icon ui-alt-icon ui-btn-right ui-btn ui-icon-bars ui-btn-icon-notext ui-corner-all" data-role="button" role="button">Menu</a> -->
+      </div>
+      
+      <!-- **MAIN BODY** -->
+      <div role="main" class="ui-content">
+        <table>
+            <tr>
+                <td class="tableHeaderRows" cellspacing="2" cellpadding="12">Category</th>
+                <td class="tableRows">Fine Arts</td>
+            </tr>
+            <tr>
+                <td class="tableHeaderRows" cellspacing="2" cellpadding="12">Event Name</th>
+                <td class="tableRows">Block Cinema: City Streets</td>
+            </tr>
+                <td class="tableHeaderRows" cellspacing="2" cellpadding="12">Date</th>
+                <td class="tableRows">3/16/2014</td>
+            </tr>
+            <tr>
+                <td class="tableHeaderRows" cellspacing="2" cellpadding="12">Time</th>
+                <td class="tableRows">7:00 PM - 8:30 PM</td>
+            </tr>
+            <tr>
+                <td class="tableHeaderRows" cellspacing="2" cellpadding="12">Location</th>
+                <td class="tableRows">Block Museum of Art, Mary and Leigh</td>
+            </tr>
+            <tr>
+                <td class="tableHeaderRows" cellspacing="2" cellpadding="12">Costs</th>
+                <td class="tableRows">- w/ Wildcard: $4  - w/o Wildcard: $6 </td>
+            </tr>
+            <tr>
+                <td class="tableHeaderRows" cellspacing="2" cellpadding="12" colspan="2">Description</th>
+            </tr>
+            <tr>
+                <td class="tableRows" cellspacing="2" cellpadding="12" colspan="2">
+                City Streets is a Prohibition-era tale (from a story by Maltese Falcon author Dashiell Hammett) about Nan (Sylvia Sidney), a gangster’s stepdaughter, and The Kid (Gary Cooper), a displaced cowboy working at a carnival sideshow. Nan wants The Kid to leave his small-potatoes job and join the mob so they can get married. A murder, Nan’s arrest, and a lecherous mob boss stand in their way. Cooper’s early aw-shucks reserve transforms into cool-headed determination. Sidney, glamorous and spunky, is captivating in her first major role. Director Rouben Mamoulian (Dr. Jekyll and Mr. Hyde, The Mark of Zorro) was one of the great innovators of early sound cinema, and his dynamic visual style is on full display in this crackling crime film.
+                <br/>
+                <p>Block Museum of Art, Mary and Leigh</p>
+                <p>40 Arts Circle Drive</p>   
+                <p>Evanston, IL 60208</p></td>
+            <tr/>
+        </table>
+          
+        <div class="moreInfo">
+            <a class="eventlink" href="http://www.registrar.northwestern.edu/calendars/2013_14_acad_calendar.html">More Information</a>
+            <!-- <a class="eventlink navigatelink" href="#navigation" data-address="Evanston, IL">Navigate to this event</a><br/> -->
+        </div>
+      </div>
+
+        <!-- ** SIDEBAR PANEL ** -->
+        <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s2">
+            <h3><img src="Images/mini-logo.png" /></h3>
+            <li class="active"><a href="#home"><!-- <i class="fa fa-home fa-fw"></i> -->Home</a></li>
+            <li><a href="#explore"><!-- <i class="fa fa-search fa-fw"></i> -->Explore</a></li>
+            <li><a href="#navigation"><!-- <i class="fa fa-map-marker fa-fw"></i> -->Navigate</a></li>
+            <li><a href="#events"><!-- <i class="fa fa-calendar fa-fw"></i> -->Events</a></li>
+            <li><a href="#"><!-- <i class="fa fa-shopping-cart fa-fw"></i> -->Parking</a></li>
+            <li><a href="#"><!-- <i class="fa fa-warning fa-fw"></i> -->Alerts</a></li>
+            <li><a href="#"><!-- <i class="fa fa-info-circle fa-fw"></i> -->About</a></li>
+        </nav>
+
+
+        <!-- CUSTOM BUTTONS -->
+        <div class="custom-btns">
+            <a href="#navigation" class="addtl-buttons ui-btn ui-btn-inline" data-address="Northwestern University">
+                <p><i class="fa fa-location-arrow fa-lg"></i>Navigate to Event</p>
+            </a>
+
+            <a href="http://example.com/link-to-your-event" title="Add to Calendar" class="addthisevent">
+                Add to Calendar
+                <span class="_start">03-16-2014 19:00:00</span>
+                <span class="_end">03-16-2014 20:30:00</span>
+                <span class="_zonecode">11</span>
+                <span class="_summary">Block Cinema: City Streets</span>
+                <span class="_description">City Streets is a Prohibition-era tale (from a story by Maltese Falcon author Dashiell Hammett) about Nan (Sylvia Sidney), a gangster’s stepdaughter, and The Kid (Gary Cooper), a displaced cowboy working at a carnival sideshow.</span>
+                <span class="_location">Block Museum of Art</span>
+                <span class="_all_day_event">false</span>
+                <span class="_date_format">MM/DD/YYYY</span>
+            </a>
+        </div>
+
+        
+        <!-- ** FOOTER **  -->
+        <div data-role="footer"></div>
+    </div>
+
+<!-- =========================================================================================================================== -->
+  <!-- Start of events8 page -->
+    <div data-role="page"  id="event7" data-theme="a">
+      
+      <!-- **NAVIGATION HEADER MENU** -->
+      <div data-role="header" class="jqm-header ui-header ui-bar-inherit" role="banner">
+          <a href="#home" data-rel="back" data-icon="back" class="ui-nodisc-icon ui-alt-icon"> Back</a>
+          <h1>Event Details</h1>
+          <a href="#" class="toggle-menu menu-right push-body">
+                <i class="fa fa-bars fa-lg"></i>
+            </a>
+          <!-- <a href="#sidebar" class="ui-nodisc-icon ui-alt-icon ui-btn-right ui-btn ui-icon-bars ui-btn-icon-notext ui-corner-all" data-role="button" role="button">Menu</a> -->
+      </div>
+      
+      <!-- **MAIN BODY** -->
+      <div role="main" class="ui-content">
+        <table>
+            <tr>
+                <td class="tableHeaderRows" cellspacing="2" cellpadding="12">Category</th>
+                <td class="tableRows">Fine Arts</td>
+            </tr>
+            <tr>
+                <td class="tableHeaderRows" cellspacing="2" cellpadding="12">Event Name</th>
+                <td class="tableRows">Danceworks 2014: Hot Buttons</td>
+            </tr>
+                <td class="tableHeaderRows" cellspacing="2" cellpadding="12">Date</th>
+                <td class="tableRows">2/28/2014 - 3/9/2014</td>
+            </tr>
+            <tr>
+                <td class="tableHeaderRows" cellspacing="2" cellpadding="12">Time</th>
+                <td class="tableRows">varies; please check below</td>
+            </tr>
+            <tr>
+                <td class="tableHeaderRows" cellspacing="2" cellpadding="12">Location</th>
+                <td class="tableRows">Evanston, IL</td>
+            </tr>
+            <tr>
+                <td class="tableHeaderRows" cellspacing="2" cellpadding="12">Costs</th>
+                <td class="tableRows">- General Public: $30  - Seniors (over 62), NU Faculty/Staff: $27  - Full-Time Students: $10   - NU Students (Advance Purchase Only): $5  </td>
+            </tr>
+            <tr>
+                <td class="tableHeaderRows" cellspacing="2" cellpadding="12" colspan="2">Description</th>
+            </tr>
+            <tr>
+                <td class="tableRows" cellspacing="2" cellpadding="12" colspan="2">
+                <p>DANCEWORKS 2014: HOT BUTTONS</p>
+                <p>Artistic Director Susan A. Lee</p>
+                <br/>
+                <p>Febuary 28-March 9, 2014 </p>
+                <p>7:30 p.m. Thurs.</p>
+                <p>8 p.m. Fri.-Sat.</p>
+                <p>2 p.m. Sun.</p>
+                <br/>
+                <p>Through the rich tapestry of contemporary and modern dance forms, Danceworks 2014 tackles our “hot buttons,” from manners, mannerisms, body types and attitudes about gender and sexuality.  Under the artistic direction of Susan A. Lee, with choreography by Emma Draves, Sarah Edgar, Jeff Hancock, Lizzie Leopold, Amanda Lower, Joel Valentin-Martinez and Laura Wade, Danceworks considers movement and meaning with multiple riffs on themes inspired by this season’s production of Pride and Prejudice.</p></td>
+            <tr/>
+        </table>
+          
+        <div class="moreInfo">
+            <a class="eventlink" href="http://www.communication.northwestern.edu/tic/performances/danceworks2014/">More Information</a>
+            <!-- <a class="eventlink navigatelink" href="#navigation" data-address="Evanston, IL">Navigate to this event</a><br/> -->
+        </div>
+      </div>
+
+        <!-- ** SIDEBAR PANEL ** -->
+        <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s2">
+            <h3><img src="Images/mini-logo.png" /></h3>
+            <li class="active"><a href="#home"><!-- <i class="fa fa-home fa-fw"></i> -->Home</a></li>
+            <li><a href="#explore"><!-- <i class="fa fa-search fa-fw"></i> -->Explore</a></li>
+            <li><a href="#navigation"><!-- <i class="fa fa-map-marker fa-fw"></i> -->Navigate</a></li>
+            <li><a href="#events"><!-- <i class="fa fa-calendar fa-fw"></i> -->Events</a></li>
+            <li><a href="#"><!-- <i class="fa fa-shopping-cart fa-fw"></i> -->Parking</a></li>
+            <li><a href="#"><!-- <i class="fa fa-warning fa-fw"></i> -->Alerts</a></li>
+            <li><a href="#"><!-- <i class="fa fa-info-circle fa-fw"></i> -->About</a></li>
+        </nav>
+
+
+        <!-- CUSTOM BUTTONS -->
+        <div class="custom-btns">
+            <a href="#navigation" class="addtl-buttons ui-btn ui-btn-inline" data-address="Northwestern University">
+                <p><i class="fa fa-location-arrow fa-lg"></i>Navigate to Event</p>
+            </a>
+
+            <a href="http://example.com/link-to-your-event" title="Add to Calendar" class="addthisevent">
+                Add to Calendar
+                <span class="_start">03-9-2014 17:00:00</span>
+                <span class="_end">03-9-2014 22:00:00</span>
+                <span class="_zonecode">11</span>
+                <span class="_summary">Danceworks 2014: Hot Buttons</span>
+                <span class="_location">Northwestern University</span>
+                <span class="_all_day_event">false</span>
+                <span class="_date_format">MM/DD/YYYY</span>
+            </a>
+        </div>
+
+        
+        <!-- ** FOOTER **  -->
+        <div data-role="footer"></div>
+    </div>
+
+<!-- =========================================================================================================================== -->
+  <!-- Start of events9 page -->
+    <div data-role="page"  id="event8" data-theme="a">
+      
+      <!-- **NAVIGATION HEADER MENU** -->
+      <div data-role="header" class="jqm-header ui-header ui-bar-inherit" role="banner">
+          <a href="#home" data-rel="back" data-icon="back" class="ui-nodisc-icon ui-alt-icon"> Back</a>
+          <h1>Event Details</h1>
+          <a href="#" class="toggle-menu menu-right push-body">
+                <i class="fa fa-bars fa-lg"></i>
+            </a>
+          <!-- <a href="#sidebar" class="ui-nodisc-icon ui-alt-icon ui-btn-right ui-btn ui-icon-bars ui-btn-icon-notext ui-corner-all" data-role="button" role="button">Menu</a> -->
+      </div>
+      
+      <!-- **MAIN BODY** -->
+      <div role="main" class="ui-content">
+        <table>
+            <tr>
+                <td class="tableHeaderRows" cellspacing="2" cellpadding="12">Category</th>
+                <td class="tableRows">Global & Civic Engagement</td>
+            </tr>
+            <tr>
+                <td class="tableHeaderRows" cellspacing="2" cellpadding="12">Event Name</th>
+                <td class="tableRows">'Cats Helping Cats: NUSAC Pet Food & Supply Drive</td>
+            </tr>
+                <td class="tableHeaderRows" cellspacing="2" cellpadding="12">Date</th>
+                <td class="tableRows">3/19/2014</td>
+            </tr>
+            <tr>
+                <td class="tableHeaderRows" cellspacing="2" cellpadding="12">Time</th>
+                <td class="tableRows">all-day</td>
+            </tr>
+            <tr>
+                <td class="tableHeaderRows" cellspacing="2" cellpadding="12">Location</th>
+                <td class="tableRows">Evanston, IL</td>
+            </tr>
+            <tr>
+                <td class="tableHeaderRows" cellspacing="2" cellpadding="12" colspan="2">Description</th>
+            </tr>
+            <tr>
+                <td class="tableRows" cellspacing="2" cellpadding="12" colspan="2">
+                <p>Join NUSAC in supporting Tree House Humane Society from March 17th - April 11th.</p>
+                <br/>
+                <p>Drop off pet food and supplies at one of our designated locations or make a donation online at http://www.treehouseanimals.org/northwestern.</p>
+                <p>Evanston pickup locations - http://www.northwestern.edu/nusac/pdfs/FY14/cats_helping_cats_flyer_EV.pdf</p>
+                <p>Chicago pickup locations - http://www.northwestern.edu/nusac/pdfs/FY14/cats_helping_cats_flyer_CH.pdf</p></td>
+            <tr/>
+        </table>
+          
+        <div class="moreInfo">
+            <a class="eventlink" href="http://www.registrar.northwestern.edu/calendars/2013_14_acad_calendar.html">More Information</a>
+            <!-- <a class="eventlink navigatelink" href="#navigation" data-address="Evanston, IL">Navigate to this event</a><br/> -->
+        </div>
+      </div>
+
+        <!-- ** SIDEBAR PANEL ** -->
+        <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s2">
+            <h3><img src="Images/mini-logo.png" /></h3>
+            <li class="active"><a href="#home"><!-- <i class="fa fa-home fa-fw"></i> -->Home</a></li>
+            <li><a href="#explore"><!-- <i class="fa fa-search fa-fw"></i> -->Explore</a></li>
+            <li><a href="#navigation"><!-- <i class="fa fa-map-marker fa-fw"></i> -->Navigate</a></li>
+            <li><a href="#events"><!-- <i class="fa fa-calendar fa-fw"></i> -->Events</a></li>
+            <li><a href="#"><!-- <i class="fa fa-shopping-cart fa-fw"></i> -->Parking</a></li>
+            <li><a href="#"><!-- <i class="fa fa-warning fa-fw"></i> -->Alerts</a></li>
+            <li><a href="#"><!-- <i class="fa fa-info-circle fa-fw"></i> -->About</a></li>
+        </nav>
+
+
+        <!-- CUSTOM BUTTONS -->
+        <div class="custom-btns">
+            <a href="#navigation" class="addtl-buttons ui-btn ui-btn-inline" data-address="Northwestern University">
+                <p><i class="fa fa-location-arrow fa-lg"></i>Navigate to Event</p>
+            </a>
+
+            <a href="http://example.com/link-to-your-event" title="Add to Calendar" class="addthisevent">
+                Add to Calendar
+                <span class="_start">03-19-2014 9:00:00</span>
+                <span class="_end">03-19-2014 17:00:00</span>
+                <span class="_zonecode">11</span>
+                <span class="_summary">'Cats Helping Cats: NUSAC Pet Food & Supply Drive</span>
+                <span class="_description">Join NUSAC in supporting Tree House Humane Society from March 17th - April 11th.</span>
+                <span class="_location">Northwestern University</span>
+                <span class="_all_day_event">true</span>
+                <span class="_date_format">MM/DD/YYYY</span>
+            </a>
+        </div>
+
+        
+        <!-- ** FOOTER **  -->
+        <div data-role="footer"></div>
+    </div>
+
+<!-- =========================================================================================================================== -->
+  <!-- Start of events10 page -->
+    <div data-role="page"  id="event9" data-theme="a">
+      
+      <!-- **NAVIGATION HEADER MENU** -->
+      <div data-role="header" class="jqm-header ui-header ui-bar-inherit" role="banner">
+          <a href="#home" data-rel="back" data-icon="back" class="ui-nodisc-icon ui-alt-icon"> Back</a>
+          <h1>Event Details</h1>
+          <a href="#" class="toggle-menu menu-right push-body">
+                <i class="fa fa-bars fa-lg"></i>
+            </a>
+          <!-- <a href="#sidebar" class="ui-nodisc-icon ui-alt-icon ui-btn-right ui-btn ui-icon-bars ui-btn-icon-notext ui-corner-all" data-role="button" role="button">Menu</a> -->
+      </div>
+      
+      <!-- **MAIN BODY** -->
+      <div role="main" class="ui-content">
+        <table>
+            <tr>
+                <td class="tableHeaderRows" cellspacing="2" cellpadding="12">Category</th>
+                <td class="tableRows">Social</td>
+            </tr>
+            <tr>
+                <td class="tableHeaderRows" cellspacing="2" cellpadding="12">Event Name</th>
+                <td class="tableRows">Free Dunkin' Donuts</td>
+            </tr>
+                <td class="tableHeaderRows" cellspacing="2" cellpadding="12">Date</th>
+                <td class="tableRows">3/19/2014</td>
+            </tr>
+            <tr>
+                <td class="tableHeaderRows" cellspacing="2" cellpadding="12">Time</th>
+                <td class="tableRows">11:00 PM - 12:00 AM  </td>
+            </tr>
+            <tr>
+                <td class="tableHeaderRows" cellspacing="2" cellpadding="12">Location</th>
+                <td class="tableRows">Norris University Center, Ground Floor</td>
+            </tr>
+            <tr>
+                <td class="tableHeaderRows" cellspacing="2" cellpadding="12" colspan="2">Description</th>
+            </tr>
+            <tr>
+                <td class="tableRows" cellspacing="2" cellpadding="12" colspan="2">
+                Free donuts, free fun.</td>
+            <tr/>
+        </table>
+          
+        <div class="moreInfo">
+            <a class="eventlink" href="http://www.registrar.northwestern.edu/calendars/2013_14_acad_calendar.html">More Information</a>
+            <!-- <a class="eventlink navigatelink" href="#navigation" data-address="Evanston, IL">Navigate to this event</a><br/> -->
+        </div>
+      </div>
+
+        <!-- ** SIDEBAR PANEL ** -->
+        <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s2">
+            <h3><img src="Images/mini-logo.png" /></h3>
+            <li class="active"><a href="#home"><!-- <i class="fa fa-home fa-fw"></i> -->Home</a></li>
+            <li><a href="#explore"><!-- <i class="fa fa-search fa-fw"></i> -->Explore</a></li>
+            <li><a href="#navigation"><!-- <i class="fa fa-map-marker fa-fw"></i> -->Navigate</a></li>
+            <li><a href="#events"><!-- <i class="fa fa-calendar fa-fw"></i> -->Events</a></li>
+            <li><a href="#"><!-- <i class="fa fa-shopping-cart fa-fw"></i> -->Parking</a></li>
+            <li><a href="#"><!-- <i class="fa fa-warning fa-fw"></i> -->Alerts</a></li>
+            <li><a href="#"><!-- <i class="fa fa-info-circle fa-fw"></i> -->About</a></li>
+        </nav>
+
+
+        <!-- CUSTOM BUTTONS -->
+        <div class="custom-btns">
+            <a href="#navigation" class="addtl-buttons ui-btn ui-btn-inline" data-address="Northwestern University">
+                <p><i class="fa fa-location-arrow fa-lg"></i>Navigate to Event</p>
+            </a>
+
+            <a href="http://example.com/link-to-your-event" title="Add to Calendar" class="addthisevent">
+                Add to Calendar
+                <span class="_start">03-19-2014 23:00:00</span>
+                <span class="_end">03-19-2014 0:00:00</span>
+                <span class="_zonecode">11</span>
+                <span class="_summary">Free Dunkin' Donuts</span>
+                <span class="_description">Free donuts, free fun.</span>
+                <span class="_location">Norris University Center, Ground Floor</span>
+                <span class="_all_day_event">false</span>
+                <span class="_date_format">MM/DD/YYYY</span>
+            </a>
+        </div>
+
+        
+        <!-- ** FOOTER **  -->
+        <div data-role="footer"></div>
+    </div>
+
+<!-- =========================================================================================================================== -->
+  <!-- Start of events11 page -->
+    <div data-role="page"  id="event10" data-theme="a">
+      
+      <!-- **NAVIGATION HEADER MENU** -->
+      <div data-role="header" class="jqm-header ui-header ui-bar-inherit" role="banner">
+          <a href="#home" data-rel="back" data-icon="back" class="ui-nodisc-icon ui-alt-icon"> Back</a>
+          <h1>Event Details</h1>
+          <a href="#" class="toggle-menu menu-right push-body">
+                <i class="fa fa-bars fa-lg"></i>
+            </a>
+          <!-- <a href="#sidebar" class="ui-nodisc-icon ui-alt-icon ui-btn-right ui-btn ui-icon-bars ui-btn-icon-notext ui-corner-all" data-role="button" role="button">Menu</a> -->
+      </div>
+      
+      <!-- **MAIN BODY** -->
+      <div role="main" class="ui-content">
+        <table>
+            <tr>
+                <td class="tableHeaderRows" cellspacing="2" cellpadding="12">Category</th>
+                <td class="tableRows">Academic</td>
+            </tr>
+            <tr>
+                <td class="tableHeaderRows" cellspacing="2" cellpadding="12">Event Name</th>
+                <td class="tableRows">EECS Seminar: Dr. Meisam Nazari</td>
+            </tr>
+                <td class="tableHeaderRows" cellspacing="2" cellpadding="12">Date</th>
+                <td class="tableRows">3/13/2014</td>
+            </tr>
+            <tr>
+                <td class="tableHeaderRows" cellspacing="2" cellpadding="12">Time</th>
+                <td class="tableRows">11:00 AM - 12:00 PM  </td>
+            </tr>
+            <tr>
+                <td class="tableHeaderRows" cellspacing="2" cellpadding="12">Location</th>
+                <td class="tableRows">Technological Institute, L324 </td>
+            </tr>
+            <tr>
+                <td class="tableHeaderRows" cellspacing="2" cellpadding="12" colspan="2">Description</th>
+            </tr>
+            <tr>
+                <td class="tableRows" cellspacing="2" cellpadding="12" colspan="2">
+                <p>The EECS Department welcomes Dr. Meisam Nazari, Post-doctoral Scholar, EE Dept, California Institute of Technology.</p>
+                <p>Nazari will present a talk entitled "From Tera-Scale Communication to Lab-in-the-Body: Challenges and Opportunities for CMOS Technology" on Thursday, March 13 at 11:00 AM in Tech L324.</p>
+                <br>
+                <p>Abstract: Over the past couple of decades we have witnessed a tremendous growth in computational capability owing to the rapid advances in CMOS technology. Exa-scale high-performance computing systems are projected to become a reality soon. With this increase in the computation, a corresponding scaling in data communication bandwidth is inevitable. The limited bandwidth of the current physical channels not only limits the communication between chip microprocessors (CMP), it also imposes serious problem for on-chip interconnection. Different techniques have been employed to bridge this gap between interconnect and CMPs bandwidth, such as 3D integration and optical signaling. In the first part of my talk, I will go over new circuit techniques that enable massively parallel electrical and optical communication to address the bandwidth requirement of the future processing systems.</p>
+                <br>
+                <p>Combining the high level of integration offered by CMOS and micro/nanofabrication technology enables complex and compact sensing systems. During the second part of the presentation, the opportunities for integrated microsystems for implantable health monitors will be explored. The combination of power and data telemetry and physiological sensors within small chips enables us to contemplate new microsystems for healthcare monitoring, closed loop therapy and remote management of patients. Such systems could be implanted as continuous glucose monitors (CGM), neural prosthetics and other physiological measurement tools and will enable a new class of continuous digital health monitors that leads to preventative healthcare at lower cost. As an example of such systems, I will present my research on implantable CGM microsystems and a retinal prosthesis.</p></td>
+            <tr/>
+        </table>
+          
+        <div class="moreInfo">
+            <a class="eventlink" href="http://eecs.northwestern.edu/events/eventdetail/114/-/dr-meisam-nazari-post-doctoral-scholar-ee-dept-california-institute-of-technology-from-tera-scale-communication-to-lab-in-the-body-challenges-and-oppo">More Information</a>
+            <!-- <a class="eventlink navigatelink" href="#navigation" data-address="Evanston, IL">Navigate to this event</a><br/> -->
+        </div>
+      </div>
+
+        <!-- ** SIDEBAR PANEL ** -->
+        <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s2">
+            <h3><img src="Images/mini-logo.png" /></h3>
+            <li class="active"><a href="#home"><!-- <i class="fa fa-home fa-fw"></i> -->Home</a></li>
+            <li><a href="#explore"><!-- <i class="fa fa-search fa-fw"></i> -->Explore</a></li>
+            <li><a href="#navigation"><!-- <i class="fa fa-map-marker fa-fw"></i> -->Navigate</a></li>
+            <li><a href="#events"><!-- <i class="fa fa-calendar fa-fw"></i> -->Events</a></li>
+            <li><a href="#"><!-- <i class="fa fa-shopping-cart fa-fw"></i> -->Parking</a></li>
+            <li><a href="#"><!-- <i class="fa fa-warning fa-fw"></i> -->Alerts</a></li>
+            <li><a href="#"><!-- <i class="fa fa-info-circle fa-fw"></i> -->About</a></li>
+        </nav>
+
+
+        <!-- CUSTOM BUTTONS -->
+        <div class="custom-btns">
+            <a href="#navigation" class="addtl-buttons ui-btn ui-btn-inline" data-address="Northwestern University">
+                <p><i class="fa fa-location-arrow fa-lg"></i>Navigate to Event</p>
+            </a>
+
+            <a href="http://example.com/link-to-your-event" title="Add to Calendar" class="addthisevent">
+                Add to Calendar
+                <span class="_start">03-13-2014 11:00:00</span>
+                <span class="_end">03-13-2014 12:00:00</span>
+                <span class="_zonecode">11</span>
+                <span class="_summary">EECS Seminar: Dr. Meisam Nazari</span>
+                <span class="_description">The EECS Department welcomes Dr. Meisam Nazari, Post-doctoral Scholar, EE Dept, California Institute of Technology.</span>
+                <span class="_location">Technological Institute, L324   </span>
+                <span class="_all_day_event">false</span>
+                <span class="_date_format">MM/DD/YYYY</span>
+            </a>
+        </div>
+
+        
+        <!-- ** FOOTER **  -->
+        <div data-role="footer"></div>
+    </div>
+
+  </body>
+</html>
