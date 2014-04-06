@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>RideTogether</title>
+
+        <link rel="stylesheet" href="CSS/reset.css">
+	    <link rel="stylesheet" href="CSS/styles.css">
+	    <link rel="stylesheet" href="CSS/main-style.css">
+	    <link href='http://fonts.googleapis.com/css?family=Just+Me+Again+Down+Here|Open+Sans' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="Plugins/FontAwesome/css/font-awesome.min.css">
+
+	    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+	    <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.2.18.min.js"></script>
+	    <script type="text/javascript" src="JS/parse.js"></script>
+    </head>
+
+    <body>
+    	<div id="container">
+            <div id="title">
+                <span>Ride<span id="cursive">Together</span></span>
+                <p>Wanna get away?</p>
+            </div>
+
+            <div id="buttons">
+                <a href="rides.html" class="a-btn">
+                    <span class="btn-symbol"><i class="fa fa-search fa-lg"></i></span>
+                    <span class="btn-text">Find a ride</span> 
+                    <span class="sub-text">and request to join</span>
+                </a>
+                <a href="#" class="a-btn">
+                    <span class="btn-symbol"><i class="fa fa-user fa-lg"></i></span>
+                    <span class="btn-text">Post a ride</span> 
+                    <span class="sub-text">register to give a ride</span>
+                </a>
+            </div>
+
+            <form name="test">
+				<p>Name  :    <input type="text" name = "txtName" ><BR>
+				<p>Address:   <input type="text" name = "txtAddress" ><BR>
+				<p>Car type:  <input type="text" name = "txtCar" ><BR>
+				<p/>
+				<input type="Button" value="save driver profile" onClick="enroll(this.form)"></input>
+			</form>
+
+			<div id="query">
+				<input type="Button" Value="show driver list" onClick="query()">
+			</div>
+
+        </div>
+    </body>
+</html>
