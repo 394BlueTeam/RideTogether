@@ -13,11 +13,17 @@
 
   var query = new Parse.Query('Ride');
   var driver;
+  query.ascending("Date");
   query.find({
     success: function(results) {
       var q = $('#query');
       for (var i=0;i < results.length;i++){
-        q.append('<div class="row" data-attribute="'+results[i].id+ '"><p>'+results[i].get('StartAddress')+"</p>"+'<p>'+results[i].get('Destination')+"</p>"+'<p>'+results[i].get('TravelTime')+"</p>"+ "<div class='info'></div></div>");
+        var time = results[i].get('Date');
+        time = String(time);
+        time = time.substr(0, 15);
+        var DateTime = time + " " + results[i].get('TravelTime');
+        console.log('DateTime is: ', DateTime);
+        q.append('<div class="row" data-attribute="'+results[i].id+ '"><p>'+results[i].get('StartAddress')+"</p>"+'<p>'+results[i].get('Destination')+"</p>"+'<p>'+DateTime+"</p>"+ "<div class='info'></div></div>");
       }
 
         $('.row').click( function(){
