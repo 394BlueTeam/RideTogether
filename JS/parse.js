@@ -39,7 +39,7 @@ query.find({
         query.get(id, {
           success: function(object) {
             console.log('success');
-            lookupDriver(object.get('DriverID'), info, object.get('OpenSeats'), object.get('StartAddress'), object.get('EndAddress'), object.get('Date'));
+            lookupDriver(object.get('DriverID'), info, object.get('OpenSeats'), object.get('StartAddress'), object.get('EndAddress'), object.get('Date'), object.get('TravelTime'), object.get('Destination'));
           },
           error: function(object, error) {
             console.log('error')
@@ -49,7 +49,7 @@ query.find({
 
       else if(info.is(':visible')) {
         info.hide();
-        $(this).css('background-color', 'transparent');
+        //$(this).css('background-color', 'transparent');
       }
 
       else {
@@ -66,7 +66,7 @@ query.find({
 //lookup the driver name
 //uses a promise/callback method to wait for query to return
 //if one result is return, then it calls insertInfo
-function lookupDriver(driverID, info, openseats, sAdd, eAdd, date){
+function lookupDriver(driverID, info, openseats, sAdd, eAdd, date, TravelTime, Destination){
   var driverName;
   var driverQuery = new Parse.Query('Users');
   driverQuery.equalTo("objectId", driverID);
@@ -85,7 +85,7 @@ function lookupDriver(driverID, info, openseats, sAdd, eAdd, date){
             console.log("The result of the callback is: ", result);
             if(result.length == 1)
             {
-              insertInfo(info, result[0].get('Name'), result[0].get('Email'), openseats, sAdd, eAdd, date);
+              insertInfo(info, result[0].get('Name'), result[0].get('Email'), openseats, sAdd, eAdd, date, TravelTime, Destination);
             }
             else
             {
@@ -97,8 +97,11 @@ function lookupDriver(driverID, info, openseats, sAdd, eAdd, date){
 
 //adds the chosen information into the appropriate div
 //error checking should be 
-function insertInfo(info, driver, email, seats, sAdd, eAdd, date){
-  var message="Hi "+driver+",\nI'd like to join your ride from "+sAdd+" to "+eAdd+", on "+date+". Please let me know if it is still available. ";
+function insertInfo(info, driver, email, seats, sAdd, eAdd, date, TravelTime, Destination){
+  var truncDate = String(date);
+  truncDate = truncDate.substr(0, 15);
+  var message="Hi "+driver+",%0D%0DI'd like to join your ride from "+sAdd+" to "+eAdd+" ("+Destination+"), on "+truncDate + 
+  " from " + TravelTime + ". Please let me know if it is still available.%0D%0DThanks,%0D";
   info.html('<p class="driverName">Driver: ' + driver +'</p><p class="seats">Open Seats: ' 
             +seats +'</p><a class="join-button" href="mailto:'+email+'?subject=I\'d like to join your ride!&body='+message+'">Join this ride</a>');
   return 0;
