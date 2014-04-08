@@ -1,12 +1,16 @@
 <!doctype html>
 <head>
-  <meta charset="utf-8">
-  <title>My Parse App</title>
-  <meta name="description" content="My Parse App">
-  <meta name="viewport" content="width=device-width">
-  <link rel="stylesheet" href="css/reset.css">
-  <link rel="stylesheet" href="css/styles2.css">
-  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>RideTogether</title>
+
+  <link rel="stylesheet" href="CSS/reset.css">
+  <link rel="stylesheet" href="CSS/style.css">
+  <link href='http://fonts.googleapis.com/css?family=Just+Me+Again+Down+Here|Open+Sans' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="Plugins/FontAwesome/css/font-awesome.min.css">
+
+  <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
   <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.2.18.min.js"></script>
   <script type="text/javascript">
   Parse.initialize("b0jfwJsQkNWPdoKnDgd8KJLufCLWNJpmc5vBTkqr", "X90Jzs3gzKceNOdkFmCle8ZiwsE0HGhyNF4N3Wcj");
@@ -106,11 +110,16 @@
   </script>
 </head>
 
-<body>
-  
-   <div class='header'> 
-    <h1>Ride Together</h1>
-  </div>
+<body class="fancy">
+    <!-- HEADER -->
+    <div class="header">
+      <h1>RideTogether
+        <span>
+          <a href="#"><i class="fa fa-bars fa-lg"></i></a>
+          <p>Menu</p>
+        </span>
+      </h1>     
+    </div>
 
   <h2 class="subheader">Current Rides:</h2>
 
@@ -121,13 +130,7 @@
       <p>Time</p>
     </div>
   </div>
-    
 
-
-<script>
-
-
-</script>
 </body>
 
 </html>
