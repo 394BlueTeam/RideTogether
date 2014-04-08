@@ -51,6 +51,7 @@
           else if(info.is(':visible'))
           {
             info.hide();
+            $(this).css('background-color', 'transparent');
           }
           else
           {
@@ -85,7 +86,7 @@
               console.log("The result of the callback is: ", result);
               if(result.length == 1)
               {
-                insertInfo(info, result[0].get('Name'), openseats);
+                insertInfo(info, result[0].get('Name'), result[0].get('Email'), openseats);
               }
               else
               {
@@ -95,11 +96,13 @@
             });
   }
 
+
+
   //adds the chosen information into the appropriate div
   //error checking should be 
-  function insertInfo(info, driver, seats){
-    info.html('<p>Driver: ' + driver +'</p><p>Open Seats: ' 
-              +seats +'</p>');
+  function insertInfo(info, driver, email, seats){
+    info.html('<p class="driverName">Driver: ' + driver +'</p><p class="seats">Open Seats: ' 
+              +seats +'</p><a class="join-button" href="mailto:'+email+'">Join this ride</a>');
     return 0;
   }
 
