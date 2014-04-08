@@ -2,3 +2,11 @@
 	width: 100%;
 	margin: 0 auto;
 }
+
+#title > span {
+	font-size: 3em;
+}
+
+#cursive {
+	font-size: 1.1em;
+}
