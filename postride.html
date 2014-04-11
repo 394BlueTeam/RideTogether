@@ -21,7 +21,8 @@
         console.log(frm.txtTravelTime);
         var rideposter = new Ride();
         rideposter.save({ Name : frm.txtName.value, OpenSeats : Number(frm.txtOpenSeats.value), TravelTime :
-        frm.txtTravelTime.value, Email : frm.txtEmail.value}, {
+        frm.txtTravelTime.value, Email : frm.txtEmail.value, StartAddress : frm.txtStartAddress.value,
+        EndAddress:frm.txtEndAddress.value, Destination:frm.txtDestination.value}, {
           
           success: function(rideposter){
             console.log("save succeeded");
@@ -51,6 +52,7 @@
     <p>EndAddress:   <input type="text" name = "txtEndAddress" ><BR>
     <p>TravelTime:  <input type="text" name = "txtTravelTime" ><BR>
     <p>Email:       <input type="text" name = "txtEmail" ><BR>
+    <p>Destination:       <input type="text" name = "txtDestination" ><BR>
     <p>Date of leaving: <input type="date" name="date"><br>
     <p/>
     <INPUT TYPE="Button" Value="Sign up" onClick="enroll(this.form)"><BR>
