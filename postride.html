@@ -1,66 +1,143 @@
-<!doctype html>
-<head>
-  <meta charset="utf-8">
-  <title>My Parse App</title>
-  <meta name="description" content="My Parse App">
-  <meta name="viewport" content="width=device-width">
-  <link rel="stylesheet" href="css/reset.css">
-  <link rel="stylesheet" href="css/styles.css">
-  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-  <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.2.18.min.js"></script>
-  <script type="text/javascript">
-  Parse.initialize("b0jfwJsQkNWPdoKnDgd8KJLufCLWNJpmc5vBTkqr", "X90Jzs3gzKceNOdkFmCle8ZiwsE0HGhyNF4N3Wcj");
-    var Ride = Parse.Object.extend("Ride");
-    
-    function enroll(frm){
-      if (frm.txtName.value == "")
-        alert("please enter your name.");
-      else if (frm.txtOpenSeats.value == "")
-        alert("please enter the avaiable seats.");
-      else {
-        console.log(frm.txtTravelTime);
-        var date = new Date(frm.date.value);
-        var rideposter = new Ride();
-        rideposter.save({ Name : frm.txtName.value, OpenSeats : Number(frm.txtOpenSeats.value), TravelTime :
-        frm.txtTravelTime.value, Email : frm.txtEmail.value, StartAddress : frm.txtStartAddress.value,
-        EndAddress:frm.txtEndAddress.value, Destination:frm.txtDestination.value, Date:date}, {
-          
-          success: function(rideposter){
-            console.log("save succeeded");
-            alert('Thank you! the ride information is posted');
-          },
-          error: function(rideposter, error){
-            console.log("save failed with error: ", error);
-          }
-        });
-      }
-    }
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML Basic 1.1//EN" "http://www.w3.org/TR/xhtml-basic/xhtml-basic11.dtd">
+<html>
+    <head>
+        <!-- files to be loaded first -->
+        <link href='http://fonts.googleapis.com/css?family=Just+Me+Again+Down+Here|Open+Sans' rel='stylesheet' type='text/css' />
+        <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.2.18.min.js"></script>
+        <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 
-  </script>
-</head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+        <title>RideTogether</title>
+        <link href="CSS/mobile.css" rel="stylesheet" media="handheld,only screen and (max-device-width:480px)" />
+        <link href="CSS/core.css" rel="stylesheet" media="screen" />
+        <link rel="stylesheet" href="Plugins/FontAwesome/css/font-awesome.min.css" />
+        <link rel="stylesheet" href="Plugins/Bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="Plugins/Bootstrap/css/bootstrap-theme.min.css">
+        <script type="text/javascript" src="Plugins/Bootstrap/js/bootstrap.min.js"></script>
+        <script type="text/javascript">
+            Parse.initialize("b0jfwJsQkNWPdoKnDgd8KJLufCLWNJpmc5vBTkqr", "X90Jzs3gzKceNOdkFmCle8ZiwsE0HGhyNF4N3Wcj");
+            var Ride = Parse.Object.extend("Ride");
+            
+            function enroll(frm){
+              if (frm.txtName.value == "")
+                alert("please enter your name.");
+              else if (frm.txtOpenSeats.value == "")
+                alert("please enter the avaiable seats.");
+              else {
+                console.log(frm.txtTravelTime);
+                var rideposter = new Ride();
+                rideposter.save({ Name : frm.txtName.value, OpenSeats : Number(frm.txtOpenSeats.value), TravelTime :
+                frm.txtTravelTime.value, Email : frm.txtEmail.value, StartAddress : frm.txtStartAddress.value,
+                EndAddress:frm.txtEndAddress.value, Destination:frm.txtDestination.value, Date: Date(frm.date.value)}, {
+                  
+                  success: function(rideposter){
+                    console.log("save succeeded");
+                    alert('Thank you! the ride information is posted');
+                  },
+                  error: function(rideposter, error){
+                    console.log("save failed with error: ", error);
+                  }
+                });
+              }
+            }
+        </script>
+    </head>
 
-<body>
-  
-  <div id="main">
-    <h1>sharing if always great!</h1>
-    <p>Please enter your information to signup:</p>
-  </div>
-  
-  <FORM NAME="test">
-    <p>Name  :      <input type="text" name = "txtName" ><BR>
-    <p>OpenSeats:   <input type="number" name = "txtOpenSeats" ><BR>
-    <p>StartAddress:   <input type="text" name = "txtStartAddress" ><BR>
-    <p>EndAddress:   <input type="text" name = "txtEndAddress" ><BR>
-    <p>TravelTime:  <input type="text" name = "txtTravelTime" ><BR>
-    <p>Email:       <input type="text" name = "txtEmail" ><BR>
-    <p>Destination:       <input type="text" name = "txtDestination" ><BR>
-    <p>Date of leaving: <input type="date" name="date"><br>
-    <p/>
-    <INPUT TYPE="Button" Value="Sign up" onClick="enroll(this.form)"><BR>
-  </FORM>
+    <body class="fancy">
+        
+        <!-- HEADER -->
+        <div class="header">
+          <h1>RideTogether
+            <span>
+              <a href="javascript:history.back()" id="back"><i class="fa fa-chevron-left fa-lg"></i></a>
+              <a href="#" id="menu"><i class="fa fa-bars fa-lg"></i></a>
+              <a href="#" id="rides"><i class="fa fa-pencil-square-o fa-lg"></i><!-- <span class="badge">1</span> --></a>
+              <!-- <p>Menu</p> -->
+            </span>
+          </h1>     
+        </div>
 
-    
+        <div class="subheader">Post Your Ride</div>
 
-</body>
 
+        <!-- REGISTRATION FORM -->
+        <div id="wrapper">
+
+            <form class="form-horizontal" role="form">
+                <!-- name -->
+                <div class="form-group">
+                    <label for="name" class="col-sm-2 control-label">Name</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="name" name="txtName" placeholder="Enter your name">
+                    </div>
+                </div>
+
+                <!-- open seats -->
+                <div class="form-group">
+                    <label for="seats" class="col-sm-2 control-label">Open Seats</label>
+                    <div class="col-xs-2">
+                      <select class="form-control" id="seats" name="txtOpenSeats">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                      </select>
+                    </div>
+                </div>
+
+                <!-- start address -->
+                <div class="form-group">
+                    <label for="start" class="col-sm-2 control-label">Start Address</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="start" name="txtStartAddress" placeholder="Enter starting address">
+                    </div>
+                </div>
+
+                <!-- destination -->
+                <div class="form-group">
+                    <label for="end" class="col-sm-2 control-label">Destination</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="end" name="txtEndAddress" placeholder="Enter destination">
+                    </div>
+                </div>
+
+                <!-- travel time -->
+                <div class="form-group">
+                    <label for="traveltime" class="col-sm-2 control-label">Travel time</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="traveltime" name="txtTravelTime" placeholder="Enter travel time">
+                    </div>
+                </div>
+
+                <!-- email -->
+                <div class="form-group">
+                    <label for="email" class="col-sm-2 control-label">Email</label>
+                    <div class="col-sm-10">
+                      <input type="email" class="form-control" id="email" name="txtEmail" placeholder="Enter email address">
+                    </div>
+                </div>
+
+                <!-- date -->
+                <div class="form-group">
+                    <label for="date" class="col-sm-2 control-label">Trip Date</label>
+                    <div class="col-sm-10">
+                      <input type="date" class="form-control" id="date" name="date" placeholder="Enter trip date">
+                    </div>
+                </div>
+
+                <!-- submit button -->
+                <div class="form-group">
+                  <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-default btn-lg" onClick="enroll(this.form)">Post it!  <span class="glyphicon glyphicon-thumbs-up"></span></button>
+                  </div>
+                </div>
+            </form>
+
+      </div>
+    </body>
 </html>
