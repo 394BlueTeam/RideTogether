@@ -24,18 +24,31 @@
 
 <script type="text/javascript">
   Parse.initialize("b0jfwJsQkNWPdoKnDgd8KJLufCLWNJpmc5vBTkqr", "X90Jzs3gzKceNOdkFmCle8ZiwsE0HGhyNF4N3Wcj");
-    var Ride = Parse.Object.extend("Ride");    
+    var Ride = Parse.Object.extend("Users");    
     
-    function enroll(frm){
-      console.log(frm.Email.value)
-      // if (frm.Email.value == ""){
-      //   alert('error: please enter an email')
-      // }
-      // else{
-      //   var user = new Ride();
-      //   user.save({Email: frm.Email.value, Name: frm.Name.value, CarType: frm.CarType.value, HomeAddress: frm.HomeAddress.value, DriverRating: 0});
-      //   alert('Thank you! your driver profile has been created');
-      // }
+    function enroll(){
+      var email = $("input[name=Email]").val();
+
+      if (email == ""){
+        alert('error: please enter an email')
+      }
+      else{
+        var name = $("input[name=Name]").val();
+        var cartype = $("input[name=CarType]").val();
+        var homeaddress = $("input[name=HomeAddress]").val();
+
+        var user = new Ride();
+
+        user.save({Email: email, Name: name, CarType: cartype, HomeAddress: homeaddress, DriverRating: 0}, {
+          success: function(rideposter){
+            console.log("save succeeded");
+            alert('Thank you! the ride information is posted');
+          },
+          error: function(rideposter, error){
+            console.log("save failed with error: ", error);
+          }
+        });
+      }
     }
 
   </script>
@@ -48,13 +61,13 @@
       <p>Enter your information below to make a user profile. </p>  
     </div>
   
-  <form name="signup">
+  <form class="form" name="signup">
     <p>Email (required) <input type="text" name = "Email" ></p>
     <p>Name <input type="text" name = "Name" ></p>
     <p>Car Type <input type="text" name = "CarType" ></p>
     <p>Home Address <input type="text" name = "HomeAddress" ></p>
     <div id="buttons">
-              <div class="a-btn"  onclick="enroll(this.form)"><span class="btn-text">Make my profile</span> </div> 
+              <div class="a-btn"  onclick="enroll()"><span class="btn-text">Make my profile</span> </div> 
     </div>
 
   </form>
