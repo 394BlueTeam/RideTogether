@@ -13,15 +13,12 @@ query.find({
       time = String(time);
       time = time.substr(0, 15);
       var DateTime = time + " " + results[i].get('TravelTime');
-      console.log('DateTime is: ', DateTime);
       q.append('<div class="row" data-attribute="'+results[i].id+ '"><div class="expandable-panel-heading"><p>'+results[i].get('StartAddress')+"</p>"+'<p>'+results[i].get('Destination')+"</p>"+'<p>'+DateTime+"</p>"+arrow+'</div><div class="info"></div></div>');
     }
 
     $('.row').click( function(){
-      console.log('here')
       var id = $(this).attr('data-attribute');
       var info = $(this).find('.info');
-      console.log("ID IS: "+id)
       
       //if for some reason we end up with undefined variables
       if(!id || !info) {
@@ -38,7 +35,6 @@ query.find({
         //$(this).css('background-color', 'white');
         query.get(id, {
           success: function(object) {
-            console.log('success');
             insertInfo(info, object.get('Name'), object.get('Email'), object.get('OpenSeats'), object.get('StartAddress'), object.get('EndAddress'), object.get('Date'), object.get('TravelTime'), object.get('Destination'));
           },
           error: function(object, error) {
