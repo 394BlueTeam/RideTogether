@@ -22,6 +22,7 @@
         var rideposter = new Ride();
         rideposter.save({ Name : frm.txtName.value, OpenSeats : Number(frm.txtOpenSeats.value), TravelTime :
         frm.txtTravelTime.value, Email : frm.txtEmail.value}, {
+          
           success: function(rideposter){
             console.log("save succeeded");
             alert('Thank you! the ride information is posted');
