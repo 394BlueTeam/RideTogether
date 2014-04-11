@@ -1,3 +1,11 @@
+/* CSS changes for mobile that differ 
+from the original style.css sheet*/
+
+.subheader {
+	margin-top: 52px;
+	margin-bottom: 15px;
+}
+
 #buttons {
 	width: 100%;
 	margin: 0 auto;
@@ -9,4 +17,22 @@
 
 #cursive {
 	font-size: 1.4em;
+}
+
+.count {
+	left: 12%;
+}
+
+.end {
+	padding-left: 30px;
+	font-size: 1em;
+}
+
+#rides {
+    margin-right: 1px;
+    padding: 0px;
+}
+
+#menu {
+	margin-right: 5px;
 }
