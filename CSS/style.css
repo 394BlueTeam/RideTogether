@@ -394,3 +394,10 @@ h2, p, ol, ul, li {
     padding: 10px 10px;
     height: auto;
 }
+
+
+@media(max-width:400px){
+    .container{
+        width:90%;
+    }
+}
