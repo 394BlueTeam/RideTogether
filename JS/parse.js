@@ -39,7 +39,7 @@ query.find({
         query.get(id, {
           success: function(object) {
             console.log('success');
-            lookupDriver(object.get('DriverID'), info, object.get('OpenSeats'), object.get('StartAddress'), object.get('EndAddress'), object.get('Date'), object.get('TravelTime'), object.get('Destination'));
+            insertInfo(info, object.get('Name'), object.get('Email'), object.get('OpenSeats'), object.get('StartAddress'), object.get('EndAddress'), object.get('Date'), object.get('TravelTime'), object.get('Destination'));
           },
           error: function(object, error) {
             console.log('error')
@@ -63,46 +63,14 @@ query.find({
   }
 });
 
-//lookup the driver name
-//uses a promise/callback method to wait for query to return
-//if one result is return, then it calls insertInfo
-function lookupDriver(driverID, info, openseats, sAdd, eAdd, date, TravelTime, Destination){
-  var driverName;
-  var driverQuery = new Parse.Query('Users');
-  driverQuery.equalTo("objectId", driverID);
-
-  driverQuery.find({
-    success: function(results){
-      console.log(results.length);
-      console.log("Successfully looked up driver name: ", results[0].get('Name'), "with driverID: ", driverID);
-      driverName = results[0].get('Name');
-      console.log(driverName);
-    },
-    error: function(object, error){
-      console.log('Error: Could not find objectID ', driverID, " in User database");
-    }
-  }).then(function(result) {
-            console.log("The result of the callback is: ", result);
-            if(result.length == 1)
-            {
-              insertInfo(info, result[0].get('Name'), result[0].get('Email'), openseats, sAdd, eAdd, date, TravelTime, Destination);
-            }
-            else
-            {
-              console.log("Error: Looking up driver ID did not return 1 result.");
-              return;
-            }
-          });
-}
-
 //adds the chosen information into the appropriate div
-//error checking should be 
+//error checking should be
 function insertInfo(info, driver, email, seats, sAdd, eAdd, date, TravelTime, Destination){
   var truncDate = String(date);
   truncDate = truncDate.substr(0, 15);
-  var message="Hi "+driver+",%0D%0DI'd like to join your ride from "+sAdd+" to "+eAdd+" ("+Destination+"), on "+truncDate + 
+  var message="Hi "+driver+",%0D%0DI'd like to join your ride from "+sAdd+" to "+eAdd+" ("+Destination+"), on "+truncDate +
   " from " + TravelTime + ". Please let me know if I can join.%0D%0DThanks,%0D";
-  info.html('<p class="driverName">Driver: ' + driver +'</p><p class="seats">Open Seats: ' 
+  info.html('<p class="driverName">Driver: ' + driver +'</p><p class="seats">Open Seats: '
             +seats +'</p><a class="join-button" href="mailto:'+email+'?subject=I\'d like to join your ride!&body='+message+'">Join this ride</a>');
   return 0;
 }
