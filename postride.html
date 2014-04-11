@@ -19,10 +19,11 @@
         alert("please enter the avaiable seats.");
       else {
         console.log(frm.txtTravelTime);
+        var date = new Date(frm.date.value);
         var rideposter = new Ride();
         rideposter.save({ Name : frm.txtName.value, OpenSeats : Number(frm.txtOpenSeats.value), TravelTime :
         frm.txtTravelTime.value, Email : frm.txtEmail.value, StartAddress : frm.txtStartAddress.value,
-        EndAddress:frm.txtEndAddress.value, Destination:frm.txtDestination.value, Date: Date(frm.date.value)}, {
+        EndAddress:frm.txtEndAddress.value, Destination:frm.txtDestination.value, Date:date}, {
           
           success: function(rideposter){
             console.log("save succeeded");
