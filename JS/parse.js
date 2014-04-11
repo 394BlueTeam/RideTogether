@@ -3,7 +3,8 @@ var arrow = '<i class="fa fa-chevron-down"></i>';
 
 
 var query = new Parse.Query('Ride');
-var driver;
+var date = new Date(Date.now());
+query.greaterThan("Date", date);
 query.ascending("Date");
 query.find({
   success: function(results) {
