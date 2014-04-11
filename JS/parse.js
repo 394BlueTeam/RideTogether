@@ -13,7 +13,6 @@ query.find({
       time = String(time);
       time = time.substr(0, 15);
       var DateTime = time + " " + results[i].get('TravelTime');
-      console.log('DateTime is: ', DateTime);
       q.append('<div class="row" data-attribute="'+results[i].id+ '"><div class="expandable-panel-heading"><p>'+results[i].get('StartAddress')+"</p>"+'<p>'+results[i].get('Destination')+"</p>"+'<p>'+DateTime+"</p>"+arrow+'</div><div class="info"></div></div>');
     }
 
