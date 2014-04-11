@@ -20,9 +20,10 @@
       else if(frm.txtTravelTime.value == "")
         alert("please specify your car model.");
       else {
-        var driver = new Ride();
-        driver.save({Name: frm.txtName.value, OpenSeats: frm.txtOpenSeats.value,TravelTime: frm.txtTravelTime.value});
-        alert('Thank you! your driver profile created');
+        var rideposter = new Ride();
+        rideposter.save({Name: frm.txtName.value, OpenSeats: frm.txtOpenSeats.value,TravelTime:
+        frm.txtTravelTime.value,Email: frm.txtEmail.value});
+        alert('Thank you! the ride information is posted');
       }
     }
 
@@ -40,6 +41,7 @@
     <p>Name  :      <input type="text" name = "txtName" ><BR>
     <p>OpenSeats:   <input type="text" name = "txtOpenSeats" ><BR>
     <p>TravelTime:  <input type="text" name = "txtTravelTime" ><BR>
+    <p>Email:       <input type="text" name = "txtEmail" ><BR>
     <p/>
     <INPUT TYPE="Button" Value="Sign up" onClick="enroll(this.form)"><BR>
   </FORM>
