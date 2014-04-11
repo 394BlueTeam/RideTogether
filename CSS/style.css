@@ -147,6 +147,7 @@ h2, p, ol, ul, li {
 #buttons {
 	width: 40%;
 	margin: 0 auto;
+            min-width:265px;
 }
 
 
