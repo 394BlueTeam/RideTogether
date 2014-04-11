@@ -1,77 +1,120 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML Basic 1.1//EN" "http://www.w3.org/TR/xhtml-basic/xhtml-basic11.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
     <head>
+        <!-- files to be loaded first -->
+        <link href='http://fonts.googleapis.com/css?family=Just+Me+Again+Down+Here|Open+Sans' rel='stylesheet' type='text/css' />
+        <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.2.18.min.js"></script>
+        <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
         <meta name="mobile-web-app-capable" content="yes">
-        
-        <!-- For Apple iOS -->
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-
         <title>RideTogether</title>
-
-        <link href="CSS/reset.css" rel="stylesheet" />
         <link href="CSS/mobile.css" rel="stylesheet" media="handheld,only screen and (max-device-width:480px)" />
         <link href="CSS/core.css" rel="stylesheet" media="screen" />
-      <link href='http://fonts.googleapis.com/css?family=Just+Me+Again+Down+Here|Open+Sans' rel='stylesheet' type='text/css' />
         <link rel="stylesheet" href="Plugins/FontAwesome/css/font-awesome.min.css" />
-      <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-      <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.2.18.min.js"></script>
-      <script type="text/javascript" src="JS/parse.js"></script>
+        <link rel="stylesheet" href="Plugins/Bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="Plugins/Bootstrap/css/bootstrap-theme.min.css">
+        <script type="text/javascript" src="Plugins/Bootstrap/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="JS/parse.js"></script>
+        <script type="text/javascript">
+          Parse.initialize("b0jfwJsQkNWPdoKnDgd8KJLufCLWNJpmc5vBTkqr", "X90Jzs3gzKceNOdkFmCle8ZiwsE0HGhyNF4N3Wcj");
+            var Ride = Parse.Object.extend("Users");    
+            
+            function enroll(){
+              var email = $("input[name=Email]").val();
+
+              if (email == ""){
+                alert('error: please enter an email')
+              }
+              else{
+                var name = $("input[name=Name]").val();
+                var cartype = $("input[name=CarType]").val();
+                var homeaddress = $("input[name=HomeAddress]").val();
+
+                var user = new Ride();
+
+                user.save({Email: email, Name: name, CarType: cartype, HomeAddress: homeaddress, DriverRating: 0}, {
+                  success: function(rideposter){
+                    console.log("save succeeded");
+                    alert('Thank you! the ride information is posted');
+                  },
+                  error: function(rideposter, error){
+                    console.log("save failed with error: ", error);
+                  }
+                });
+              }
+            }
+        </script>
     </head>
 
-<script type="text/javascript">
-  Parse.initialize("b0jfwJsQkNWPdoKnDgd8KJLufCLWNJpmc5vBTkqr", "X90Jzs3gzKceNOdkFmCle8ZiwsE0HGhyNF4N3Wcj");
-    var Ride = Parse.Object.extend("Users");    
-    
-    function enroll(){
-      var email = $("input[name=Email]").val();
+    <body class="fancy">
+        <!-- HEADER -->
+        <div class="header">
+          <h1>RideTogether
+            <span>
+              <a href="javascript:history.back()" id="back"><i class="fa fa-chevron-left fa-lg"></i></a>
+              <!-- <a href="#" id="menu"><i class="fa fa-bars fa-lg"></i></a> -->
+              <!-- <a href="#" id="rides"><i class="fa fa-pencil-square-o fa-lg"></i><span class="badge">1</span> </a> -->
+              <!-- <p>Menu</p> -->
+            </span>
+          </h1>     
+        </div>
 
-      if (email == ""){
-        alert('error: please enter an email')
-      }
-      else{
-        var name = $("input[name=Name]").val();
-        var cartype = $("input[name=CarType]").val();
-        var homeaddress = $("input[name=HomeAddress]").val();
+        <div id="signup" class="wrapper">
+            <!-- <div id="title">
+              <h1>Make a profile</h1>
+              <p>Enter your information below to make a user profile. </p>  
+            </div> -->
+      
+            <!-- <form class="form" name="signup">
+              <p>Email (required) <input type="text" name = "Email" ></p>
+              <p>Name <input type="text" name = "Name" ></p>
+              <p>Car Type <input type="text" name = "CarType" ></p>
+              <p>Home Address <input type="text" name = "HomeAddress" ></p>
+              <div id="buttons">
+                  <div class="a-btn"  onclick="enroll()"><span class="btn-text">Make my profile</span> </div> 
+              </div>
+            </form> -->
 
-        var user = new Ride();
+            <!-- <div class="wrapper"> -->
+                
+                <form role="form">
+                    <!-- name -->
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="name" name="Name" placeholder="Name">
+                    </div>
 
-        user.save({Email: email, Name: name, CarType: cartype, HomeAddress: homeaddress, DriverRating: 0}, {
-          success: function(rideposter){
-            console.log("save succeeded");
-            alert('Thank you! the ride information is posted');
-          },
-          error: function(rideposter, error){
-            console.log("save failed with error: ", error);
-          }
-        });
-      }
-    }
+                    <!-- email -->
+                    <div class="col-sm-10">
+                      <input type="email" class="form-control" id="email" name="Email" placeholder="Email">
+                    </div>
 
-  </script>
+                    <!-- car type -->
+                    <div class="col-sm-10">
+                      <select class="form-control" id="seats" name="CarType">
+                        <option>Car Type</option>
+                        <option>Sedan</option>
+                        <option>Coupe</option>
+                        <option>SUV</option>
+                        <option>Truck</option>
+                      </select>
+                    </div>        
 
-<body>
-  
-  <div id="signup" class="container">
-    <div id="title">
-      <h1>Make a profile</h1>
-      <p>Enter your information below to make a user profile. </p>  
+                    <!-- home address -->
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="home" name="HomeAddress" placeholder="Home Address">
+                    </div>
+
+                    <!-- submit button -->
+                    <div class="col-sm-offset-2 col-sm-10">
+                      <button type="submit" class="btn btn-default btn-lg" onclick="enroll()">Sign Up </button>
+                    </div>
+                </form>
+
+          <!-- </div> -->
     </div>
-  
-  <form class="form" name="signup">
-    <p>Email (required) <input type="text" name = "Email" ></p>
-    <p>Name <input type="text" name = "Name" ></p>
-    <p>Car Type <input type="text" name = "CarType" ></p>
-    <p>Home Address <input type="text" name = "HomeAddress" ></p>
-    <div id="buttons">
-              <div class="a-btn"  onclick="enroll()"><span class="btn-text">Make my profile</span> </div> 
-    </div>
-
-  </form>
-</div>
-</body>
-
+    </body>
 </html>

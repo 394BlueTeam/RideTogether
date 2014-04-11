@@ -68,12 +68,23 @@ h2, p, ol, ul, li {
     margin-bottom: 20px;
 }
 
-.container {
+.wrapper{
     width:70%;    
     margin:auto;
     margin-top:100px;
 }
  
+/*.wrapper {
+    margin-left: 12%;
+    margin-right: 12%;
+    text-align: left;
+    margin: auto;
+}*/
+
+.fancy {
+    background-image: url('../Images/bg.png');
+    background-attachment: fixed;
+}
 
 /* ------------------------------ HOME PAGE  ------------------------------ */
 /* ======================================================================== */
@@ -112,6 +123,7 @@ h2, p, ol, ul, li {
         font-size: 0.6em;
         color: #08cbc4 !important;
         text-decoration: none;
+        padding: 7px;
     }
 
 
@@ -208,14 +220,9 @@ h2, p, ol, ul, li {
     }
 
 
-/* ------------------------------ RIDES  ------------------------------ */
+/* -------------------------------- RIDES  -------------------------------- */
 /* ======================================================================== */
 
-
-    .fancy {
-    	background-image: url('../Images/bg.png');
-        background-attachment: fixed;
-    }
 
     .header {
     	background-color: #08cbc4;
@@ -467,28 +474,33 @@ h2, p, ol, ul, li {
 /* ------------------------------ POST RIDE  ------------------------------ */
 /* ======================================================================== */
 
-#wrapper {
-    margin-left: 12%;
-    margin-right: 12%;
-    text-align: left;
+
+
+
+/* ------------------------------- SIGN UP  -------------------------------- */
+/* ========================================================================= */
+
+#signup {
+    background-color: white;
+    -webkit-box-shadow:0px 0px 9px rgba(0,0,0,0.4), 0px 0px 0px 1px rgba(188,188,188,0.1);
+        -moz-box-shadow:0px 0px 9px rgba(0,0,0,0.4), 0px 0px 0px 1px rgba(188,188,188,0.1);
+        box-shadow:0px 0px 9px rgba(0,0,0,0.4), 0px 0px 0px 1px rgba(188,188,188,0.1);
 }
 
+#signup form {
+    /*margin: 20px auto;*/
+    overflow: hidden;
+    text-align: center;
+    width: auto;
+    padding: 3%;
+}
 
-
-/* ------------------------------ SIGN UP  ------------------------------ */
-/* ======================================================================== */
-
-#signup h1{
+/*#signup h1{
     margin: 0 auto;
 }
 
 
-#signup form{
-    margin: 20px auto;
-    overflow: hidden;
-    text-align: center;
-    width: auto;
-}
+
 
 
 #signup form p{
@@ -515,16 +527,9 @@ h2, p, ol, ul, li {
     height: auto;
 }
 
-
-<<<<<<< HEAD
-
-
-
-
-=======
 @media(max-width:400px){
     .container{
         width:90%;
     }
 }
->>>>>>> FETCH_HEAD
+*/
