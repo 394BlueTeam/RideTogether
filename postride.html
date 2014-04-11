@@ -16,7 +16,6 @@
         <link href="CSS/core.css" rel="stylesheet" media="screen" />
         <link rel="stylesheet" href="Plugins/FontAwesome/css/font-awesome.min.css" />
         <link rel="stylesheet" href="Plugins/Bootstrap/css/bootstrap.min.css">
-        <link rel="stylesheet" href="Plugins/Bootstrap/css/bootstrap-theme.min.css">
         <script type="text/javascript" src="Plugins/Bootstrap/js/bootstrap.min.js"></script>
         <script type="text/javascript">
             Parse.initialize("b0jfwJsQkNWPdoKnDgd8KJLufCLWNJpmc5vBTkqr", "X90Jzs3gzKceNOdkFmCle8ZiwsE0HGhyNF4N3Wcj");
@@ -61,26 +60,23 @@
           </h1>     
         </div>
 
-        <!-- <div class="subheader"></div> -->
-
-
         <!-- POST RIDE FORM -->
-        <div class="wrapper">
-
+        <div class="signup">
             <form class="form-horizontal" role="form">
                 <!-- name -->
                 <div class="form-group">
                     <label for="name" class="col-sm-2 control-label">Name</label>
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" id="name" name="txtName" placeholder="Enter your name">
+                      <input type="text" class="form-control" id="name" name="txtName" placeholder="Name">
                     </div>
                 </div>
 
                 <!-- open seats -->
                 <div class="form-group">
-                    <label for="seats" class="col-sm-2 control-label">Open Seats</label>
-                    <div class="col-xs-3">
+                    <label for="seats" class="col-sm-2 control-label" id="openseats">Open Seats</label>
+                    <div class="col-xs-6">
                       <select class="form-control" id="seats" name="txtOpenSeats">
+                        <option>Open Seats</option>
                         <option>1</option>
                         <option>2</option>
                         <option>3</option>
@@ -94,7 +90,7 @@
                 <div class="form-group">
                     <label for="start" class="col-sm-2 control-label">Start Address</label>
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" id="start" name="txtStartAddress" placeholder="Enter starting address">
+                      <input type="text" class="form-control" id="start" name="txtStartAddress" placeholder="ex: 2255 Ridge Ave, Plex, Tech, etc">
                     </div>
                 </div>
 
@@ -102,7 +98,7 @@
                 <div class="form-group">
                     <label for="end" class="col-sm-2 control-label">Destination</label>
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" id="end" name="txtEndAddress" placeholder="Enter destination">
+                      <input type="text" class="form-control" id="end" name="txtEndAddress" placeholder="ex: O'Hare, Old Orchard, etc">
                     </div>
                 </div>
 
@@ -110,7 +106,7 @@
                 <div class="form-group">
                     <label for="traveltime" class="col-sm-2 control-label">Travel time</label>
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" id="traveltime" name="txtTravelTime" placeholder="Enter travel time">
+                      <input type="text" class="form-control" id="traveltime" name="txtTravelTime" placeholder="ex: 1:00pm - 3:00pm">
                     </div>
                 </div>
 
@@ -118,7 +114,7 @@
                 <div class="form-group">
                     <label for="email" class="col-sm-2 control-label">Email</label>
                     <div class="col-sm-10">
-                      <input type="email" class="form-control" id="email" name="txtEmail" placeholder="Enter email address">
+                      <input type="email" class="form-control" id="email" name="txtEmail" placeholder="Email">
                     </div>
                 </div>
 
@@ -133,7 +129,7 @@
                 <!-- submit button -->
                 <div class="form-group">
                   <div class="col-sm-offset-2 col-sm-10">
-                    <button type="submit" class="btn btn-default btn-lg" onClick="enroll(this.form)">Post it!  <span class="glyphicon glyphicon-thumbs-up"></span></button>
+                    <button type="submit" class="btn btn-default" onClick="enroll(this.form)">Post it!  <span class="glyphicon glyphicon-thumbs-up"></span></button>
                   </div>
                 </div>
             </form>

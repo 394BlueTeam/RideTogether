@@ -36,3 +36,7 @@ from the original style.css sheet*/
 #menu {
 	margin-right: 5px;
 }
+
+#openseats {
+	display: none;
+}
