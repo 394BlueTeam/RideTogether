@@ -11,7 +11,7 @@ body {
 	height: auto;
 	/*background-image: url('Images/bg.png');*/
 	/*background-color: #fcf9f2;*/
-	background-color: #f1f1f1;
+	background-color: #f1f1f1 !important;
     text-align: center;
     /*padding: 0 25px;*/
     /*margin: auto;*/
@@ -120,7 +120,7 @@ h2, p, ol, ul, li {
     }
 
     #small {
-        font-size: 0.6em;
+        font-size: 0.8em;
         color: #08cbc4 !important;
         text-decoration: none;
         padding: 7px;
@@ -143,7 +143,7 @@ h2, p, ol, ul, li {
         background:#fff;
         text-decoration: none;
         /*width: 150px;*/
-        height: 32px;
+        height: 48px;
         color:#555;
         background:-webkit-gradient(linear,left top,left bottom,color-stop(rgba(255,255,255,1),0),color-stop(rgba(246,246,246,1),0.74),color-stop(rgba(237,237,237,1),1));
         background:-webkit-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(246,246,246,1) 74%, rgba(237,237,237,1) 100%);
