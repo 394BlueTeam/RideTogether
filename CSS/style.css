@@ -373,14 +373,20 @@ h2, p, ol, ul, li {
 
 #signup form p{
     text-align: left;
-    max-width: 360px;
+    max-width: 320px;
     margin: 0 auto;
     padding: 5px 0px;
 
 }
 
+#buttons{
+    width:100%;
+    max-width:265px;
+}
+
 #signup form input{
     float: right;
+    width:50%;
     max-width:240px;
 }
 
