@@ -23,15 +23,16 @@
             
             function enroll(frm){
               if (frm.txtName.value == "")
-                alert("please enter your name.");
+                alert("Required field");
               else if (frm.txtOpenSeats.value == "")
-                alert("please enter the avaiable seats.");
+                alert("Required field");
               else {
-                console.log(frm.txtTravelTime);
+                console.log(frm.date.value);
+                var date = new Date(frm.date.value);
                 var rideposter = new Ride();
                 rideposter.save({ Name : frm.txtName.value, OpenSeats : Number(frm.txtOpenSeats.value), TravelTime :
                 frm.txtTravelTime.value, Email : frm.txtEmail.value, StartAddress : frm.txtStartAddress.value,
-                EndAddress:frm.txtEndAddress.value, Destination:frm.txtDestination.value, Date: Date(frm.date.value)}, {
+                EndAddress:frm.txtEndAddress.value, Date:date}, {
                   
                   success: function(rideposter){
                     console.log("save succeeded");
@@ -129,7 +130,7 @@
                 <!-- submit button -->
                 <div class="form-group">
                   <div class="col-sm-offset-2 col-sm-10">
-                    <button type="submit" class="btn btn-default" onClick="enroll(this.form)">Post it!  <span class="glyphicon glyphicon-thumbs-up"></span></button>
+                    <input type="button" class="btn btn-default" onClick="enroll(this.form)" value="Post it!">
                   </div>
                 </div>
             </form>
