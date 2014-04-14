@@ -288,13 +288,13 @@ h2, p, ol, ul, li {
         position: relative;
     }
 
-    .badge {
+    .bdge {
         position: absolute;
         top: 2px;
         right: 30px;
-        font-size: 0.3em;
+        font-size: 0.7em;
         line-height: 16px;
-        height: 12.5px;
+        height: 16.5px;
         padding: 0 0 3px 5px;
         color: white;
         text-shadow: 0 1px rgba(0, 0, 0, 0.25);
@@ -308,6 +308,7 @@ h2, p, ol, ul, li {
         background-image: -moz-linear-gradient(top, #fc9f8a, #fa623f);
         background-image: -o-linear-gradient(top, #fc9f8a, #fa623f);
         background-image: linear-gradient(to bottom, #fc9f8a, #fa623f);
+        display: none;
     }
 
     .subheader {
@@ -317,37 +318,22 @@ h2, p, ol, ul, li {
         margin-bottom: 2%;
     }
 
-    .row, #label {
-        margin-bottom: 20px;
-        margin-left: 15%;
-        margin-right: 15%;
-    }
-
-    .row {
-        background-color: white;
-    }
-
-    .row:hover {
-        background-color: white;
-    }
-
-    .info {
-        background-color: white;
-    }
-
     #query {
         list-style: none;
-        width: 100%;
+        width: 85%;
+        margin: auto;
+        margin-top: 54px;
     }
 
     .count {
         float: left;
         position: absolute;
-        left: 13.5%;
-        font-size: 1em;
-        line-height: 22px;
-        height: 19.5px;
-        padding: 0 6px 3px 7px;
+        left: 8.5%;
+        margin-top: 5%;
+        font-size: 2em;
+        line-height: 39px;
+        height: 42.5px;
+        padding: 0 12px 3px 12px;
         color: white;
         text-shadow: 0 1px rgba(0, 0, 0, 0.25);
         border: 1px solid #f1f1f1;
@@ -355,16 +341,62 @@ h2, p, ol, ul, li {
         background-color: black;
     }
 
-    .end {
-        font-size: 1.2em;
-        float: left;
-        padding-left: 4%;
+    .ride {
+        clear: both;
+        margin-bottom: 25px;
+        background-color: white;
     }
 
-    .start, .time, .date {
+    .content-shown {
+        /*margin-left: 8%;*/
+    }
+
+    .content-shown > p > span {
+        font-weight: 700;
+    }
+
+   /* .quick-btns {
+        float: right;
+        background-color: black;
+        color: white;
+        height: 130px;
+        width: 190px;
+    }*/
+
+    .content-hidden {
         clear: both;
+    }
+
+    .end {
+        margin-left: 8%;
+        font-size: 1.5em;
         text-align: left;
-        padding-left: 2.5%;
+        /*padding-left: 4%;*/
+        border-bottom: black solid 1px;
+        font-weight: 700;
+        padding-top: 10px;
+    }
+
+    .start, .date, .time, .driver, .seats {
+        /*clear: both;*/
+        text-align: left;
+        /*padding: 0 0 0 2.5%;*/
+        margin: 0;
+        margin-left: 8%;
+        padding: 0;
+        font-size: 0.85em;
+    }
+
+    .more {
+        color: #08cbc4;
+        font-weight: 700;
+    }
+
+    .btn-email, .btn-sign {
+        font-size: 0.6em;
+        padding-right: 7px;
+        float: right;
+        z-index: 20;
     }
 
     /*.row p, #label p {
@@ -374,7 +406,7 @@ h2, p, ol, ul, li {
         margin: 0 auto;
         word-wrap: break-word;
     }*/
-
+   
     .ride-info {
     	background-color: #f7f7f7;
     	border: 7px solid white;
@@ -382,60 +414,6 @@ h2, p, ol, ul, li {
         -moz-box-shadow:0px 0px 9px rgba(0,0,0,0.4), 0px 0px 0px 1px rgba(188,188,188,0.1);
         box-shadow:0px 0px 9px rgba(0,0,0,0.4), 0px 0px 0px 1px rgba(188,188,188,0.1);
         margin-bottom: 3%;
-    }
-
-    .avatar {
-    	float: left;
-    	margin: 2% 3% 0 0;
-    	width: 20%;
-    }
-
-    .avatar > h1 {
-    	font-size: 1.2em;
-    	margin: 0;
-    	padding:0 0 5px 0px;
-    }
-
-    .avatar > p {
-    	margin: 0;
-    	padding:0;
-    	font-size: 0.7em;
-    }
-
-    .avatar > span > span {
-    	font-size: 70%;
-    	margin: 0;
-    	padding:0 0 0 5px;
-    }
-
-    .details {
-    	margin-top: 2%;
-    	float: left;
-    	border-bottom: solid 1px;
-    }
-
-    .details > h1 {
-    	font-size: 2.2em;
-    	font-family: 'Just Me Again Down Here', cursive;
-    	text-align: center;
-    	padding:0;
-    	margin:0;
-    }
-
-    .details > p {
-    	padding: 2px 0;
-    	margin:0;
-    	font-size: 70%;
-    	text-align: left;
-    }
-
-    .register {
-    	clear: both;
-    	font-size: 0.8em;
-    }
-
-    .register > span {
-    	padding-right: 2%;
     }
 
 
@@ -448,7 +426,8 @@ h2, p, ol, ul, li {
 
     #submit {
         width: 180px;
-        padding: 0 0 180px 0;
+        /*padding: 0 0 180px 0;*/
+        padding:0;
         right: 3%;
         top: 45px;
         position: absolute;
@@ -466,7 +445,8 @@ h2, p, ol, ul, li {
         display: block;
         position: absolute;
         top:-27px;
-        right: 61px;
+        /*right: 61px;*/
+        right: 3px;
         width:0;
         height:0;
         border-color: transparent transparent black transparent;
@@ -475,7 +455,7 @@ h2, p, ol, ul, li {
     }
 
     #submit p {
-        font-size: 0.6em;
+        font-size: 0.7em;
     }
 
 

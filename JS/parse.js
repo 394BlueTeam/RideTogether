@@ -1,5 +1,5 @@
 Parse.initialize("b0jfwJsQkNWPdoKnDgd8KJLufCLWNJpmc5vBTkqr", "X90Jzs3gzKceNOdkFmCle8ZiwsE0HGhyNF4N3Wcj");
-var arrow = '<i class="fa fa-chevron-down"></i>';
+var counter = 0;
 
 
 var query = new Parse.Query('Ride');
@@ -10,16 +10,23 @@ query.find({
   success: function(results) {
     var q = $('#query');
     for (var i=0;i < results.length;i++){
-      var time = results[i].get('Date');
-      time = String(time);
-      time = time.substr(0, 15);
-      var DateTime = time + " " + results[i].get('TravelTime');
-      q.append('<div class="row" data-attribute="'+results[i].id+ '"><div class="expandable-panel-heading"><p>'+results[i].get('StartAddress')+"</p>"+'<p>'+results[i].get('Destination')+"</p>"+'<p>'+DateTime+"</p>"+arrow+'</div><div class="info"></div></div>');
+      var date = results[i].get('Date');
+      date = String(date);
+      date = date.substr(0, 15);
+      var time = results[i].get('TravelTime');
+      var driver = results[i].get('Name');
+      var seats = results[i].get('OpenSeats');
+      counter += 1;
+      var btn1 = "<a href='#'><i class='fa fa-link btn-email'>  connect with driver</i></a>";
+      var btn2 = "<a href='#' id='join' onclick='badgesystem();'><i class='fa fa-plus-square btn-sign'>  join ride</i></a>";
+      // var DateTime = date + " " + results[i].get('TravelTime');
+      q.append('<div class="ride" data-attribute="'+results[i].id+ '"><div class="count">'+counter+'</div><div class="content-shown"><p class="end">'+results[i].get('Destination')+'<span>'+btn1 + btn2+'</span></p><p class="start"><span>Leaving From: </span>'+results[i].get('StartAddress')+'</p><p class="date"><span>Trip Date: </span>'+date+'</p><p class="time"><span>Time: </span>'+time+'</p><p class="driver"><span>Driver: </span>'+driver+'</p><p class="seats"><span>Available seats: </span>'+seats+'</p><p class="more">click to display more info</p></div><div class="content-hidden"></div></div>');
     }
 
-    $('.row').click( function(){
+    $('.ride').click( function(){
       var id = $(this).attr('data-attribute');
-      var info = $(this).find('.info');
+      var info = $(this).find('.content-hidden');
+      var more = $(this).find('.more');
       
       //if for some reason we end up with undefined variables
       if(!id || !info) {
@@ -36,7 +43,7 @@ query.find({
         //$(this).css('background-color', 'white');
         query.get(id, {
           success: function(object) {
-            insertInfo(info, object.get('Name'), object.get('Email'), object.get('OpenSeats'), object.get('StartAddress'), object.get('EndAddress'), object.get('Date'), object.get('TravelTime'), object.get('Destination'));
+            insertInfo(more, object.get('Name'), object.get('Email'), object.get('OpenSeats'), object.get('StartAddress'), object.get('EndAddress'), object.get('Date'), object.get('TravelTime'), object.get('Destination'));
           },
           error: function(object, error) {
             console.log('error')
@@ -44,13 +51,13 @@ query.find({
         });
       }
 
-      else if(info.is(':visible')) {
-        info.hide();
+      else if(more.is(':visible')) {
+        more.hide();
         //$(this).css('background-color', 'transparent');
       }
 
       else {
-        info.show();
+        more.show();
       }
     })
   },
@@ -62,12 +69,35 @@ query.find({
 
 //adds the chosen information into the appropriate div
 //error checking should be
-function insertInfo(info, driver, email, seats, sAdd, eAdd, date, TravelTime, Destination){
+function insertInfo(more, driver, email, seats, sAdd, eAdd, date, TravelTime, Destination){
   var truncDate = String(date);
   truncDate = truncDate.substr(0, 15);
   var message="Hi "+driver+",%0D%0DI'd like to join your ride from "+sAdd+" to "+eAdd+" ("+Destination+"), on "+truncDate +
   " from " + TravelTime + ". Please let me know if I can join.%0D%0DThanks,%0D";
-  info.html('<p class="driverName">Driver: ' + driver +'</p><p class="seats">Open Seats: '
-            +seats +'</p><a class="join-button" href="mailto:'+email+'?subject=I\'d like to join your ride!&body='+message+'">Join this ride</a>');
+  more.html('<a class="join-button" href="mailto:'+email+'?subject=I\'d like to join your ride!&body='+message+'">Join this ride</a>');
+  // info.html('<p class="driverName">Driver: ' + driver +'</p><p class="seats">Open Seats: '
+  //           +seats +'</p><a class="join-button" href="mailto:'+email+'?subject=I\'d like to join your ride!&body='+message+'">Join this ride</a>');
   return 0;
 }
+
+
+// function for when "join this ride" is clicked;
+// it will update the badge count number
+var count = 0;
+function badgesystem() {
+  count += 1;
+  $('.bdge').show();
+  $('.bdge').empty();
+  $('.bdge').append(count);
+}
+
+// function for when the rides icon in the header
+// is clicked; it will display info about the ride
+// that was added
+function notify() {
+  $('#submit').toggle();
+}
+
+
+
+

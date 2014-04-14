@@ -20,23 +20,22 @@ from the original style.css sheet*/
 }
 
 .count {
-	left: 12%;
+    left: 5px;
+    font-size: 1.7em;
+    line-height: 39px;
+    height: 40px;
 }
 
 .end {
-	padding-left: 30px;
+	/*padding-left: 30px;*/
 	font-size: 1em;
 }
 
-#rides {
-    margin-right: 1px;
-    padding: 0px;
+.start, .date, .time, .driver, .seats {
+    font-size: 0.7em;
 }
 
-#menu {
-	margin-right: 5px;
-}
 
-#openseats {
-	display: none;
+.bdge {
+    right: 28px;
 }

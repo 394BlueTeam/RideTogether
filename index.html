@@ -12,11 +12,60 @@
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
         <title>RideTogether</title>
+        <script type='application/javascript' src='JS/fastclick.js'></script>
         <link href="CSS/mobile.css" rel="stylesheet" media="handheld,only screen and (max-device-width:480px)" />
         <link href="CSS/core.css" rel="stylesheet" media="screen" />
         <link rel="stylesheet" href="Plugins/FontAwesome/css/font-awesome.min.css" />
         <link rel="stylesheet" href="Plugins/Bootstrap/css/bootstrap.min.css">
         <script type="text/javascript" src="Plugins/Bootstrap/js/bootstrap.min.js"></script>
+        <!-- <script type="text/javascript" src="test.js"></script> -->
+        <script type="text/javascript">
+          Parse.initialize("b0jfwJsQkNWPdoKnDgd8KJLufCLWNJpmc5vBTkqr", "X90Jzs3gzKceNOdkFmCle8ZiwsE0HGhyNF4N3Wcj");
+            var Ride = Parse.Object.extend("Users");    
+            
+            function enroll(){
+                // security measure -->
+                // check to make sure that the submitted email
+                // is a u.northwestern.edu email account
+                var email = $("input[name=Email]").val();
+                var end = "@u.northwestern.edu";
+                var len = email.length;                 // length of inputted email
+                var len2 = end.length;                  // length of u.northw.....
+                var pos = len - len2;                   // start of slice - the part with @u.....
+                var ending = email.slice(pos, len);     // supposed to be the @u.northw.... ending
+
+                if (email == "") {
+                    alert('Error: Please enter a @u.northwestern.edu email')
+                }
+
+                else if (ending != end) {
+                    alert('Error: Please enter a @u.northwestern.edu email')
+                }
+
+                else {
+                    var name = $("input[name=Name]").val();
+                    var cartype = $("input[name=CarType]").val();
+                    var homeaddress = $("input[name=HomeAddress]").val();
+
+                    var user = new Ride();
+
+                    user.save({Email: email, Name: name, CarType: cartype, HomeAddress: homeaddress, DriverRating: 0}, {
+                        success: function(rideposter){
+                            console.log("save succeeded");
+                            alert('You\'re registered!');
+                            $('#register').modal('hide')
+                        },
+                        error: function(rideposter, error){
+                            console.log("Error: ", error);
+                        }
+                    });
+                }
+            }
+
+            window.addEventListener('load', function() {
+                FastClick.attach(document.body);
+            }, false);
+        </script>
     </head>
 
     <body>
@@ -73,7 +122,7 @@
                                 <div class="form-group">
                                     <div class="col-sm-10">
                                         <select class="form-control" id="seats" name="CarType">
-                                            <option>Car Type</option>
+                                            <option>Car Type - choose one only if you plan to offer rides</option>
                                             <option>Sedan</option>
                                             <option>Coupe</option>
                                             <option>SUV</option>
