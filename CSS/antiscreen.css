@@ -39,3 +39,7 @@ from the original style.css sheet*/
 .bdge {
     right: 28px;
 }
+
+#openseats {
+	display: none;
+}
