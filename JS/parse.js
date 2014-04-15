@@ -10,9 +10,9 @@ query.find({
   success: function(results) {
     var q = $('#query');
     for (var i=0;i < results.length;i++){
-      var date = results[i].get('Date');
-      date = String(date);
-      date = date.substr(0, 15);
+      var tripdate = results[i].get('Date');
+      tripdate = String(tripdate);
+      tripdate = tripdate.substr(0, 15);
       var time = results[i].get('TravelTime');
       var driver = results[i].get('Name');
       var seats = results[i].get('OpenSeats');
@@ -20,7 +20,7 @@ query.find({
       var btn1 = "<a href='#'><i class='fa fa-link btn-email'>  connect with driver</i></a>";
       var btn2 = "<a href='#' id='join' onclick='badgesystem();'><i class='fa fa-plus-square btn-sign'>  join ride</i></a>";
       // var DateTime = date + " " + results[i].get('TravelTime');
-      q.append('<div class="ride" data-attribute="'+results[i].id+ '"><div class="count">'+counter+'</div><div class="content-shown"><p class="end">'+results[i].get('Destination')+'<span>'+btn1 + btn2+'</span></p><p class="start"><span>Leaving From: </span>'+results[i].get('StartAddress')+'</p><p class="date"><span>Trip Date: </span>'+date+'</p><p class="time"><span>Time: </span>'+time+'</p><p class="driver"><span>Driver: </span>'+driver+'</p><p class="seats"><span>Available seats: </span>'+seats+'</p><p class="more">click to display more info</p></div><div class="content-hidden"></div></div>');
+      q.append('<div class="ride" data-attribute="'+results[i].id+ '"><div class="count">'+counter+'</div><div class="content-shown"><p class="end">'+results[i].get('Destination')+'<span>'+btn1 + btn2+'</span></p><p class="start"><span>Leaving From: </span>'+results[i].get('StartAddress')+'</p><p class="date"><span>Trip Date: </span>'+tripdate+'</p><p class="time"><span>Time: </span>'+time+'</p><p class="driver"><span>Driver: </span>'+driver+'</p><p class="seats"><span>Available seats: </span>'+seats+'</p><p class="more">click to display more info</p></div><div class="content-hidden"></div></div>');
     }
 
     $('.ride').click( function(){

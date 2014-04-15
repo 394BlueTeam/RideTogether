@@ -34,7 +34,7 @@
 
                 rideposter.save({ Name : frm.txtName.value, OpenSeats : Number(frm.txtOpenSeats.value), TravelTime :
                 frm.txtTravelTime.value, Email : frm.txtEmail.value, StartAddress : frm.txtStartAddress.value,
-                EndAddress:frm.txtEndAddress.value, Date:date}, {
+                Destination : frm.txtDestination.value, Date:date}, {
                   success: function(rideposter){
                     console.log("save succeeded");
                     alert('Thank you! the ride information is posted');
@@ -102,7 +102,7 @@
                 <div class="form-group">
                     <label for="end" class="col-sm-2 control-label">Destination</label>
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" id="end" name="txtEndAddress" placeholder="ex: O'Hare, Old Orchard, etc">
+                      <input type="text" class="form-control" id="end" name="txtDestination" placeholder="ex: O'Hare, Old Orchard, etc">
                     </div>
                 </div>
 
