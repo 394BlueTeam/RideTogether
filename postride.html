@@ -25,47 +25,68 @@
             
             function enroll(frm){
               if (frm.txtName.value == "")
-                alert("Required field");
+                  alert("Required field");
               else if (frm.txtOpenSeats.value == "")
-                alert("Required field");
+                  alert("Required field");
               else {
-                console.log(frm.date.value);
-                var date = new Date(frm.date.value);
-                var rideposter = new Ride();
+                  console.log(frm.date.value);
+                  var date = new Date(frm.date.value);
 
-                rideposter.save({ Name : frm.txtName.value, OpenSeats : Number(frm.txtOpenSeats.value), TravelTime :
-                frm.txtTravelTime.value, Email : frm.txtEmail.value, StartAddress : frm.txtStartAddress.value,
-                Destination : frm.txtDestination.value, Date:date}, {
-                  success: function(rideposter){
-                    console.log("save succeeded");
-                    alert('Thank you! the ride information is posted');
-                  },
-                  error: function(rideposter, error){
-                    console.log("save failed with error: ", error);
-                  }
-                });
+                  var startPoint = new Parse.GeoPoint({
+                                       latitude: parseFloat(frm.txtStartPointLat.value),
+                                       longitude: parseFloat(frm.txtStartPointLng.value)
+                                   });
+                  var endPoint = new Parse.GeoPoint({
+                                     latitude: parseFloat(frm.txtEndPointLat.value),
+                                     longitude: parseFloat(frm.txtEndPointLng.value)
+                                   });
+  
+                  var rideposter = new Ride();
+                  rideposter.save({ Name: frm.txtName.value,
+                                    OpenSeats: Number(frm.txtOpenSeats.value),
+                                    TravelTime: frm.txtTravelTime.value,
+                                    Email: frm.txtEmail.value,
+                                    StartAddress: frm.txtStartAddress.value, 
+                                    StartPoint: startPoint, 
+                                    Destination: frm.txtDestination.value,
+                                    EndPoint: endPoint,
+                                    Date: date}, {
+                      success: function(rideposter){
+                          console.log("Save succeeded");
+                          alert('Thank you! the ride information is posted');
+                      },
+                      error: function(rideposter, error){
+                          console.log("Save failed with error: ", error);
+                      }
+                  });
               }
             }
 
             window.addEventListener('load', function() {
                 FastClick.attach(document.body);
             }, false);
-        </script>
        
-       //address auto complete
-        <script>
-            var autocomplete;
+            // Address auto complete
             function initialize() {
-              autocomplete_start = new google.maps.places.Autocomplete(
-                  /** @type {HTMLInputElement} */(document.getElementById('start')),
-                  { types: [] });
-              google.maps.event.addListener(autocomplete_start, 'place_changed', function() {
-              });
-              autocomplete_end = new google.maps.places.Autocomplete(
-                  /** @type {HTMLInputElement} */(document.getElementById('end')),
-                  { types: [] });
-              google.maps.event.addListener(autocomplete_end, 'place_changed', function() {
-              });
+                autocomplete_start = new google.maps.places.Autocomplete(
+                    (document.getElementById('start')),
+                    { types: [] });
+                google.maps.event.addListener(autocomplete_start, 'place_changed', function() {
+                    var start_place = autocomplete_start.getPlace();
+                    document.getElementById("startpointlat").value = start_place.geometry.location.lat();
+                    document.getElementById("startpointlng").value = start_place.geometry.location.lng();
+                });
+
+                autocomplete_end = new google.maps.places.Autocomplete(
+                   (document.getElementById('end')),
+                   { types: [] });
+                google.maps.event.addListener(autocomplete_end, 'place_changed', function() {
+                    var end_place = autocomplete_end.getPlace();
+                    end_place.geometry.location.lat();
+                    document.getElementById("endpointlat").value = end_place.geometry.location.lat();
+                    document.getElementById("endpointlng").value = end_place.geometry.location.lng();
+                });
+
             }
         </script>
     </head>
@@ -113,6 +134,8 @@
                     <label for="start" class="col-sm-2 control-label">Start Address</label>
                     <div class="col-sm-10">
                       <input type="text" class="form-control" id="start" name="txtStartAddress" placeholder="ex: 2255 Ridge Ave, Plex, Tech, etc">
+                      <input type="hidden" class="form-control" id="startpointlat" name="txtStartPointLat">
+                      <input type="hidden" class="form-control" id="startpointlng" name="txtStartPointLng">
                     </div>
                 </div>
 
@@ -121,6 +144,8 @@
                     <label for="end" class="col-sm-2 control-label">Destination</label>
                     <div class="col-sm-10">
                       <input type="text" class="form-control" id="end" name="txtDestination" placeholder="ex: O'Hare, Old Orchard, etc">
+                      <input type="hidden" class="form-control" id="endpointlat" name="txtEndPointLat">
+                      <input type="hidden" class="form-control" id="endpointlng" name="txtEndPointLng">
                     </div>
                 </div>
 
