@@ -19,6 +19,7 @@
         <link rel="stylesheet" href="Plugins/Bootstrap/css/bootstrap.min.css">
         <script type="text/javascript" src="Plugins/Bootstrap/js/bootstrap.min.js"></script>
         <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
+        <script type="text/javascript" src="JS/autocomplete.js"></script>
         <script type="text/javascript">
             Parse.initialize("b0jfwJsQkNWPdoKnDgd8KJLufCLWNJpmc5vBTkqr", "X90Jzs3gzKceNOdkFmCle8ZiwsE0HGhyNF4N3Wcj");
             var Ride = Parse.Object.extend("Ride");
@@ -65,33 +66,10 @@
             window.addEventListener('load', function() {
                 FastClick.attach(document.body);
             }, false);
-       
-            // Address auto complete
-            function initialize() {
-                autocomplete_start = new google.maps.places.Autocomplete(
-                    (document.getElementById('start')),
-                    { types: [] });
-                google.maps.event.addListener(autocomplete_start, 'place_changed', function() {
-                    var start_place = autocomplete_start.getPlace();
-                    document.getElementById("startpointlat").value = start_place.geometry.location.lat();
-                    document.getElementById("startpointlng").value = start_place.geometry.location.lng();
-                });
-
-                autocomplete_end = new google.maps.places.Autocomplete(
-                   (document.getElementById('end')),
-                   { types: [] });
-                google.maps.event.addListener(autocomplete_end, 'place_changed', function() {
-                    var end_place = autocomplete_end.getPlace();
-                    end_place.geometry.location.lat();
-                    document.getElementById("endpointlat").value = end_place.geometry.location.lat();
-                    document.getElementById("endpointlng").value = end_place.geometry.location.lng();
-                });
-
-            }
         </script>
     </head>
 
-    <body class="fancy" onload="initialize()"> 
+    <body class="fancy"> 
         
         <!-- HEADER -->
         <div class="header">
