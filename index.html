@@ -22,7 +22,8 @@
         <script type="text/javascript">
           Parse.initialize("b0jfwJsQkNWPdoKnDgd8KJLufCLWNJpmc5vBTkqr", "X90Jzs3gzKceNOdkFmCle8ZiwsE0HGhyNF4N3Wcj");
             var Ride = Parse.Object.extend("Users");    
-            
+            function login(){
+            }
             function enroll(){
                 // security measure -->
                 // check to make sure that the submitted email
@@ -88,12 +89,44 @@
                     <span class="btn-text">Post a ride</span> 
                     <span class="sub-text">and become a hero</span>
                 </a>
-                <!-- <a href="signup.html" class="a-btn">
-                    <span class="btn-symbol"><i class="fa fa-pencil fa-lg"></i></span>
-                    <span class="btn-text">Sign Up</span> 
-                    <span class="sub-text">and make your profile</span>
-                </a> -->
                 <a href="#" id="small" data-toggle="modal" data-target="#register">Don't have an account? Register here</a> <!--this link triggers the signup modal-->
+                <a href="#" id="small2" data-toggle="modal" data-target="#login">log in</a> 
+            </div>
+
+            <!-- login modal -->
+            <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="signup" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+
+                        <!-- BODY -->
+                        <div class="modal-body">
+                            <form class="form-horizontal" role="form">
+                                <!-- Email -->
+                                <div class="form-group">
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="name" name="Name"
+                                        placeholder="Email">
+                                    </div>
+                                </div>
+
+                                <!-- Password -->
+                                <div class="form-group">
+                                    <div class="col-sm-10">
+                                        <input type="email" class="form-control" id="email" name="Email"
+                                        placeholder="Password">
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+
+                        <!-- FOOTER -->
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-default" onclick="login()">login</button>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <!-- SIGN UP MODAL -->
