@@ -21,9 +21,19 @@
         <!-- <script type="text/javascript" src="test.js"></script> -->
         <script type="text/javascript">
           Parse.initialize("b0jfwJsQkNWPdoKnDgd8KJLufCLWNJpmc5vBTkqr", "X90Jzs3gzKceNOdkFmCle8ZiwsE0HGhyNF4N3Wcj");
-            var Ride = Parse.Object.extend("Users");    
             function login(){
+                var username = $("input[name=UserNameLogin]").val();
+                var password = $("input[name=PasswordLogin]").val();
+
+                Parse.User.logIn(username, password, {
+                   success: function(user){
+                   },
+                   error: function(user, error){
+                       console.log("Error: ", error);
+                   },
+                });
             }
+
             function enroll(){
                 // security measure -->
                 // check to make sure that the submitted email
@@ -44,13 +54,15 @@
                 }
 
                 else {
+                    var password = $("input[name=Password]").val();
                     var name = $("input[name=Name]").val();
                     var cartype = $("input[name=CarType]").val();
                     var homeaddress = $("input[name=HomeAddress]").val();
 
-                    var user = new Ride();
-
-                    user.save({Email: email, Name: name, CarType: cartype, HomeAddress: homeaddress, DriverRating: 0}, {
+                    var user = new Parse.User();    
+                    user.signUp({username: email, password: password, email: email, 
+                                 Name: name, CarType: cartype, HomeAddress: homeaddress,
+                                 DriverRating: 0}, {
                         success: function(rideposter){
                             console.log("save succeeded");
                             alert('You\'re registered!');
@@ -66,6 +78,17 @@
             window.addEventListener('load', function() {
                 FastClick.attach(document.body);
             }, false);
+
+            $(document).ready(function() {
+                var currentUser = Parse.User.current();
+                if (currentUser) {
+                    $('#users').html('<p>Welcome, ' + currentUser.get('Name') + '</p>');
+                } else {
+                    $('#users').html('<a href="#" id="small" data-toggle="modal" data-target="#register">Don\'t have an account? Register here</a>' +
+                                     '<a href="#" id="small2" data-toggle="modal" data-target="#login">log in</a>');
+                }
+            });
+
         </script>
     </head>
 
@@ -89,12 +112,14 @@
                     <span class="btn-text">Post a ride</span> 
                     <span class="sub-text">and become a hero</span>
                 </a>
-                <a href="#" id="small" data-toggle="modal" data-target="#register">Don't have an account? Register here</a> <!--this link triggers the signup modal-->
-                <a href="#" id="small2" data-toggle="modal" data-target="#login">log in</a> 
+                <div id="users">
+                    <!--<a href="#" id="small" data-toggle="modal" data-target="#register">Don't have an account? Register here</a> [>this link triggers the signup modal<]-->
+                    <!--<a href="#" id="small2" data-toggle="modal" data-target="#login">log in</a> -->
+                </div>
             </div>
 
-            <!-- login modal -->
-            <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="signup" aria-hidden="true">
+            <!-- LOGIN MODAL -->
+            <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="signin" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
 
@@ -104,7 +129,7 @@
                                 <!-- Email -->
                                 <div class="form-group">
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="name" name="Name"
+                                        <input type="text" class="form-control" id="usernamelogin" name="UserNameLogin"
                                         placeholder="Email">
                                     </div>
                                 </div>
@@ -112,7 +137,7 @@
                                 <!-- Password -->
                                 <div class="form-group">
                                     <div class="col-sm-10">
-                                        <input type="email" class="form-control" id="email" name="Email"
+                                        <input type="password" class="form-control" id="passwordlogin" name="PasswordLogin"
                                         placeholder="Password">
                                     </div>
                                 </div>
@@ -137,17 +162,24 @@
                         <!-- BODY -->
                         <div class="modal-body">
                             <form class="form-horizontal" role="form">
-                                <!-- name -->
-                                <div class="form-group">
-                                    <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="name" name="Name" placeholder="Name">
-                                    </div>
-                                </div>
-
                                 <!-- email -->
                                 <div class="form-group">
                                     <div class="col-sm-10">
                                         <input type="email" class="form-control" id="email" name="Email" placeholder="Email">
+                                    </div>
+                                </div>
+
+                                <!-- password -->
+                                <div class="form-group">
+                                    <div class="col-sm-10">
+                                        <input type="password" class="form-control" id="password" name="Password" placeholder="Password">
+                                    </div>
+                                </div>
+
+                                <!-- name -->
+                                <div class="form-group">
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="name" name="Name" placeholder="Name">
                                     </div>
                                 </div>
 

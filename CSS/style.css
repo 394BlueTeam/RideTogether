@@ -133,6 +133,13 @@ h2, p, ol, ul, li {
         padding: 7px;
     }
 
+    #users {
+        font-size: 0.9em;
+        color: #08cbc4 !important;
+        text-decoration: none;
+        padding: 7px;
+    }
+
 
     /*----- buttons -----*/
 
