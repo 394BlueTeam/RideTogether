@@ -27,6 +27,9 @@
 
                 Parse.User.logIn(username, password, {
                    success: function(user){
+                       console.log("Login succeeded");
+                       $('#login').modal('hide');
+                       $('#users').html('<p>Welcome, ' + user.get('Name') + '</p>');
                    },
                    error: function(user, error){
                        console.log("Error: ", error);
@@ -84,8 +87,8 @@
                 if (currentUser) {
                     $('#users').html('<p>Welcome, ' + currentUser.get('Name') + '</p>');
                 } else {
-                    $('#users').html('<a href="#" id="small" data-toggle="modal" data-target="#register">Don\'t have an account? Register here</a>' +
-                                     '<a href="#" id="small2" data-toggle="modal" data-target="#login">log in</a>');
+                    $('#users').html('<a href="#" data-toggle="modal" data-target="#register">Don\'t have an account? Register here</a>' +
+                                     '<a href="#" data-toggle="modal" data-target="#login">log in</a>');
                 }
             });
 
