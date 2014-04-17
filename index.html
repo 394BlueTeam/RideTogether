@@ -85,12 +85,12 @@
             $(document).ready(function() {
                 var currentUser = Parse.User.current();
                 if (currentUser) {
-                    $('#users').html('<p>Welcome, ' + currentUser.get('Name') + 
+                    $('#users').html('<p>Welcome, ' + currentUser.get('Name') + '    ' +
                         '<a href="#" id="logout">Logout</a>' + '</p>');
                     $('#logout').click(Parse.User.logOut());
                 } else {
                     $('#users').html('<a href="#" data-toggle="modal" data-target="#register">Don\'t have an account? Register here</a>' +
-                                     '<a href="#" data-toggle="modal" data-target="#login">Log in</a>');
+                                     '    ' + '<a href="#" data-toggle="modal" data-target="#login">Log in</a>');
                 }
             });
 
