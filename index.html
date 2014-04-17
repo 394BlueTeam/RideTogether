@@ -85,7 +85,9 @@
             $(document).ready(function() {
                 var currentUser = Parse.User.current();
                 if (currentUser) {
-                    $('#users').html('<p>Welcome, ' + currentUser.get('Name') + '</p>');
+                    $('#users').html('<p>Welcome, ' + currentUser.get('Name') + 
+                                     '<a href="#" id='logout'>' + '</p>');
+                    $('#logout').click(Parse.User.logOut());
                 } else {
                     $('#users').html('<a href="#" data-toggle="modal" data-target="#register">Don\'t have an account? Register here</a>' +
                                      '<a href="#" data-toggle="modal" data-target="#login">log in</a>');
