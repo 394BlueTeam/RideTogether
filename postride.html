@@ -165,7 +165,7 @@
             <div class="circle"></div><p>Start</p>
         </div>
         <div class="line line-drive">
-            <div class="piece"></div><p>30 mins</p>
+            <div class="piece"></div><p></p>
         </div>
 
         <div class="waypoint">
@@ -173,7 +173,7 @@
         </div>
 
         <div class="line line-dest">
-            <div class="piece"></div><p>40 mins</p>
+            <div class="piece"></div><p></p>
         </div>
 
         <div class="waypoint">
@@ -181,7 +181,7 @@
         </div>
 
         <div class="line line-drive">
-            <div class="piece"></div><p>30 mins</p>
+            <div class="piece"></div><p></p>
         </div>
 
         <div class="waypoint">
@@ -203,19 +203,23 @@
             timeline.css('width', screenWidth);
             var timeWidth = screenWidth - (35*4);
 
-            console.log('timeWidth: ' + timeWidth);
 
             var fullTime = destTime + (2*rideTime);            
-            console.log('fullTime: ' + fullTime);
 
             var destWidth = destTime/fullTime;
             var driveWidth = rideTime/fullTime;
 
-            console.log('driveWidth: '+driveWidth);
-            console.log('destWidth: '+destWidth);
 
             $('.line-drive .piece').css('width',  (timeWidth*driveWidth)+10+'px')
             $('.line-dest .piece').css('width',  (destWidth*timeWidth)+10+'px')
+
+
+            console.log('driveWidth: '+driveWidth);
+            console.log('destWidth: '+destWidth);
+
+            $('.line-drive p').html(""+rideTime+' mins');
+            $('.line-dest p').html(""+destTime+' mins');
+
         }
 
         $(window).ready(function(){
