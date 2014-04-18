@@ -101,7 +101,6 @@ function notify() {
 }
 
 
-<<<<<<< HEAD
 // function for populating the sidebar profile
 // with the pertinent information
 
@@ -162,5 +161,3 @@ function star(x) {
       return score;
     }
 }
-=======
->>>>>>> FETCH_HEAD
