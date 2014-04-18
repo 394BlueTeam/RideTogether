@@ -11,6 +11,8 @@ query.find({
     var q = $('#query');
     for (var i=0;i < results.length;i++){
       var tripdate = results[i].get('Date');
+      tripdate.setHours(tripdate.getHours()+5);
+      console.log(tripdate);
       tripdate = String(tripdate);
       tripdate = tripdate.substr(0, 15);
       var time = results[i].get('TravelTime');
@@ -97,7 +99,5 @@ function badgesystem() {
 function notify() {
   $('#submit').toggle();
 }
-
-
 
 
