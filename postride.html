@@ -67,6 +67,9 @@
                 FastClick.attach(document.body);
             }, false);
         </script>
+
+          <script type="text/javascript" src="timeline.js"></script>
+
     </head>
 
     <body class="fancy"> 
@@ -190,45 +193,13 @@
 
       </div>
 
+            
+              <p><button type="button" onclick="calculateDistances('1121 Church Street, Evanston, IL',  '10000 West O\'Hare International Airport', 60);">Calculate
+          distances</button></p>
+          <p id="outputDiv"></p>
+
       <div id="map-canvas"></div>
 
-
-      <script>
-        function drawTimeline(start, destTime, rideTime){
-            var timeline = $('.timeline');
-            var screenWidth = $(window).width()-10;
-            if (screenWidth > 800){
-                screenWidth = 800;
-            }
-            timeline.css('width', screenWidth);
-            var timeWidth = screenWidth - (35*4);
-
-
-            var fullTime = destTime + (2*rideTime);            
-
-            var destWidth = destTime/fullTime;
-            var driveWidth = rideTime/fullTime;
-
-
-            $('.line-drive .piece').css('width',  (timeWidth*driveWidth)+10+'px')
-            $('.line-dest .piece').css('width',  (destWidth*timeWidth)+10+'px')
-
-
-            console.log('driveWidth: '+driveWidth);
-            console.log('destWidth: '+destWidth);
-
-            $('.line-drive p').html(""+rideTime+' mins');
-            $('.line-dest p').html(""+destTime+' mins');
-
-        }
-
-        $(window).ready(function(){
-            drawTimeline(60, 40, 30);
-        });
-        $(window).resize(function(){
-            drawTimeline(60,40,30);
-        });
-      </script>
 
     </body>
 </html>

@@ -530,7 +530,7 @@ h2, p, ol, ul, li {
 .timeline{
     width:auto;
     height:100px;
-    display:block;
+    display:none;
     position:relative;
     margin: 0 auto;
     overflow: hidden;
