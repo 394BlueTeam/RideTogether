@@ -11,16 +11,18 @@ query.find({
     var q = $('#query');
     for (var i=0;i < results.length;i++){
       var tripdate = results[i].get('Date');
+      tripdate.setHours(tripdate.getHours()+5);
+      console.log(tripdate);
       tripdate = String(tripdate);
       tripdate = tripdate.substr(0, 15);
       var time = results[i].get('TravelTime');
       var driver = results[i].get('Name');
       var seats = results[i].get('OpenSeats');
       counter += 1;
-      var btn1 = "<a href='#'><i class='fa fa-link btn-email'>  connect with driver</i></a>";
+      // var btn1 = "<a href='#'><i class='fa fa-link btn-email'>  connect with driver</i></a>";
       var btn2 = "<a href='#' id='join' onclick='badgesystem();'><i class='fa fa-plus-square btn-sign'>  join ride</i></a>";
       // var DateTime = date + " " + results[i].get('TravelTime');
-      q.append('<div class="ride" data-attribute="'+results[i].id+ '"><div class="count">'+counter+'</div><div class="content-shown"><p class="end">'+results[i].get('Destination')+'<span>'+btn1 + btn2+'</span></p><p class="start"><span>Leaving From: </span>'+results[i].get('StartAddress')+'</p><p class="date"><span>Trip Date: </span>'+tripdate+'</p><p class="time"><span>Time: </span>'+time+'</p><p class="driver"><span>Driver: </span>'+driver+'</p><p class="seats"><span>Available seats: </span>'+seats+'</p><p class="more">click to display more info</p></div><div class="content-hidden"></div></div>');
+      q.append('<div class="ride" data-attribute="'+results[i].id+ '"><div class="count">'+counter+'</div><div class="content-shown"><p class="end">'+results[i].get('Destination')+'<span>'+btn2+'</span></p><p class="start"><span>Leaving From: </span>'+results[i].get('StartAddress')+'</p><p class="date"><span>Trip Date: </span>'+tripdate+'</p><p class="time"><span>Time: </span>'+time+'</p><p class="driver"><span>Driver: </span>'+driver+'</p><p class="seats"><span>Available seats: </span>'+seats+'</p><p class="more">click to display more info</p></div><div class="content-hidden"></div></div>');
     }
 
     $('.ride').click( function(){
@@ -99,5 +101,63 @@ function notify() {
 }
 
 
+// function for populating the sidebar profile
+// with the pertinent information
 
+$(document).ready(function() {
+    var currentUser = Parse.User.current();
+    // console.log(currentUser);
+    if(currentUser) {
+      var tag = $('#profile');
+      var links = $('.links');
+      var name = currentUser.get('Name');
+      var email = currentUser.get('email');
+      var rating = Number(currentUser.get('DriverRating'));
+      var home = currentUser.get('HomeAddress');
 
+      var one = '<h3 class="profile-name">'+name+'</h3>';
+      var two = '<div class="rating">'+star(rating)+'</div>';
+      var three = '<p class="sub-title">'+home+'</p>';
+      var four = '<p class="sub-title">'+email+'</p>';
+      tag.append(one+three+two);
+    }
+
+    else if(!currentUser) {
+      $('.avatar').hide();
+      $('#profile').append('<p class="prompt">please login</p>');
+      $('.links').hide();
+    }
+});
+
+// to automatically display the rating in stars
+function star(x) {
+    var empty = '<span><i class="fa fa-star-o"></i></span>';
+    var full = '<span><i class="fa fa-star"></i></span>';
+    var half = '<span><i class="fa fa-star-half-o"></i></span>';
+    var score;
+
+    if(x == 0) {
+      score = empty+empty+empty+empty;
+      return score;
+    }
+
+    if(x == 1) {
+      score = full+empty+empty+empty;
+      return score;
+    }
+
+    if(x == 2) {
+      score = full+full+empty+empty;
+      return score;
+    }
+
+    if(x == 3) {
+      score = full+full+full+empty;
+      return score;
+    }
+
+    if(x == 4) {
+      score = full+full+full+full;
+      return score;
+    }
+}

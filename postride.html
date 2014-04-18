@@ -42,15 +42,27 @@
                                      longitude: parseFloat(frm.txtEndPointLng.value)
                                    });
   
+                  var durationRes, departureRes;
+                  var durationStr = frm.txtDurationTime.value;
+                  var departureStr = frm.txtDepartureTime.value;
+
+                  durationRes = durationStr.split(":");
+                  departureRes = departureStr.split(":");
+
                   var rideposter = new Ride();
                   rideposter.save({ Name: frm.txtName.value,
                                     OpenSeats: Number(frm.txtOpenSeats.value),
-                                    TravelTime: frm.txtTravelTime.value,
+                                    TravelTime: frm.txtDepartureTime.value,
                                     Email: frm.txtEmail.value,
                                     StartAddress: frm.txtStartAddress.value, 
                                     StartPoint: startPoint, 
                                     Destination: frm.txtDestination.value,
                                     EndPoint: endPoint,
+                                    DepartureTimeHR : Number(departureRes[0]),
+                                    DepartureTimeMin : Number(departureRes[1]),
+                                    DurationTimeHR : Number(durationRes[0]),
+                                    DurationTimeMin : Number(durationRes[1]),
+                                    DepartureAMPM : frm.durselect.value,
                                     Date: date}, {
                       success: function(rideposter){
                           console.log("Save succeeded");
@@ -130,11 +142,23 @@
                     </div>
                 </div>
 
-                <!-- travel time -->
+                <!-- Departure time -->
                 <div class="form-group">
-                    <label for="traveltime" class="col-sm-2 control-label">Travel time</label>
+                    <label for="departuretime" class="col-sm-2 control-label">Departure Time</label>
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" id="traveltime" name="txtTravelTime" placeholder="ex: 1:00pm - 3:00pm">
+                      <input type="text" class="form-control" id="departuretime" name="txtDepartureTime" placeholder="ex: 1:00">
+                      <select class="form-control" id="durselect" name="durselect">
+                        <option value="AM">AM</option>
+                        <option value="PM">PM</option>
+                      </select>
+                    </div>
+                </div>
+
+                <!-- trip duration -->
+                <div class="form-group">
+                    <label for="durationtime" class="col-sm-2 control-label">Trip Duration</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="durationtime" name="txtDurationTime" placeholder="How long are you going to spend at your destination? ex. 2:30">
                     </div>
                 </div>
 

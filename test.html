@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+    <script>
+var markersArray = [];
+
+var origin = '1121 Church Street, Evanston, IL';
+var destination = '10000 West O\'Hare International Airport';
+
+//var destinationIcon = 'https://chart.googleapis.com/chart?chst=d_map_pin_letter&chld=D|FF0000|000000';
+//var originIcon = 'https://chart.googleapis.com/chart?chst=d_map_pin_letter&chld=O|FFFF00|000000';
+
+function calculateDistances() {
+  var service = new google.maps.DistanceMatrixService();
+  service.getDistanceMatrix(
+    {
+      origins: [origin],
+      destinations: [destination],
+      travelMode: google.maps.TravelMode.DRIVING,
+      unitSystem: google.maps.UnitSystem.METRIC,
+      avoidHighways: false,
+      avoidTolls: false
+    }, callback);
+}
+
+function callback(response, status) {
+  if (status != google.maps.DistanceMatrixStatus.OK) {
+    alert('Error was: ' + status);
+  } else {
+    var origins = response.originAddresses;
+    var destinations = response.destinationAddresses;
+    var outputDiv = document.getElementById('outputDiv');
+    var totaltime = 0;
+    outputDiv.innerHTML = '';
+    //deleteOverlays();
+
+    for (var i = 0; i < origins.length; i++) {
+      var results = response.rows[i].elements;
+      //addMarker(origins[i], false);
+      for (var j = 0; j < results.length; j++) {
+        totaltime = totaltime + results[j].duration.value;
+        totaltime=totaltime/60;
+        console.log(totaltime);
+      }
+    }
+  }
+}
+    </script>
+  </head>
+
+
+
+
+
+  <body>
+    <div id="content-pane">2
+      <div id="inputs">
+        <pre>
+var origin1 = new google.maps.LatLng(42.057915, -87.676655);
+var origin2 = '2145 Sheridan Road, Evanston, IL';
+var destinationA = '1615 Ridge Avenue, Evanston, IL';
+var destinationB = new google.maps.LatLng(42.047932, -87.688168);
+        </pre>
+        <p><button type="button" onclick="calculateDistances();">Calculate
+          distances</button></p>
+      </div>
+      <div id="outputDiv"></div>
+    </div>
+    <div id="map-canvas"></div>
+  </body>
+</html>
