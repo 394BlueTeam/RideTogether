@@ -18,31 +18,48 @@
         <link rel="stylesheet" href="Plugins/FontAwesome/css/font-awesome.min.css" />
         <link rel="stylesheet" href="Plugins/Bootstrap/css/bootstrap.min.css">
         <script type="text/javascript" src="Plugins/Bootstrap/js/bootstrap.min.js"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
+        <script type="text/javascript" src="JS/autocomplete.js"></script>
         <script type="text/javascript">
             Parse.initialize("b0jfwJsQkNWPdoKnDgd8KJLufCLWNJpmc5vBTkqr", "X90Jzs3gzKceNOdkFmCle8ZiwsE0HGhyNF4N3Wcj");
             var Ride = Parse.Object.extend("Ride");
             
             function enroll(frm){
               if (frm.txtName.value == "")
-                alert("Required field");
+                  alert("Required field");
               else if (frm.txtOpenSeats.value == "")
-                alert("Required field");
+                  alert("Required field");
               else {
-                console.log(frm.date.value);
-                var date = new Date(frm.date.value);
-                var rideposter = new Ride();
+                  console.log(frm.date.value);
+                  var date = new Date(frm.date.value);
 
-                rideposter.save({ Name : frm.txtName.value, OpenSeats : Number(frm.txtOpenSeats.value), TravelTime :
-                frm.txtTravelTime.value, Email : frm.txtEmail.value, StartAddress : frm.txtStartAddress.value,
-                Destination : frm.txtDestination.value, Date:date}, {
-                  success: function(rideposter){
-                    console.log("save succeeded");
-                    alert('Thank you! the ride information is posted');
-                  },
-                  error: function(rideposter, error){
-                    console.log("save failed with error: ", error);
-                  }
-                });
+                  var startPoint = new Parse.GeoPoint({
+                                       latitude: parseFloat(frm.txtStartPointLat.value),
+                                       longitude: parseFloat(frm.txtStartPointLng.value)
+                                   });
+                  var endPoint = new Parse.GeoPoint({
+                                     latitude: parseFloat(frm.txtEndPointLat.value),
+                                     longitude: parseFloat(frm.txtEndPointLng.value)
+                                   });
+  
+                  var rideposter = new Ride();
+                  rideposter.save({ Name: frm.txtName.value,
+                                    OpenSeats: Number(frm.txtOpenSeats.value),
+                                    TravelTime: frm.txtTravelTime.value,
+                                    Email: frm.txtEmail.value,
+                                    StartAddress: frm.txtStartAddress.value, 
+                                    StartPoint: startPoint, 
+                                    Destination: frm.txtDestination.value,
+                                    EndPoint: endPoint,
+                                    Date: date}, {
+                      success: function(rideposter){
+                          console.log("Save succeeded");
+                          alert('Thank you! the ride information is posted');
+                      },
+                      error: function(rideposter, error){
+                          console.log("Save failed with error: ", error);
+                      }
+                  });
               }
             }
 
@@ -52,7 +69,7 @@
         </script>
     </head>
 
-    <body class="fancy">
+    <body class="fancy"> 
         
         <!-- HEADER -->
         <div class="header">
@@ -89,12 +106,14 @@
                       </select>
                     </div>
                 </div>
-
+                
                 <!-- start address -->
                 <div class="form-group">
                     <label for="start" class="col-sm-2 control-label">Start Address</label>
                     <div class="col-sm-10">
                       <input type="text" class="form-control" id="start" name="txtStartAddress" placeholder="ex: 2255 Ridge Ave, Plex, Tech, etc">
+                      <input type="hidden" class="form-control" id="startpointlat" name="txtStartPointLat">
+                      <input type="hidden" class="form-control" id="startpointlng" name="txtStartPointLng">
                     </div>
                 </div>
 
@@ -103,6 +122,8 @@
                     <label for="end" class="col-sm-2 control-label">Destination</label>
                     <div class="col-sm-10">
                       <input type="text" class="form-control" id="end" name="txtDestination" placeholder="ex: O'Hare, Old Orchard, etc">
+                      <input type="hidden" class="form-control" id="endpointlat" name="txtEndPointLat">
+                      <input type="hidden" class="form-control" id="endpointlng" name="txtEndPointLng">
                     </div>
                 </div>
 
@@ -114,19 +135,19 @@
                     </div>
                 </div>
 
-                <!-- email -->
-                <div class="form-group">
-                    <label for="email" class="col-sm-2 control-label">Email</label>
-                    <div class="col-sm-10">
-                      <input type="email" class="form-control" id="email" name="txtEmail" placeholder="Email">
-                    </div>
-                </div>
-
                 <!-- date -->
                 <div class="form-group">
                     <label for="date" class="col-sm-2 control-label">Trip Date</label>
                     <div class="col-sm-10">
                       <input type="date" class="form-control" id="date" name="date" placeholder="Enter trip date">
+                    </div>
+                </div>
+                
+                <!-- email -->
+                <div class="form-group">
+                    <label for="email" class="col-sm-2 control-label">Email</label>
+                    <div class="col-sm-10">
+                      <input type="email" class="form-control" id="email" name="txtEmail" placeholder="Email">
                     </div>
                 </div>
 
@@ -137,7 +158,6 @@
                   </div>
                 </div>
             </form>
-
       </div>
 
       <div class="timeline">
@@ -170,6 +190,7 @@
 
       </div>
 
+      <div id="map-canvas"></div>
 
 
       <script>
@@ -204,5 +225,6 @@
             drawTimeline(60,40,30);
         });
       </script>
+
     </body>
 </html>
