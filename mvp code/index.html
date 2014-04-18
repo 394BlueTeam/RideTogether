@@ -16,48 +16,236 @@
         <link href="../CSS/core.css" rel="stylesheet" media="screen" />
         <link rel="stylesheet" href="../Plugins/FontAwesome/css/font-awesome.min.css" />
         <link rel="stylesheet" href="../Plugins/Bootstrap/css/bootstrap.min.css">
+        <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
+        <script type="text/javascript" src="../JS/autocomplete.js"></script>
         <script type='application/javascript' src='../JS/fastclick.js'></script>
         <script type="text/javascript" src="../Plugins/Bootstrap/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="../JS/parse.js"></script>
+        <script type="text/javascript" src="../JS/snap.js"></script>
         <script type="text/javascript">
-         window.addEventListener('load', function() {
-                FastClick.attach(document.body);
-            }, false);
+          Parse.initialize("b0jfwJsQkNWPdoKnDgd8KJLufCLWNJpmc5vBTkqr", "X90Jzs3gzKceNOdkFmCle8ZiwsE0HGhyNF4N3Wcj");
+            var Ride = Parse.Object.extend("Ride");
+            
+            function enroll(frm){
+              var name = $("input[name=txtName]").val();
+              var seats = $("input[name=txtOpenSeats]").val();
+              var traveltime = $("input[name=txtTravelTime]").val();
+              var email = $("input[name=txtEmail]").val();
+              var start = $("input[name=txtStartAddress]").val();
+              var dest = $("input[name=txtDestination]").val();
+              var datetime = $("input[name=date]").val();
+              var startLat = $("input[name=txtStartPointLat]").val();
+              var startLong = $("input[name=txtStartPointLng]").val();
+              var endLat = $("input[name=txtEndPointLat]").val();
+              var endLong = $("input[name=txtEndPointLng]").val();
+
+              if (name == "")
+                  alert("Required field");
+              else if (seats == "")
+                  alert("Required field");
+              else {
+                  var date = new Date(datetime);
+                  var startPoint = new Parse.GeoPoint({
+                                       latitude: parseFloat(startLat),
+                                       longitude: parseFloat(startLong)
+                                   });
+                  var endPoint = new Parse.GeoPoint({
+                                     latitude: parseFloat(endLat),
+                                     longitude: parseFloat(endLong)
+                                   });
+                  console.log(startPoint);
+                  var rideposter = new Ride();
+
+                  rideposter.save({ Name: name,
+                                    OpenSeats: seats,
+                                    TravelTime: traveltime,
+                                    Email: email,
+                                    StartAddress: start, 
+                                    StartPoint: startPoint, 
+                                    Destination: dest,
+                                    EndPoint: endPoint,
+                                    Date: date}, {
+                      success: function(rideposter){
+                          console.log("Save succeeded");
+                          alert('Thank you! the ride information is posted');
+                      },
+                      error: function(rideposter, error){
+                          console.log("Save failed with error: ", error);
+                      }
+                  });
+              }
+            }
+
+          // FAST CLICK CODE
+           window.addEventListener('load', function() {
+                  FastClick.attach(document.body);
+              }, false);
         </script>
     </head>
 
+
     <body class="fancy">
-      
-        <!-- HEADER -->
-        <div class="header">
-          <h1>Current Rides
-            <span>
-              <a href="javascript:history.back()" id="back"><i class="fa fa-chevron-left fa-lg"></i></a>
-              <!-- <a href="#" id="menu"><i class="fa fa-bars fa-lg"></i></a> -->
-              <a href="#" id="rides" onclick='notify();'><i class="fa fa-pencil-square-o fa-lg"></i><span class="bdge" id="n-badge"></span></a>
-              <!-- <p>Menu</p> -->
-            </span>
-          </h1>     
+        <!-- SIDEBAR PANEL -->
+        <div class="snap-drawers">
+            <div class="snap-drawer snap-drawer-right">
+                <div>
+                    <div class="avatar"></div>
+                    <div id="profile"></div>
+                    <div class="links">
+                      <ul>
+                          <li><a href="../index.html">Home</a></li>
+                          <li><a href="#" id="post" onclick='snapper.close();' data-toggle="modal" data-target="#postride">Post a Ride</a></li>
+                          <li><a href="#">Saved Rides</a></li>
+                          <li><a href="#">Messages</a></li>
+                      </ul>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <!-- REGISTERED RIDE NOTIFICATON -->
-        <div id="notification">
-          <div id="submit">
-            <p><span><i class="fa fa-check"></i>  Ride reservation successful</span></p>
-            <p><span><i class="fa fa-spinner fa-spin"></i>  Pending driver confirmation</span></p>
+        <!-- BODY CONTENT -->
+        <div id="wrapper" class="snap-content">
+            
+            <!-- HEADER -->
+            <div class="header">
+              <h1>Current Rides
+                <span>
+                  <a href="javascript:history.back()" id="back"><i class="fa fa-chevron-left fa-lg"></i></a>
+                  <a href="#" id="menu"><i class="fa fa-bars fa-lg"></i></a>
+                  <a href="#" id="rides" onclick='notify();'><i class="fa fa-pencil-square-o fa-lg"></i><span class="bdge" id="n-badge"></span></a>
+                  <!-- <p>Menu</p> -->
+                </span>
+              </h1>     
+            </div>
+
+            <!-- REGISTERED RIDE NOTIFICATON -->
+            <div id="notification">
+              <div id="submit">
+                <p><span><i class="fa fa-check"></i>  Ride reservation successful</span></p>
+                <p><span><i class="fa fa-spinner fa-spin"></i>  Pending driver confirmation</span></p>
+              </div>
+            </div>
+
+            <!-- AVAILABLE RIDES LIST -->
+            <div id="query">
+              <!-- <div class="row" style="font-weight:bolder;">
+                <p>Start Address</p>
+                <p>End Address</p> 
+                <p>Time</p>
+              </div> -->
+            </div>
           </div>
-        </div>
-        
-        <!-- <div class="subheader" style="text-align: left; margin-left: 4%;"></div> -->
 
-        <!-- AVAILABLE RIDES LIST -->
-        <div id="query">
-          <!-- <div class="row" style="font-weight:bolder;">
-            <p>Start Address</p>
-            <p>End Address</p> 
-            <p>Time</p>
-          </div> -->
+        <!-- SIGN UP MODAL -->
+        <div class="modal fade" id="postride" tabindex="-1" role="dialog" aria-labelledby="post" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                    <!-- BODY -->
+                    <div class="modal-body">
+                        <form class="form-horizontal" role="form">
+                            <!-- name -->
+                            <div class="form-group">
+                                <label for="name" class="col-sm-2 control-label">Name</label>
+                                <div class="col-sm-10">
+                                  <input type="text" class="form-control" id="name" name="txtName" placeholder="Name">
+                                </div>
+                            </div>
+
+                            <!-- email -->
+                            <div class="form-group">
+                                <label for="email" class="col-sm-2 control-label">Email</label>
+                                <div class="col-sm-10">
+                                  <input type="email" class="form-control" id="email" name="txtEmail" placeholder="Email">
+                                </div>
+                            </div>
+
+                            <!-- open seats -->
+                            <div class="form-group">
+                                <label for="seats" class="col-sm-2 control-label" id="openseats">Open Seats</label>
+                                <div class="col-xs-6">
+                                  <select class="form-control" id="seats" name="txtOpenSeats">
+                                    <option>Open Seats</option>
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                  </select>
+                                </div>
+                            </div>
+
+                            <!-- start address -->
+                            <div class="form-group">
+                                <label for="start" class="col-sm-2 control-label">Start Address</label>
+                                <div class="col-sm-10">
+                                  <input type="text" class="form-control" id="start" name="txtStartAddress" placeholder="ex: 2255 Ridge Ave, Plex, Tech, etc">
+                                  <input type="hidden" class="form-control" id="startpointlat" name="txtStartPointLat">
+                                  <input type="hidden" class="form-control" id="startpointlng" name="txtStartPointLng">
+                                </div>
+                            </div>
+
+                            <!-- destination -->
+                            <div class="form-group">
+                                <label for="end" class="col-sm-2 control-label">Destination</label>
+                                <div class="col-sm-10">
+                                  <input type="text" class="form-control" id="end" name="txtDestination" placeholder="ex: O'Hare, Old Orchard, etc">
+                                  <input type="hidden" class="form-control" id="endpointlat" name="txtEndPointLat">
+                                  <input type="hidden" class="form-control" id="endpointlng" name="txtEndPointLng">
+                                </div>
+                            </div>
+
+                            <!-- travel time -->
+                            <div class="form-group">
+                                <label for="traveltime" class="col-sm-2 control-label">Travel time</label>
+                                <div class="col-sm-10">
+                                  <input type="text" class="form-control" id="traveltime" name="txtTravelTime" placeholder="ex: 1:00pm - 3:00pm">
+                                </div>
+                            </div>
+
+                            <!-- date -->
+                            <div class="form-group">
+                                <label for="date" class="col-sm-2 control-label">Trip Date</label>
+                                <div class="col-sm-10">
+                                  <input type="date" class="form-control" id="date" name="date" placeholder="Enter trip date">
+                                </div>
+                            </div>
+                            
+                            
+                        </form>
+                    </div>
+
+                    <!-- FOOTER -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-default" onClick="enroll(this.form)">Post it!</button>
+                    </div>
+                </div>
+            </div>
         </div>
+
+        <!-- SCRIPT FOR SWIPE MENU -->
+        <script type="text/javascript">
+          var snapper = new Snap({
+            element: document.getElementById('wrapper'),
+            disable: 'left'
+          });
+
+          /*  create cross-browser event handler. */
+          var addEvent = function addEvent(element, eventName, func) {
+              if (element.addEventListener) {
+                  return element.addEventListener(eventName, func, false);
+              } else if (element.attachEvent) {
+                  return element.attachEvent("on" + eventName, func);
+              }
+          };
+
+          /* when the element with id 'open-left' is clicked, use the public snapper.open() method to slide the content div rightward, to reveal the LEFT menu */
+          addEvent(document.getElementById('menu'), 'click', function() {
+              snapper.open('right');
+          });
+
+        </script>
         
     </body>
 
