@@ -515,3 +515,62 @@ h2, p, ol, ul, li {
     }
 }
 */
+
+
+
+
+
+/*=============TIMELINE==========*/
+
+.timeline{
+    width:auto;
+    height:100px;
+    display:block;
+    position:relative;
+    margin: 0 auto;
+    overflow: hidden;
+    text-align: center;
+    margin-top:40px;
+}
+
+.timeline .waypoint{
+    float: left;
+    position: relative;
+    margin: 0 ;
+    font-size: 0;
+    z-index: 1;
+}
+
+.timeline .waypoint .circle{
+    width:35px;
+    height:35px;
+    border-radius:50%;
+    background-color: #00403D;
+    display: block;
+    margin: 0 auto;
+
+}
+
+.timeline .line{
+    width:auto;
+    float: left;
+    position: relative;
+    height:auto;
+    font-size: 0;
+    z-index: 0;
+}
+
+.timeline > .line-drive > .piece,  .timeline > .line-dest > .piece{   
+    height:16px;
+    background-color:#08cbc4;
+    width: auto;
+    display: block;
+    margin-top: 10px;
+    font-size: 0;
+    position: relative;
+    margin-left:-5px;
+    margin-right:-5px;
+}
+p{
+        font-size: 12px;
+}

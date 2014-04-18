@@ -139,5 +139,70 @@
             </form>
 
       </div>
+
+      <div class="timeline">
+        <div class="waypoint">
+            <div class="circle"></div><p>Start</p>
+        </div>
+        <div class="line line-drive">
+            <div class="piece"></div><p>30 mins</p>
+        </div>
+
+        <div class="waypoint">
+            <div class="circle"></div><p>Arrive</p>
+        </div>
+
+        <div class="line line-dest">
+            <div class="piece"></div><p>40 mins</p>
+        </div>
+
+        <div class="waypoint">
+            <div class="circle"></div><p>Leave</p>
+        </div>
+
+        <div class="line line-drive">
+            <div class="piece"></div><p>30 mins</p>
+        </div>
+
+        <div class="waypoint">
+            <div class="circle"></div><p>End</p>
+        </div>
+
+      </div>
+
+
+
+      <script>
+        function drawTimeline(start, destTime, rideTime){
+            var timeline = $('.timeline');
+            var screenWidth = $(window).width()-10;
+            if (screenWidth > 800){
+                screenWidth = 800;
+            }
+            timeline.css('width', screenWidth);
+            var timeWidth = screenWidth - (35*4);
+
+            console.log('timeWidth: ' + timeWidth);
+
+            var fullTime = destTime + (2*rideTime);            
+            console.log('fullTime: ' + fullTime);
+
+            var destWidth = destTime/fullTime;
+            var driveWidth = rideTime/fullTime;
+
+            console.log('driveWidth: '+driveWidth);
+            console.log('destWidth: '+destWidth);
+
+            $('.line-drive .piece').css('width',  (timeWidth*driveWidth)+10+'px')
+            $('.line-dest .piece').css('width',  (destWidth*timeWidth)+10+'px')
+        }
+
+        $(window).ready(function(){
+            drawTimeline(60, 40, 30);
+        });
+        $(window).resize(function(){
+            drawTimeline(60,40,30);
+        });
+      </script>
     </body>
 </html>
