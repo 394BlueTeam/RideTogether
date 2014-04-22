@@ -23,7 +23,10 @@
         <script type="text/javascript">
             Parse.initialize("b0jfwJsQkNWPdoKnDgd8KJLufCLWNJpmc5vBTkqr", "X90Jzs3gzKceNOdkFmCle8ZiwsE0HGhyNF4N3Wcj");
             var Ride = Parse.Object.extend("Ride");
-            
+            var origin;
+            var destination;
+
+
             function enroll(frm){
               if (frm.txtName.value == "")
                   alert("Required field");
@@ -218,7 +221,7 @@
       </div>
 
             
-              <p><button type="button" onclick="calculateDistances('1121 Church Street, Evanston, IL',  '10000 West O\'Hare International Airport', 60);">Calculate
+              <p><button type="button" onclick="calculateDistances(origin,  destination, 60);">Calculate
           distances</button></p>
           <p id="outputDiv"></p>
 
