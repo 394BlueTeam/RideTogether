@@ -42,27 +42,27 @@ q.append('<div class="ride"  data-start="'+results[i].get('StartAddress')+'" dat
         return;
       }
 
-      //check to see if it is empty,
-      //if empty -> add data
-      //if non empty and visible -> 'collapse' div. hide div
-      //if non empty and hidden -> 'uncollapse' div and show it
-      //saves us from refetching already fetched data
+      // check to see if it is empty,
+      // if empty -> add data
+      // if non empty and visible -> 'collapse' div. hide div
+      // if non empty and hidden -> 'uncollapse' div and show it
+      // saves us from refetching already fetched data
       // if(info.is(':empty')) {
-      //   //$(this).css('background-color', 'white');
-      //   query.get(id, {
-      //     success: function(object) {
-      //       insertInfo(more, object.get('Name'), object.get('Email'), object.get('OpenSeats'), object.get('StartAddress'), object.get('EndAddress'), object.get('Date'), object.get('TravelTime'), object.get('Destination'));
-      //     },
-      //     error: function(object, error) {
-      //       console.log('error')
-      //     }
-      //   });
+        //$(this).css('background-color', 'white');
+        query.get(id, {
+          success: function(object) {
+            insertInfo(more, object.get('Name'), object.get('Email'), object.get('OpenSeats'), object.get('StartAddress'), object.get('EndAddress'), object.get('Date'), object.get('TravelTime'), object.get('Destination'));
+          },
+          error: function(object, error) {
+            console.log('error')
+          }
+        });
       // }
 
-      if (s && e){
-          calculateDistances(s,e,30)
-          $(this).find('.timeline').toggle();
-      }
+      // if (s && e){
+      //     calculateDistances(s,e,30)
+      //     $(this).find('.timeline').toggle();
+      // }
 
     })
   },
