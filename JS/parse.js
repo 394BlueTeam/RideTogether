@@ -35,7 +35,9 @@ q.append('<div class="ride"  data-start="'+results[i].get('StartAddress')+'" dat
       var more = $(this).find('.more');
       var s = $(this).attr('data-start');
       var e = $(this).attr('data-end');
-      
+      console.log(s)
+      console.log(e)
+      console.log('#######')
       //if for some reason we end up with undefined variables
       if(!id || !info) {
         console.log("Error: could not set id or info variables.");
@@ -59,10 +61,19 @@ q.append('<div class="ride"  data-start="'+results[i].get('StartAddress')+'" dat
       //   });
       // }
 
-      if (s && e){
+      if (s != 'undefined'){
+        if (e != 'undefined'){
           calculateDistances(s,e,30)
           $(this).find('.timeline').toggle();
+        }
+        else{
+          console.log('fail');
+        }
       }
+      else{
+        console.log('fail')
+      }
+
 
     })
   },

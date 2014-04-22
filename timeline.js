@@ -2,6 +2,8 @@
 //var originIcon = 'https://chart.googleapis.com/chart?chst=d_map_pin_letter&chld=O|FFFF00|000000';
 
 function calculateDistances(origin, destination, destTime) {
+  console.log(origin)
+  console.log(destination)
   var service = new google.maps.DistanceMatrixService();
   service.getDistanceMatrix(
     {
@@ -44,7 +46,7 @@ function callback(response, status, destTime) {
 
 function drawTimeline(destTime, rideTime){
     var timeline = $('.timeline');
-    var screenWidth = $(window).width()-10;
+    var screenWidth = $('.ride').width()-10;
     if (screenWidth > 800){
         screenWidth = 800;
     }
