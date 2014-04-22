@@ -23,7 +23,6 @@ function calculateDistances() {
       avoidTolls: false
     }, callback);
 }
-
 function callback(response, status) {
   if (status != google.maps.DistanceMatrixStatus.OK) {
     alert('Error was: ' + status);
