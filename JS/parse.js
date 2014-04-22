@@ -61,7 +61,6 @@ q.append('<div class="ride"  data-start="'+results[i].get('StartAddress')+'" dat
         });
       // }
 
-<<<<<<< HEAD
       if (s != 'undefined'){
         if (e != 'undefined'){
           calculateDistances(s,e,30)
@@ -75,12 +74,6 @@ q.append('<div class="ride"  data-start="'+results[i].get('StartAddress')+'" dat
         console.log('fail')
       }
 
-=======
-      // if (s && e){
-      //     calculateDistances(s,e,30)
-      //     $(this).find('.timeline').toggle();
-      // }
->>>>>>> afa2422a89d5607d03d4b9ac7d394ceafb0e637b
 
     })
   },
