@@ -4,8 +4,8 @@ var counter = 0;
 
 var query = new Parse.Query('Ride');
 var date = new Date(Date.now());
-query.greaterThan("Date", date);
-query.ascending("Date");
+query.greaterThan("TimeStamp", Date.now());
+query.ascending("TimeStamp");
 query.find({
   success: function(results) {
     var q = $('#query');
