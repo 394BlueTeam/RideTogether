@@ -16,6 +16,9 @@ query.find({
       tripdate = String(tripdate);
       tripdate = tripdate.substr(0, 15);
       var time = results[i].get('TravelTime');
+      var am_pm = results[i].get('DepartureAMPM');
+      time = time.concat(" " + am_pm);
+      console.log(time);
       var driver = results[i].get('Name');
       var seats = results[i].get('OpenSeats');
       counter += 1;
