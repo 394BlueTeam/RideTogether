@@ -32,6 +32,7 @@ function callback(response, status, destTime) {
         totaltime=totaltime/60;
       }
     }
+    totaltime = Math.round(totaltime)
     drawTimeline(destTime, totaltime);
     $(window).resize(function(){
             drawTimeline(destTime, totaltime);
@@ -48,7 +49,6 @@ function drawTimeline(destTime, rideTime){
         screenWidth = 800;
     }
     timeline.css('width', screenWidth);
-    timeline.css('display', 'block');
     var timeWidth = screenWidth - (35*4);
 
 

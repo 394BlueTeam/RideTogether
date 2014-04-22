@@ -22,13 +22,16 @@ query.find({
       // var btn1 = "<a href='#'><i class='fa fa-link btn-email'>  connect with driver</i></a>";
       var btn2 = "<a href='#' id='join' onclick='badgesystem();'><i class='fa fa-plus-square btn-sign'>  join ride</i></a>";
       // var DateTime = date + " " + results[i].get('TravelTime');
-      q.append('<div class="ride" data-attribute="'+results[i].id+ '"><div class="count">'+counter+'</div><div class="content-shown"><p class="end">'+results[i].get('Destination')+'<span>'+btn2+'</span></p><p class="start"><span>Leaving From: </span>'+results[i].get('StartAddress')+'</p><p class="date"><span>Trip Date: </span>'+tripdate+'</p><p class="time"><span>Time: </span>'+time+'</p><p class="driver"><span>Driver: </span>'+driver+'</p><p class="seats"><span>Available seats: </span>'+seats+'</p><p class="more">click to display more info</p></div><div class="content-hidden"></div></div>');
-    }
+q.append('<div class="ride"  data-start="'+results[i].get('StartAddress')+'" data-end="'+results[i].get('EndAddress')+'" data-attribute="'+results[i].id+ '"><div class="count">'+counter+'</div><div class="content-shown"><p class="end">'+results[i].get('Destination')+'<span>'+btn2+'</span></p><p class="start"><span>Leaving From: </span>'+results[i].get('StartAddress')+'</p><p class="date"><span>Trip Date: </span>'+tripdate+'</p><p class="time"><span>Time: </span>'+time+'</p><p class="driver"><span>Driver: </span>'+driver+'</p><p class="seats"><span>Available seats: </span>'+seats+'</p><a class="more">click to display more info</a></div><div class="timeline"><div class="waypoint"><div class="circle"></div><p>Start</p></div><div class="line line-drive"><div class="piece"></div><p></p></div><div class="waypoint"><div class="circle"></div><p>Arrive</p></div><div class="line line-dest"><div class="piece"></div><p></p></div><div class="waypoint"><div class="circle"></div><p>Leave</p></div><div class="line line-drive"><div class="piece"></div><p></p></div><div class="waypoint"><div class="circle"></div><p>End</p></div></div></div>');  
+          }
+
 
     $('.ride').click( function(){
       var id = $(this).attr('data-attribute');
       var info = $(this).find('.content-hidden');
       var more = $(this).find('.more');
+      var s = $(this).attr('data-start');
+      var e = $(this).attr('data-end');
       
       //if for some reason we end up with undefined variables
       if(!id || !info) {
@@ -41,26 +44,23 @@ query.find({
       //if non empty and visible -> 'collapse' div. hide div
       //if non empty and hidden -> 'uncollapse' div and show it
       //saves us from refetching already fetched data
-      if(info.is(':empty')) {
-        //$(this).css('background-color', 'white');
-        query.get(id, {
-          success: function(object) {
-            insertInfo(more, object.get('Name'), object.get('Email'), object.get('OpenSeats'), object.get('StartAddress'), object.get('EndAddress'), object.get('Date'), object.get('TravelTime'), object.get('Destination'));
-          },
-          error: function(object, error) {
-            console.log('error')
-          }
-        });
+      // if(info.is(':empty')) {
+      //   //$(this).css('background-color', 'white');
+      //   query.get(id, {
+      //     success: function(object) {
+      //       insertInfo(more, object.get('Name'), object.get('Email'), object.get('OpenSeats'), object.get('StartAddress'), object.get('EndAddress'), object.get('Date'), object.get('TravelTime'), object.get('Destination'));
+      //     },
+      //     error: function(object, error) {
+      //       console.log('error')
+      //     }
+      //   });
+      // }
+
+      if (s && e){
+          calculateDistances(s,e,30)
+          $(this).find('.timeline').toggle();
       }
 
-      else if(more.is(':visible')) {
-        more.hide();
-        //$(this).css('background-color', 'transparent');
-      }
-
-      else {
-        more.show();
-      }
     })
   },
 
