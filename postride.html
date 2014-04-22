@@ -48,9 +48,31 @@
                   var durationRes, departureRes;
                   var durationStr = frm.txtDurationTime.value;
                   var departureStr = frm.txtDepartureTime.value;
+                  var datestr = frm.date.value;
+                  var datevals = datestr.split('-');                  
 
                   durationRes = durationStr.split(":");
                   departureRes = departureStr.split(":");
+
+                  if(frm.durselect.value == 'PM')
+                  {
+                    if(departureRes[0] != 12)
+                    {
+                      departureRes[0] = 12 + Number(departureRes[0]);
+                    }
+                  }
+                  else
+                  {
+                    if(Number(departureRes[0]) == 12)
+                    {
+                      departureRes[0] = 0;
+                    }
+                  }
+                  console.log(departureRes[0]);
+
+                  var new_date = new Date(Number(datevals[0]), Number(datevals[1]) - 1, Number(datevals[2]), departureRes[0], departureRes[1]);
+                  var timestamp = new_date.getTime();
+
 
                   var currentUser = Parse.User.current();
                   var isVerified = false;
@@ -73,6 +95,7 @@
                                         DurationTimeHR : Number(durationRes[0]),
                                         DurationTimeMin : Number(durationRes[1]),
                                         DepartureAMPM : frm.durselect.value,
+                                        TimeStamp : timestamp,
                                         Date: date}, {
                           success: function(rideposter){
                               console.log("Save succeeded");
