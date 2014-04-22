@@ -48,51 +48,49 @@
                   var durationRes, departureRes;
                   var durationStr = frm.txtDurationTime.value;
                   var departureStr = frm.txtDepartureTime.value;
-                  var datestr = frm.date.value;
-                  var datevals = datestr.split('-');
 
                   durationRes = durationStr.split(":");
                   departureRes = departureStr.split(":");
-                  if(frm.durselect.value == 'PM')
-                  {
-                    departureRes[0] = 12 + Number(departureRes[0]);
-                  }
-                  else
-                  {
-                    if(Number(departureRes[0]) == 12)
-                    {
-                      departureRes[0] = 0;
-                    }
-                  }
-                  console.log(departureRes[0]);
 
-                  var new_date = new Date(Number(datevals[0]), Number(datevals[1]) - 1, Number(datevals[2]), departureRes[0], departureRes[1]);
-                  var timestamp = new_date.getTime();
-
-
-
-                  var rideposter = new Ride();
-                  rideposter.save({ Name: frm.txtName.value,
-                                    OpenSeats: Number(frm.txtOpenSeats.value),
-                                    TravelTime: frm.txtDepartureTime.value,
-                                    Email: frm.txtEmail.value,
-                                    StartAddress: frm.txtStartAddress.value, 
-                                    StartPoint: startPoint, 
-                                    Destination: frm.txtDestination.value,
-                                    EndPoint: endPoint,
-                                    DepartureTimeHR : Number(departureRes[0]),
-                                    DepartureTimeMin : Number(departureRes[1]),
-                                    DurationTimeHR : Number(durationRes[0]),
-                                    DurationTimeMin : Number(durationRes[1]),
-                                    DepartureAMPM : frm.durselect.value,
-                                    TimeStamp : timestamp,
-                                    Date: date}, {
-                      success: function(rideposter){
-                          console.log("Save succeeded");
-                          alert('Thank you! the ride information is posted');
+                  var query = new Parse.Query('User');
+                  query.equalTo('username', frm.txtEmail.value);
+                  query.find({
+                      success: function(result) {
+                          if (result.length != 0) {
+                              var isVerified = result[0].get("emailVerified");
+                              if (isVerified) {
+                                  var rideposter = new Ride();
+                                  rideposter.save({ Name: frm.txtName.value,
+                                                    OpenSeats: Number(frm.txtOpenSeats.value),
+                                                    TravelTime: frm.txtDepartureTime.value,
+                                                    Email: frm.txtEmail.value,
+                                                    StartAddress: frm.txtStartAddress.value, 
+                                                    StartPoint: startPoint, 
+                                                    Destination: frm.txtDestination.value,
+                                                    EndPoint: endPoint,
+                                                    DepartureTimeHR : Number(departureRes[0]),
+                                                    DepartureTimeMin : Number(departureRes[1]),
+                                                    DurationTimeHR : Number(durationRes[0]),
+                                                    DurationTimeMin : Number(durationRes[1]),
+                                                    DepartureAMPM : frm.durselect.value,
+                                                    Date: date}, {
+                                      success: function(rideposter){
+                                          console.log("Save succeeded");
+                                          alert('Thank you! the ride information is posted');
+                                      },
+                                      error: function(rideposter, error){
+                                          console.log("Save failed with error: ", error);
+                                      }
+                                  });
+                              } else {
+                                  alert('Your Email has not been verified.');
+                              }
+                          } else {
+                              alert('Your Email does not exist.');
+                          }
                       },
-                      error: function(rideposter, error){
-                          console.log("Save failed with error: ", error);
+                      error: function(error) {
+                          console.log('Error');
                       }
                   });
               }
