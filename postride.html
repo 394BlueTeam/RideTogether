@@ -5,21 +5,25 @@
         <link href='http://fonts.googleapis.com/css?family=Just+Me+Again+Down+Here|Open+Sans' rel='stylesheet' type='text/css' />
         <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.2.18.min.js"></script>
         <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-
+        <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
+        
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
         <meta name="mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
         <title>RideTogether</title>
-        <script type='application/javascript' src='JS/fastclick.js'></script>
+        
         <link href="CSS/mobile.css" rel="stylesheet" media="handheld,only screen and (max-device-width:480px)" />
         <link href="CSS/core.css" rel="stylesheet" media="screen" />
         <link rel="stylesheet" href="Plugins/FontAwesome/css/font-awesome.min.css" />
         <link rel="stylesheet" href="Plugins/Bootstrap/css/bootstrap.min.css">
+
+        <script type='application/javascript' src='JS/fastclick.js'></script>
         <script type="text/javascript" src="Plugins/Bootstrap/js/bootstrap.min.js"></script>
-        <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
         <script type="text/javascript" src="JS/autocomplete.js"></script>
+        <script type="text/javascript" src="JS/timeline.js"></script>
+
         <script type="text/javascript">
             Parse.initialize("b0jfwJsQkNWPdoKnDgd8KJLufCLWNJpmc5vBTkqr", "X90Jzs3gzKceNOdkFmCle8ZiwsE0HGhyNF4N3Wcj");
             var Ride = Parse.Object.extend("Ride");
@@ -49,12 +53,15 @@
                   var durationStr = frm.txtDurationTime.value;
                   var departureStr = frm.txtDepartureTime.value;
                   var datestr = frm.date.value;
-                  var datevals = datestr.split('-');                  
+                  var datevals = datestr.split('-');
+                  var durselect = $("input[name=durselect]:checked").val();                 
+                   console.log(durselect);
 
                   durationRes = durationStr.split(":");
                   departureRes = departureStr.split(":");
+                  
 
-                  if(frm.durselect.value == 'PM')
+                  if(durselect == 'PM')
                   {
                     if(departureRes[0] != 12)
                     {
@@ -94,12 +101,13 @@
                                         DepartureTimeMin : Number(departureRes[1]),
                                         DurationTimeHR : Number(durationRes[0]),
                                         DurationTimeMin : Number(durationRes[1]),
-                                        DepartureAMPM : frm.durselect.value,
+                                        DepartureAMPM : durselect,
                                         TimeStamp : timestamp,
                                         Date: date}, {
                           success: function(rideposter){
                               console.log("Save succeeded");
                               alert('Thank you! the ride information is posted');
+                              window.location.replace("rides.html");
                           },
                           error: function(rideposter, error){
                               console.log("Save failed with error: ", error);
@@ -115,9 +123,6 @@
                 FastClick.attach(document.body);
             }, false);
         </script>
-
-          <script type="text/javascript" src="timeline.js"></script>
-
     </head>
 
     <body class="fancy"> 
@@ -126,7 +131,7 @@
         <div class="header">
           <h1>Post Your Ride
             <span>
-              <a href="javascript:history.back()" id="back"><i class="fa fa-chevron-left fa-lg"></i></a>
+              <a href="index.html" id="back"><i class="fa fa-chevron-left fa-lg"></i></a>
               <!-- <a href="#" id="menu"><i class="fa fa-bars fa-lg"></i></a> -->
             </span>
           </h1>     
@@ -139,7 +144,15 @@
                 <div class="form-group">
                     <label for="name" class="col-sm-2 control-label">Name</label>
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" id="name" name="txtName" value="Chris Riesbeck" placeholder="Name">
+                      <input type="text" class="form-control" id="name" name="txtName" placeholder="Name">
+                    </div>
+                </div>
+
+                <!-- email -->
+                <div class="form-group">
+                    <label for="email" class="col-sm-2 control-label">Email</label>
+                    <div class="col-sm-10">
+                      <input type="email" class="form-control" id="email" name="txtEmail" placeholder="Email">
                     </div>
                 </div>
 
@@ -148,10 +161,10 @@
                     <label for="seats" class="col-sm-2 control-label" id="openseats">Open Seats</label>
                     <div class="col-xs-6">
                       <select class="form-control" id="seats" name="txtOpenSeats">
-                        <option>Open Seats</option>
+                        <option>Open seats in your car</option>
                         <option>1</option>
                         <option>2</option>
-                        <option selected>3</option>
+                        <option>3</option>
                         <option>4</option>
                         <option>5</option>
                       </select>
@@ -182,11 +195,26 @@
                 <div class="form-group">
                     <label for="departuretime" class="col-sm-2 control-label">Departure Time</label>
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" id="departuretime" name="txtDepartureTime" value="1:00" placeholder="ex: 1:00">
-                      <select class="form-control" id="durselect" name="durselect">
+                      <input type="text" class="form-control" id="departuretime" name="txtDepartureTime" placeholder="ex: 1:00">
+                      <!-- <select class="form-control" id="durselect" name="durselect">
                         <option value="AM">AM</option>
                         <option selected value="PM">PM</option>
-                      </select>
+                      </select> -->
+
+                      <!-- radio buttons -->
+                      <div class="radio radio-inline">
+                        <label>
+                          <input type="radio" name="durselect" id="durselect1" value="AM">
+                          AM
+                        </label>
+                      </div>
+                      <div class="radio radio-inline">
+                        <label>
+                          <input type="radio" name="durselect" id="durselect2" value="PM">
+                          PM
+                        </label>
+                      </div>
+
                     </div>
                 </div>
 
@@ -194,7 +222,7 @@
                 <div class="form-group">
                     <label for="durationtime" class="col-sm-2 control-label">Trip Duration</label>
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" id="durationtime" name="txtDurationTime" value="3:00" placeholder="How long are you going to spend at your destination? ex. 2:30">
+                      <input type="text" class="form-control" id="durationtime" name="txtDurationTime" placeholder="How long are you going to spend at your destination? ex. 2:30 is 2.5 hrs">
                     </div>
                 </div>
 
@@ -206,13 +234,7 @@
                     </div>
                 </div>
                 
-                <!-- email -->
-                <div class="form-group">
-                    <label for="email" class="col-sm-2 control-label">Email</label>
-                    <div class="col-sm-10">
-                      <input type="email" class="form-control" id="email" name="txtEmail" value="email@u.northwestern.edu" placeholder="Email">
-                    </div>
-                </div>
+                
 
                 <!-- submit button -->
                 <div class="form-group">
