@@ -106,7 +106,8 @@ h2, p, ol, ul, li {
     }
 
     #cursive {
-    	font-family: 'Just Me Again Down Here', cursive;
+    	/*font-family: 'Just Me Again Down Here', cursive;*/
+        font-family: 'Covered By Your Grace', 'cursive';
     	font-size: 1.4em;
     	text-align: center;
     }
