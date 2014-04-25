@@ -27,7 +27,7 @@ query.find({
       var btn2 = ""
       // var DateTime = date + " " + results[i].get('TravelTime');
       q.append('<div class="ride" data-date="'+tripdate+'" data-time="'+time+'" data-start="'+results[i].get('StartAddress')+'" data-end="'+results[i].get('EndAddress')+'" data-attribute="'+results[i].id+ '"><div class="count">'+counter+'</div><div class="content-shown"><p class="end">'+results[i].get('Destination')+'<span>'+btn2+'</span></p><p class="start"><span>Leaving From: </span>'+results[i].get('StartAddress')+'</p><p class="date"><span>Trip Date: </span>'+tripdate+'</p><p class="time"><span>Time: </span>'+time+'</p><p class="driver"><span>Driver: </span>'+driver+'</p><p class="seats"><span>Available seats: </span>'+seats+'</p><a class="more">click to display more info</a></div><div class="timeline"><div class="waypoint"><div class="circle"></div><p>Start</p></div><div class="line line-drive"><div class="piece"></div><p></p></div><div class="waypoint"><div class="circle"></div><p>Arrive</p></div><div class="line line-dest"><div class="piece"></div><p></p></div><div class="waypoint"><div class="circle"></div><p>Leave</p></div><div class="line line-drive"><div class="piece"></div><p></p></div><div class="waypoint"><div class="circle"></div><p>End</p></div></div></div>');  
-          }
+    }
 
 
     $('.ride').click( function(){
@@ -74,8 +74,6 @@ query.find({
       else{
         console.log('fail')
       }
-
-
     })
   },
 
@@ -83,6 +81,7 @@ query.find({
     console.log('error')
   }
 });
+
 
 //adds the chosen information into the appropriate div
 //error checking should be
@@ -96,6 +95,44 @@ function insertInfo(more, driver, email, seats, sAdd, eAdd, date, TravelTime, De
   //           +seats +'</p><a class="join-button" href="mailto:'+email+'?subject=I\'d like to join your ride!&body='+message+'">Join this ride</a>');
   return 0;
 }
+
+
+// filter function
+function filter(type, query) {
+  // if filtering by location
+  // .... supposing the form is a text box with autocomplete setup
+  if (type == 'location') {
+    $( ".ride" ).each(function() {
+        var destination = $(this).find('.end').text();
+        if (query != dest) {
+          $(".ride").find("[data-attribute='" + ride + "']").hide();
+        }
+    });
+    // for (var i=0; i < rides.length; i++) {
+    //   var destination = $('.end').text();
+    //   var ride = $('').text();
+    //   if (query != dest) {
+    //     $(".ride").find("[data-attribute='" + ride + "']").hide();
+    //   }
+    //   else {
+    //     // $(".ride").find("[data-attribute='" + ride + "']").show();
+    //   }
+    // }
+  }
+
+  // if filtering by time
+  else if (type == 'time') {
+    // do this...
+  }
+
+  // if filtering by date
+  else if (type == 'date') {
+    // do this...
+  }
+
+}
+
+
 
 
 // function for when "join this ride" is clicked;
@@ -115,7 +152,6 @@ function notify() {
   $('#submit').toggle();
 }
 
-
 // function for populating the sidebar profile
 // with the pertinent information
 
@@ -128,6 +164,7 @@ $(document).ready(function() {
       var name = currentUser.get('Name');
       var email = currentUser.get('email');
       var rating = Number(currentUser.get('DriverRating'));
+      var avatar = currentUser.get('Avatar');
       var home = currentUser.get('HomeAddress');
 
       var one = '<h3 class="profile-name">'+name+'</h3>';
