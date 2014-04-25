@@ -98,41 +98,34 @@ function insertInfo(more, driver, email, seats, sAdd, eAdd, date, TravelTime, De
 
 
 // filter function
-function filter(type, query) {
-  // if filtering by location
-  // .... supposing the form is a text box with autocomplete setup
-  if (type == 'location') {
+function filter(form) {
+  // filtering by location
+  var location = $("input[name=filter-location]").val();
+  var time = $("input[name=filter-time]").val();
+  var date = $("input[name=filter-date]").val();
+
+  if (location != "") {
     $( ".ride" ).each(function() {
         var destination = $(this).find('.end').text();
-        if (query != dest) {
-          $(".ride").find("[data-attribute='" + ride + "']").hide();
+        if (location != destination) {
+          $(this).hide();
+        }
+        else {
+          $( ".count" ).empty();
+          $( ".count" ).append( "<i class='fa fa-circle'></i> " ).css('font-size', '1.5em' );
         }
     });
-    // for (var i=0; i < rides.length; i++) {
-    //   var destination = $('.end').text();
-    //   var ride = $('').text();
-    //   if (query != dest) {
-    //     $(".ride").find("[data-attribute='" + ride + "']").hide();
-    //   }
-    //   else {
-    //     // $(".ride").find("[data-attribute='" + ride + "']").show();
-    //   }
-    // }
   }
 
-  // if filtering by time
-  else if (type == 'time') {
-    // do this...
-  }
+  else if (time != "") {
 
-  // if filtering by date
-  else if (type == 'date') {
-    // do this...
+  }
+  
+  else if (date != "") {
+
   }
 
 }
-
-
 
 
 // function for when "join this ride" is clicked;
@@ -164,7 +157,7 @@ $(document).ready(function() {
       var name = currentUser.get('Name');
       var email = currentUser.get('email');
       var rating = Number(currentUser.get('DriverRating'));
-      var avatar = currentUser.get('Avatar');
+      var num = currentUser.get('Avatar');
       var home = currentUser.get('HomeAddress');
 
       var one = '<h3 class="profile-name">'+name+'</h3>';
@@ -172,6 +165,7 @@ $(document).ready(function() {
       var three = '<p class="sub-title">'+home+'</p>';
       var four = '<p class="sub-title">'+email+'</p>';
       tag.append(one+three+two);
+      $('.avatar').append('<img src="Images/'+num+'.png" class="img-circle" />');
     }
 
     else if(!currentUser) {

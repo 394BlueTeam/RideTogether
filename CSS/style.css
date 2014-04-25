@@ -330,7 +330,7 @@ h2, p, ol, ul, li {
         list-style: none;
         width: 85%;
         margin: auto;
-        margin-top: 54px;
+        margin-bottom: 54px;
     }
 
 
@@ -548,13 +548,12 @@ h2, p, ol, ul, li {
     }
 
     .avatar {
-        width: 115px;
-        height: 115px;
-        border-radius: 180px;
-        background-color: white;
-        margin: auto;
         margin-top: 65px;
         margin-bottom: 20px;
+    }
+
+    .avatar img {
+        width: 140px;
     }
 
     .profile-name {
@@ -682,13 +681,20 @@ h2, p, ol, ul, li {
     }
 
 /*========Filter=======*/
+#filter-btn {
+    margin: 50px 0 20px 0;
+}
+/*
+#icon:before {
+    content: "\f078";
+}*/
+
 .filter{
-    top: 45px;
-    position: relative;
-    width: 90%;
+    width: 60%;
     margin: auto;
     text-align: left;
     right: 40px;
+    display: none;
 }
 
 #filter-header{

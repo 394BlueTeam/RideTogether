@@ -84,6 +84,11 @@
            window.addEventListener('load', function() {
                   FastClick.attach(document.body);
               }, false);
+
+           function show() {
+            $( '#filter' ).toggle( 'slow' );
+            $('.icon').find('i').toggleClass('fa-chevron-down fa-chevron-up');
+           }
         </script>
     </head>
 
@@ -99,8 +104,8 @@
                       <ul>
                           <li><a href="index.html">Home</a></li>
                           <li><a href="#" id="post" onclick='snapper.close();' data-toggle="modal" data-target="#postride">Post a Ride</a></li>
-                          <li><a href="#">Saved Rides</a></li>
-                          <li><a href="#">Messages</a></li>
+                          <li><a href="#">Ride History</a></li>
+                          <!-- <li><a href="#">Messages</a></li> -->
                       </ul>
                     </div>
                 </div>
@@ -131,33 +136,46 @@
             </div>
 
             <!-- Filter -->
-            <p id="filter-header"><span>Filter</span></p>
+            <div id="filter-btn">
+              <button type="button" class="btn btn-default" onclick="show();">Filter Options <span class="icon"><i class="fa fa-chevron-down"></i></span></button>
+            </div>
+
+            <!-- <p id="filter-header"><span>Filter</span></p> -->
             <div id="filter" class="filter">
               <div id="filter-form-div">
                 <form id="filter-form" class="form-horizontal">
-                  <div id="location-div" class="form-group">
-                    <label for="filter-location" class="col-sm-2 control-label">Location:</label>
-                      <div class="col-sm-10">
-                        <input type="text" class="form-control" id="filter-location" name="filter-location" placehold="ex. Old Orchard, O'Hare">
-                      </div>
-                  </div>
-                  <div id="time-div" class="form-group">
-                    <label for="filter-time" class="col-sm-2 control-label">Time:</label>
-                      <div class="col-sm-10">
+                  
+                    <!-- location -->
+                    <div id="location-div" class="form-group">
+                      <label for="filter-location" class="col-sm-2 control-label">Location:</label>
+                        <div class="col-sm-10">
+                          <input type="text" class="form-control" id="filter-location" name="filter-location" placehold="ex. Old Orchard, O'Hare">
+                        </div>
+                    </div>
+
+                    <!-- time -->
+                    <div id="time-div" class="form-group">
+                      <label for="filter-time" class="col-sm-2 control-label">Time:</label>
+                      <div class="col-sm-6">
                         <input type="text" class="form-control" id="filter-time" name="filter-time" placeholder="ex. 3:00 PM">
                       </div>
-                  </div>
-                  <div id="date-div" class="form-group">
-                    <label for="filter-date" class="col-sm-2 control-label">Date:</label>
-                      <div class="col-sm-10">
+                    </div>
+
+                    <!-- date -->
+                    <div id="date-div" class="form-group">
+                      <label for="filter-date" class="col-sm-2 control-label">Date:</label>
+                      <div class="col-sm-6">
                           <input type="date" class="form-control" id="filter-date" name="filter-date">
                       </div>
                     </div>
-                  <div id="filter-submit-div" class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10">
-                      <input type="button" class="btn btn-default" value="Search">
+
+                    <!-- submit button -->
+                    <div id="filter-submit-div" class="form-group">
+                      <div class="col-sm-offset-2 col-sm-10">
+                        <input type="button" class="btn btn-default" value="Search" onClick="filter(this.form)">
+                        <input type="button" class="btn btn-default" value="Refresh" onClick="window.location.reload()">
+                      </div>
                     </div>
-                  </div>
                 </form>
               </div>
           </div>
