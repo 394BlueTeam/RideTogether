@@ -20,6 +20,13 @@ function autoComplete() {
         destination = "(" + document.getElementById("endpointlat").value  + ", " + document.getElementById("endpointlng").value + ")";   
         console.log(destination);      
     });
+
+    autoCompleteFilter = new google.maps.places.Autocomplete(
+        (document.getElementById('filter-location')),
+        {types: []});
+    google.maps.event.addListener(autoCompleteFilter, 'place_changed', function(){
+        var location = autoCompleteFilter.getPlace();
+    });
 }
 
 $(document).ready(function() {
