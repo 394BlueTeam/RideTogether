@@ -46,11 +46,13 @@ function callback(response, status, destTime) {
 
 function drawTimeline(destTime, rideTime){
     var timeline = $('.timeline');
-    var screenWidth = $('.ride').width()-10;
-    if (screenWidth > 800){
-        screenWidth = 800;
+    var screenWidth = $('.timeline').width();
+    if (screenWidth > 795){
+        screenWidth = 795;
     }
-    timeline.css('width', screenWidth);
+
+
+
     var timeWidth = screenWidth - (35*4);
 
 
@@ -60,8 +62,8 @@ function drawTimeline(destTime, rideTime){
     var driveWidth = rideTime/fullTime;
 
 
-    $('.line-drive .piece').css('width',  (timeWidth*driveWidth)+10+'px')
-    $('.line-dest .piece').css('width',  (destWidth*timeWidth)+10+'px')
+    $('.line-drive').css('width',  (timeWidth*driveWidth)+'px')
+    $('.line-dest').css('width',  (destWidth*timeWidth)+'px')
 
     $('.line-drive p').html(""+rideTime+' mins');
     $('.line-dest p').html(""+destTime+' mins');

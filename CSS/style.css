@@ -333,6 +333,14 @@ h2, p, ol, ul, li {
         margin-top: 54px;
     }
 
+
+    @media (max-width:400px){
+        #query{
+            width:90%;
+        }
+    }
+
+
     .count {
         float: left;
         position: absolute;
@@ -674,6 +682,8 @@ h2, p, ol, ul, li {
     overflow: hidden;
     text-align: center;
     margin-top:40px;
+    width:100%;
+    max-width: 800px;
 }
 
 .timeline .waypoint{
