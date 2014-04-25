@@ -62,8 +62,8 @@ function drawTimeline(destTime, rideTime){
     var driveWidth = rideTime/fullTime;
 
 
-    $('.line-drive').css('width',  (timeWidth*driveWidth)+'px')
-    $('.line-dest').css('width',  (destWidth*timeWidth)+'px')
+    $('.line-drive').css('width',  (timeWidth*driveWidth)-1+'px')
+    $('.line-dest').css('width',  (destWidth*timeWidth)-1+'px')
 
     $('.line-drive p').html(""+rideTime+' mins');
     $('.line-dest p').html(""+destTime+' mins');
