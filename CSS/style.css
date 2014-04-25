@@ -325,7 +325,7 @@ h2, p, ol, ul, li {
         font-size: 1.5em;
         margin-bottom: 2%;
     }
-
+    
     #query {
         list-style: none;
         width: 85%;
@@ -428,47 +428,47 @@ h2, p, ol, ul, li {
     /* ------------------------------ NOTIFICATIONS ------------------------------ */
     /* ======================================================================== */
 
-    #submit {
-        display: none;
-    }
+        #submit {
+            display: none;
+        }
 
-    #submit {
-        width: 180px;
-        /*padding: 0 0 180px 0;*/
-        padding:0;
-        right: 3%;
-        top: 45px;
-        position: absolute;
-        background-color: black;
-        color: white;
-        border-radius: 8px;
-        -webkit-box-shadow:0px 0px 9px rgba(0,0,0,0.4), 0px 0px 0px 1px rgba(188,188,188,0.1);
-        -moz-box-shadow:0px 0px 9px rgba(0,0,0,0.4), 0px 0px 0px 1px rgba(188,188,188,0.1);
-        box-shadow:0px 0px 9px rgba(0,0,0,0.4), 0px 0px 0px 1px rgba(188,188,188,0.1);
-    }
+        #submit {
+            width: 180px;
+            /*padding: 0 0 180px 0;*/
+            padding:0;
+            right: 3%;
+            top: 45px;
+            position: absolute;
+            background-color: black;
+            color: white;
+            border-radius: 8px;
+            -webkit-box-shadow:0px 0px 9px rgba(0,0,0,0.4), 0px 0px 0px 1px rgba(188,188,188,0.1);
+            -moz-box-shadow:0px 0px 9px rgba(0,0,0,0.4), 0px 0px 0px 1px rgba(188,188,188,0.1);
+            box-shadow:0px 0px 9px rgba(0,0,0,0.4), 0px 0px 0px 1px rgba(188,188,188,0.1);
+        }
 
-    #submit:after {
-        z-index: 4;
-        content:'';
-        display: block;
-        position: absolute;
-        top:-27px;
-        /*right: 61px;*/
-        right: 3px;
-        width:0;
-        height:0;
-        border-color: transparent transparent black transparent;
-        border-style: solid;
-        border-width: 15px;
-    }
+        #submit:after {
+            z-index: 4;
+            content:'';
+            display: block;
+            position: absolute;
+            top:-27px;
+            /*right: 61px;*/
+            right: 3px;
+            width:0;
+            height:0;
+            border-color: transparent transparent black transparent;
+            border-style: solid;
+            border-width: 15px;
+        }
 
-    #submit p {
-        font-size: 0.7em;
-    }
+        #submit p {
+            font-size: 0.7em;
+        }
 
 
-/* ------------------------------ POST RIDE  ------------------------------ */
-/* ======================================================================== */
+/* ------------------------------ POST RIDE  ------------------------------- */
+/* ========================================================================= */
 
 
 
@@ -614,106 +614,62 @@ h2, p, ol, ul, li {
         color: #47a3da;
     }
 
-/*#signup form {
-    margin: 20px auto;
-    overflow: hidden;
-    text-align: center;
-    width: auto;
-    padding: 3%;
-}
-
-#signup h1{
-    margin: 0 auto;
-}
 
 
+/* ------------------------------- TIMELINE  ------------------------------- */
+/* ========================================================================= */
 
 
-
-#signup form p{
-    text-align: left;
-    max-width: 320px;
-    margin: 0 auto;
-    padding: 5px 0px;
-
-}
-
-#buttons{
-    width:100%;
-    max-width:265px;
-}
-
-#signup form input{
-    float: right;
-    width:50%;
-    max-width:240px;
-}
-
-#signup .a-btn{
-    padding: 10px 10px;
-    height: auto;
-}
-
-@media(max-width:400px){
-    .container{
-        width:90%;
+    .timeline{
+        width:auto;
+        height:100px;
+        display:none;
+        position:relative;
+        margin: 0 auto;
+        overflow: hidden;
+        text-align: center;
+        margin-top:40px;
     }
-}
-*/
 
+    .timeline .waypoint{
+        float: left;
+        position: relative;
+        margin: 0 ;
+        font-size: 0;
+        z-index: 1;
+    }
 
+    .timeline .waypoint .circle{
+        width:35px;
+        height:35px;
+        border-radius:50%;
+        background-color: #00403D;
+        display: block;
+        margin: 0 auto;
 
-/*=============TIMELINE==========*/
+    }
 
-.timeline{
-    width:auto;
-    height:100px;
-    display:none;
-    position:relative;
-    margin: 0 auto;
-    overflow: hidden;
-    text-align: center;
-    margin-top:40px;
-}
+    .timeline .line{
+        width:auto;
+        float: left;
+        position: relative;
+        height:auto;
+        font-size: 0;
+        z-index: 0;
+    }
 
-.timeline .waypoint{
-    float: left;
-    position: relative;
-    margin: 0 ;
-    font-size: 0;
-    z-index: 1;
-}
+    .timeline > .line-drive > .piece,  .timeline > .line-dest > .piece{   
+        height:16px;
+        background-color:#08cbc4;
+        width: auto;
+        display: block;
+        margin-top: 10px;
+        font-size: 0;
+        position: relative;
+        margin-left:-5px;
+        margin-right:-5px;
+    }
 
-.timeline .waypoint .circle{
-    width:35px;
-    height:35px;
-    border-radius:50%;
-    background-color: #00403D;
-    display: block;
-    margin: 0 auto;
-
-}
-
-.timeline .line{
-    width:auto;
-    float: left;
-    position: relative;
-    height:auto;
-    font-size: 0;
-    z-index: 0;
-}
-
-.timeline > .line-drive > .piece,  .timeline > .line-dest > .piece{   
-    height:16px;
-    background-color:#08cbc4;
-    width: auto;
-    display: block;
-    margin-top: 10px;
-    font-size: 0;
-    position: relative;
-    margin-left:-5px;
-    margin-right:-5px;
-}
-p{
+    p {
         font-size: 12px;
-}
+    }

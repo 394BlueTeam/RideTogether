@@ -62,11 +62,12 @@
                     var name = $("input[name=Name]").val();
                     var cartype = $("input[name=CarType]").val();
                     var homeaddress = $("input[name=HomeAddress]").val();
+                    var num = Math.floor((Math.random()*4)+1);
 
                     var user = new Parse.User();    
                     user.signUp({username: email, password: password, email: email, 
                                  Name: name, CarType: cartype, HomeAddress: homeaddress,
-                                 DriverRating: 0}, {
+                                 DriverRating: num, Avatar: num}, {
                         success: function(rideposter){
                             console.log("save succeeded");
                             alert('Success! To verify your account, please look for an email from "no-reply@parseapps.com" and click the link in the email.');
