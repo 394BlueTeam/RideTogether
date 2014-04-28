@@ -275,6 +275,15 @@
 
         <!-- SCRIPT FOR SWIPE MENU -->
         <script type="text/javascript">
+          $('#location-div').click(function(){ 
+            console.log("here");
+            var location = $("input[name=filter-location]").val();
+            if (location != "") {
+              $('#filter-location').val('');
+              $( ".ride" ).show();
+            }
+          });
+
           var snapper = new Snap({
             element: document.getElementById('wrapper'),
             disable: 'left'
