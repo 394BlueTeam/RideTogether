@@ -111,26 +111,28 @@ function filter(form) {
           $(this).hide();
         }
         else {
+          $(this).show();
           $( ".count" ).empty();
           $( ".count" ).append( "<i class='fa fa-circle'></i> " ).css('font-size', '1.5em' );
         }
     });
   }
 
-  else if (time != "") {
+  if (time != "") {
     $( ".ride" ).each(function() {
         var t = $(this).find('.time').text().substring(6); //substring to get ride of 'Time: '
         if (time != t) {
           $(this).hide();
         }
         else {
+          $(this).show();
           $( ".count" ).empty();
           $( ".count" ).append( "<i class='fa fa-circle'></i> " ).css('font-size', '1.5em' );
         }
     });
   }
   
-  else if (date != "") {
+  if (date != "") {
     $( ".ride" ).each(function() {
         var d = new Date( $(this).find('.date').text().substring(11) ); //substring to get ride of 'Trip Date: '
         dString = d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0' + d.getDate()).slice(-2)
@@ -138,6 +140,7 @@ function filter(form) {
           $(this).hide();
         }
         else {
+          $(this).show();
           $( ".count" ).empty();
           $( ".count" ).append( "<i class='fa fa-circle'></i> " ).css('font-size', '1.5em' );
         }
