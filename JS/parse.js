@@ -114,8 +114,8 @@ function filter(form) {
         }
         else {
           // $(this).show();
-          $( ".count" ).empty();
-          $( ".count" ).append( "<i class='fa fa-circle'></i> " ).css('font-size', '1.5em' );
+          $( ".count" ).hide();
+          // $( ".count" ).append( "<i class='fa fa-circle'></i> " ).css('font-size', '1.5em' );
         }
     });
   }
@@ -128,8 +128,8 @@ function filter(form) {
         }
         else {
           // $(this).show();
-          $( ".count" ).empty();
-          $( ".count" ).append( "<i class='fa fa-circle'></i> " ).css('font-size', '1.5em' );
+          $( ".count" ).hide();
+          // $( ".count" ).append( "<i class='fa fa-circle'></i> " ).css('font-size', '1.5em' );
         }
     });
   }
@@ -143,8 +143,8 @@ function filter(form) {
         }
         else {
           // $(this).show();
-          $( ".count" ).empty();
-          $( ".count" ).append( "<i class='fa fa-circle'></i> " ).css('font-size', '1.5em' );
+          $( ".count" ).hide();
+          // $( ".count" ).append( "<i class='fa fa-circle'></i> " ).css('font-size', '1.5em' );
         }
     });
 
@@ -229,7 +229,7 @@ $(document).ready(function() {
 
     else if(!currentUser) {
       $('.avatar').hide();
-      $('#profile').append('<p class="prompt"><a href="#" onclick="snapper.close();" data-toggle="modal" data-target="#login">Click Here</a> to login in a view your profile</p>');
+      $('#profile').append('<p class="prompt"><a href="#" onclick="snapper.close();" data-toggle="modal" data-target="#login">Click Here</a> to login in and view your profile</p>');
       $('.links').hide();
     }
 });
