@@ -176,6 +176,7 @@ function login(){
        success: function(user){
            console.log("Login succeeded");
            $('#login').modal('hide');
+           window.location.reload();
            $('#users').html('<p>Welcome, ' + user.get('Name') + '</p>');
        },
        error: function(user, error){

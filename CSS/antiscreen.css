@@ -61,3 +61,11 @@ from the original style.css sheet*/
 #openseats {
 	display: none;
 }
+
+.avatar {
+    margin-top: 45px;
+}
+
+.avatar img {
+    width: 110px;
+}
