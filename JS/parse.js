@@ -90,7 +90,7 @@ query.find({
 function insertInfo(more, driver, email, seats, sAdd, eAdd, date, TravelTime, Destination){
   var truncDate = String(date);
   truncDate = truncDate.substr(0, 15);
-  var message="Hi "+driver+",%0D%0DI'd like to join your ride from "+sAdd+" to "+eAdd+" ("+Destination+"), on "+truncDate +
+  var message="Hi "+driver+",%0D%0DI'd like to join your ride from "+sAdd+" to "+Destination+" on "+truncDate +
   " from " + TravelTime + ". Please let me know if I can join.%0D%0DThanks,%0D";
   more.html('<a class="join-button" href="mailto:'+email+'?subject=I\'d like to join your ride!&body='+message+'">Join this ride</a>');
   // info.html('<p class="driverName">Driver: ' + driver +'</p><p class="seats">Open Seats: '
