@@ -152,7 +152,7 @@ function filter(form) {
 
 
 // clear function
-function clear() {
+function clearfilter() {
   var location = $("input[name=filter-location]").val();
   var time = $("input[name=filter-time]").val();
   var date = $("input[name=filter-date]").val();
