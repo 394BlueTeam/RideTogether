@@ -111,7 +111,6 @@ function filter(form) {
           $(this).hide();
         }
         else {
-          $(this).show();
           $( ".count" ).empty();
           $( ".count" ).append( "<i class='fa fa-circle'></i> " ).css('font-size', '1.5em' );
         }
@@ -125,7 +124,6 @@ function filter(form) {
           $(this).hide();
         }
         else {
-          $(this).show();
           $( ".count" ).empty();
           $( ".count" ).append( "<i class='fa fa-circle'></i> " ).css('font-size', '1.5em' );
         }
@@ -140,7 +138,6 @@ function filter(form) {
           $(this).hide();
         }
         else {
-          $(this).show();
           $( ".count" ).empty();
           $( ".count" ).append( "<i class='fa fa-circle'></i> " ).css('font-size', '1.5em' );
         }
