@@ -49,7 +49,7 @@ from the original style.css sheet*/
 	font-size: 1em;
 }
 
-.start, .date, .time, .driver, .seats {
+.start, .date, .time, .driver, .seats, .cost {
     font-size: 0.7em;
 }
 
