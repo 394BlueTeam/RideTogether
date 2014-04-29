@@ -173,7 +173,7 @@
                     <div id="filter-submit-div" class="form-group">
                       <div class="col-sm-offset-2 col-sm-10">
                         <input type="button" class="btn btn-default" value="Search" onClick="filter(this.form)">
-                        <input type="button" class="btn btn-default" value="Refresh" onClick="window.location.reload()">
+                        <input type="button" class="btn btn-default" value="Clear" onClick="clear()">
                       </div>
                     </div>
                 </form>
@@ -273,13 +273,28 @@
             </div>
         </div>
 
-        <!-- SCRIPT FOR SWIPE MENU -->
+        <!-- JAVASCRIPT FUNCTIONS -->
         <script type="text/javascript">
-          $('#location-div').click(function(){ 
-            console.log("here");
+          $('#location-div').click(function(){
             var location = $("input[name=filter-location]").val();
             if (location != "") {
               $('#filter-location').val('');
+              $( ".ride" ).show();
+            }
+          });
+
+          $('#time-div').click(function(){
+            var time = $("input[name=filter-time]").val();
+            if (time != "") {
+              $('#filter-time').val('');
+              $( ".ride" ).show();
+            }
+          });
+
+          $('#date-div').click(function(){
+            var date = $("input[name=filter-date]").val();
+            if (date != "") {
+              $('#filter-date').val('');
               $( ".ride" ).show();
             }
           });

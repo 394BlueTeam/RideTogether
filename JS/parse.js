@@ -151,6 +151,19 @@ function filter(form) {
 }
 
 
+// clear function
+function clear() {
+  var location = $("input[name=filter-location]").val();
+  var time = $("input[name=filter-time]").val();
+  var date = $("input[name=filter-date]").val();
+  if (location != "" || time != "" || date != "") {
+    $('#filter-location').val('');
+    $('#filter-time').val('');
+    $('#filter-date').val('');
+    $( ".ride" ).show();
+  }
+}
+
 // function for when "join this ride" is clicked;
 // it will update the badge count number
 var count = 0;
