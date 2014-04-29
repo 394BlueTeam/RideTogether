@@ -56,7 +56,7 @@ query.find({
         //$(this).css('background-color', 'white');
         query.get(id, {
           success: function(object) {
-            insertInfo(more, object.get('Name'), object.get('Email'), object.get('OpenSeats'), object.get('StartAddress'), object.get('EndAddress'), object.get('Date'), object.get('TravelTime'), object.get('Destination'));
+            insertInfo(more, object.get('Name'), object.get('Email'), object.get('OpenSeats'), object.get('StartAddress'), object.get('EndAddress'), object.get('Date'), object.get('TravelTime'), object.get('Destination'), object.get('DepartureAMPM'));
           },
           error: function(object, error) {
             console.log('error')
@@ -87,11 +87,11 @@ query.find({
 
 //adds the chosen information into the appropriate div
 //error checking should be
-function insertInfo(more, driver, email, seats, sAdd, eAdd, date, TravelTime, Destination){
+function insertInfo(more, driver, email, seats, sAdd, eAdd, date, TravelTime, Destination, ampm){
   var truncDate = String(date);
   truncDate = truncDate.substr(0, 15);
   var message="Hi "+driver+",%0D%0DI'd like to join your ride from "+sAdd+" to "+Destination+" on "+truncDate +
-  " at " + TravelTime + ". Please let me know if I can join.%0D%0DThanks,%0D";
+  " at " + TravelTime + " " + ampm + ". Please let me know if I can join.%0D%0DThanks,%0D";
   more.html('<a class="join-button" href="mailto:'+email+'?subject=I\'d like to join your ride!&body='+message+'">Join this ride</a>');
   // info.html('<p class="driverName">Driver: ' + driver +'</p><p class="seats">Open Seats: '
   //           +seats +'</p><a class="join-button" href="mailto:'+email+'?subject=I\'d like to join your ride!&body='+message+'">Join this ride</a>');
