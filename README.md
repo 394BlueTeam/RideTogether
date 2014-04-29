@@ -21,6 +21,12 @@ Yu Zhou
 
 Credit:
 ======================
-jQuery Mobile
+Twitter Bootstrap
 
 Font Awesome for icons
+
+Snap.js for menu
+
+Parse.com
+
+fastclick.js
