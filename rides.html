@@ -29,54 +29,98 @@
         <script type="text/javascript">
           Parse.initialize("b0jfwJsQkNWPdoKnDgd8KJLufCLWNJpmc5vBTkqr", "X90Jzs3gzKceNOdkFmCle8ZiwsE0HGhyNF4N3Wcj");
             var Ride = Parse.Object.extend("Ride");
-            
-            function enroll(frm){
-              var name = $("input[name=txtName]").val();
-              var seats = $("input[name=txtOpenSeats]").val();
-              var traveltime = $("input[name=txtTravelTime]").val();
-              var email = $("input[name=txtEmail]").val();
-              var start = $("input[name=txtStartAddress]").val();
-              var dest = $("input[name=txtDestination]").val();
-              var datetime = $("input[name=date]").val();
-              var startLat = $("input[name=txtStartPointLat]").val();
-              var startLong = $("input[name=txtStartPointLng]").val();
-              var endLat = $("input[name=txtEndPointLat]").val();
-              var endLong = $("input[name=txtEndPointLng]").val();
+            var origin;
+            var destination;
 
-              if (name == "")
+
+            function enroll(frm){
+              if (frm.txtName.value == "")
                   alert("Required field");
-              else if (seats == "")
+              else if (frm.txtOpenSeats.value == "")
                   alert("Required field");
               else {
-                  var date = new Date(datetime);
+                  console.log(frm.date.value);
+                  var date = new Date(frm.date.value);
+
                   var startPoint = new Parse.GeoPoint({
-                                       latitude: parseFloat(startLat),
-                                       longitude: parseFloat(startLong)
+                                       latitude: parseFloat(frm.txtStartPointLat.value),
+                                       longitude: parseFloat(frm.txtStartPointLng.value)
                                    });
                   var endPoint = new Parse.GeoPoint({
-                                     latitude: parseFloat(endLat),
-                                     longitude: parseFloat(endLong)
+                                     latitude: parseFloat(frm.txtEndPointLat.value),
+                                     longitude: parseFloat(frm.txtEndPointLng.value)
                                    });
-                  console.log(startPoint);
-                  var rideposter = new Ride();
+  
+                  var durationRes, departureRes;
+                  var durationStr = frm.txtDurationTime.value;
+                  var departureStr = frm.txtDepartureTime.value;
+                  var datestr = frm.date.value;
+                  var datevals = datestr.split('-');
+                  var durselect = $("input[name=durselect]:checked").val();
+                  var cost = $("input[name=costtype]:checked").val();                 
+                   // console.log(durselect);
 
-                  rideposter.save({ Name: name,
-                                    OpenSeats: seats,
-                                    TravelTime: traveltime,
-                                    Email: email,
-                                    StartAddress: start, 
-                                    StartPoint: startPoint, 
-                                    Destination: dest,
-                                    EndPoint: endPoint,
-                                    Date: date}, {
-                      success: function(rideposter){
-                          console.log("Save succeeded");
-                          alert('Thank you! the ride information is posted');
-                      },
-                      error: function(rideposter, error){
-                          console.log("Save failed with error: ", error);
-                      }
-                  });
+                  durationRes = durationStr.split(":");
+                  departureRes = departureStr.split(":");
+                  
+
+                  if(durselect == 'PM')
+                  {
+                    if(departureRes[0] != 12)
+                    {
+                      departureRes[0] = 12 + Number(departureRes[0]);
+                    }
+                  }
+                  else
+                  {
+                    if(Number(departureRes[0]) == 12)
+                    {
+                      departureRes[0] = 0;
+                    }
+                  }
+                  console.log(departureRes[0]);
+
+                  var new_date = new Date(Number(datevals[0]), Number(datevals[1]) - 1, Number(datevals[2]), departureRes[0], departureRes[1]);
+                  var timestamp = new_date.getTime();
+
+
+                  var currentUser = Parse.User.current();
+                  var isVerified = false;
+                  if (currentUser) {
+                      isVerified = currentUser.get("emailVerified");
+                  }
+
+                  if (isVerified || (!currentUser)) {
+                      var rideposter = new Ride();
+                      rideposter.save({ Name: frm.txtName.value,
+                                        OpenSeats: Number(frm.txtOpenSeats.value),
+                                        TravelTime: frm.txtDepartureTime.value,
+                                        Email: frm.txtEmail.value,
+                                        StartAddress: frm.txtStartAddress.value, 
+                                        StartPoint: startPoint, 
+                                        Destination: frm.txtDestination.value,
+                                        EndPoint: endPoint,
+                                        DepartureTimeHR : Number(departureRes[0]),
+                                        DepartureTimeMin : Number(departureRes[1]),
+                                        DurationTimeHR : Number(durationRes[0]),
+                                        DurationTimeMin : Number(durationRes[1]),
+                                        DepartureAMPM : durselect,
+                                        TimeStamp : timestamp,
+                                        TripCost : frm.tripcost.value,
+                                        CostType : cost,
+                                        Date: date}, {
+                          success: function(rideposter){
+                              console.log("Save succeeded");
+                              alert('Thank you! the ride information is posted');
+                              window.location.replace("rides.html");
+                          },
+                          error: function(rideposter, error){
+                              console.log("Save failed with error: ", error);
+                          }
+                      });
+                  } else {
+                      alert('Your Email has not been verified.');
+                  }
               }
             }
 
@@ -86,9 +130,16 @@
               }, false);
 
            function show() {
-            $( '#filter' ).toggle( 'slow' );
-            $('.icon').find('i').toggleClass('fa-chevron-down fa-chevron-up');
+              $( '#filter' ).toggle( 'slow' );
+              $('.icon').find('i').toggleClass('fa-chevron-down fa-chevron-up');
            }
+
+
+          // log out
+          function logout() {
+              Parse.User.logOut();
+              window.location.replace("rides.html");
+          }
         </script>
     </head>
 
@@ -105,6 +156,7 @@
                           <li><a href="index.html">Home</a></li>
                           <li><a href="#" id="post" onclick='snapper.close();' data-toggle="modal" data-target="#postride">Post a Ride</a></li>
                           <li><a href="#">Ride History</a></li>
+                          <li><a href="#" id="logout" onclick="logout();">Logout</a></li>
                           <!-- <li><a href="#">Messages</a></li> -->
                       </ul>
                     </div>
@@ -185,7 +237,7 @@
             <div id="query"></div>
           </div>
 
-        <!-- SIGN UP MODAL -->
+        <!-- POST RIDE MODAL -->
         <div class="modal fade" id="postride" tabindex="-1" role="dialog" aria-labelledby="post" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -195,24 +247,24 @@
                         <form class="form-horizontal" role="form">
                             <!-- name -->
                             <div class="form-group">
-                                <label for="name" class="col-sm-2 control-label">Name</label>
-                                <div class="col-sm-10">
+                                <!-- <label for="name" class="col-sm-2 control-label">Name</label> -->
+                                <div class="col-sm-12">
                                   <input type="text" class="form-control" id="name" name="txtName" placeholder="Name">
                                 </div>
                             </div>
 
                             <!-- email -->
                             <div class="form-group">
-                                <label for="email" class="col-sm-2 control-label">Email</label>
-                                <div class="col-sm-10">
+                                <!-- <label for="email" class="col-sm-2 control-label">Email</label> -->
+                                <div class="col-sm-12">
                                   <input type="email" class="form-control" id="email" name="txtEmail" placeholder="Email">
                                 </div>
                             </div>
 
                             <!-- open seats -->
                             <div class="form-group">
-                                <label for="seats" class="col-sm-2 control-label" id="openseats">Open Seats</label>
-                                <div class="col-xs-6">
+                                <!-- <label for="seats" class="col-sm-2 control-label" id="openseats">Open Seats</label> -->
+                                <div class="col-xs-7">
                                   <select class="form-control" id="seats" name="txtOpenSeats">
                                     <option>Open Seats</option>
                                     <option>1</option>
@@ -226,9 +278,9 @@
 
                             <!-- start address -->
                             <div class="form-group">
-                                <label for="start" class="col-sm-2 control-label">Start Address</label>
-                                <div class="col-sm-10">
-                                  <input type="text" class="form-control" id="start" name="txtStartAddress" placeholder="ex: 2255 Ridge Ave, Plex, Tech, etc">
+                                <!-- <label for="start" class="col-sm-2 control-label">Start Address</label> -->
+                                <div class="col-sm-12">
+                                  <input type="text" class="form-control" id="start" name="txtStartAddress" placeholder="Start Address">
                                   <input type="hidden" class="form-control" id="startpointlat" name="txtStartPointLat">
                                   <input type="hidden" class="form-control" id="startpointlng" name="txtStartPointLng">
                                 </div>
@@ -236,30 +288,66 @@
 
                             <!-- destination -->
                             <div class="form-group">
-                                <label for="end" class="col-sm-2 control-label">Destination</label>
-                                <div class="col-sm-10">
-                                  <input type="text" class="form-control" id="end" name="txtDestination" placeholder="ex: O'Hare, Old Orchard, etc">
+                                <!-- <label for="end" class="col-sm-2 control-label">Destination</label> -->
+                                <div class="col-sm-12">
+                                  <input type="text" class="form-control" id="end" name="txtDestination" placeholder="Destination (ex: Old Orchard, etc)">
                                   <input type="hidden" class="form-control" id="endpointlat" name="txtEndPointLat">
                                   <input type="hidden" class="form-control" id="endpointlng" name="txtEndPointLng">
                                 </div>
                             </div>
 
-                            <!-- travel time -->
+                            <!-- Departure time -->
                             <div class="form-group">
-                                <label for="traveltime" class="col-sm-2 control-label">Travel time</label>
-                                <div class="col-sm-10">
-                                  <input type="text" class="form-control" id="traveltime" name="txtTravelTime" placeholder="ex: 1:00pm - 3:00pm">
+                                <!-- <label for="departuretime" class="col-sm-2 control-label">Departure Time</label> -->
+                                <div class="col-sm-12">
+                                  <input type="text" class="form-control" id="departuretime" name="txtDepartureTime" placeholder="Departure Time (ex: 1:00)">
+
+                                  <!-- radio buttons -->
+                                  <div class="radio radio-inline">
+                                    <label><input type="radio" name="durselect" id="durselect1" value="AM">AM</label>
+                                  </div>
+                                  <div class="radio radio-inline">
+                                    <label><input type="radio" name="durselect" id="durselect2" value="PM">PM</label>
+                                  </div>
+                                </div>
+                            </div>
+
+                            <!-- trip duration -->
+                            <div class="form-group">
+                                <!-- <label for="durationtime" class="col-sm-2 control-label">Trip Duration</label> -->
+                                <div class="col-sm-12">
+                                  <input type="text" class="form-control" id="durationtime" name="txtDurationTime" placeholder="Trip Duration (ex: 2:30 is 2.5 hrs)">
                                 </div>
                             </div>
 
                             <!-- date -->
                             <div class="form-group">
-                                <label for="date" class="col-sm-2 control-label">Trip Date</label>
-                                <div class="col-sm-10">
-                                  <input type="date" class="form-control" id="date" name="date" placeholder="Enter trip date">
+                                <!-- <label for="date" class="col-sm-2 control-label">Trip Date</label> -->
+                                <div class="col-sm-12">
+                                  <input type="date" class="form-control" id="date" name="date" placeholder="Trip Date">
                                 </div>
-                            </div>
-                            
+                            </div>   
+
+                            <!-- cost -->
+                            <div class="form-group">
+                                <!-- <label for="cost" class="col-sm-2 control-label">Charge ($)</label> -->
+                                <div class="col-sm-12">
+                                  <input type="text" class="form-control" id="cost" name="tripcost" placeholder="Charge (ex: $10 flat rate, $2/mile)">
+
+                                  <!-- radio buttons -->
+                                  <div class="radio radio-inline">
+                                    <label>
+                                      <input type="radio" name="costtype" id="cost1" value="Flat Rate">Flat Rate
+                                    </label>
+                                  </div>
+                                  <div class="radio radio-inline">
+                                    <label>
+                                      <input type="radio" name="costtype" id="cost2" value="Per Mile">Per Mile
+                                    </label>
+                                  </div>
+
+                                </div>
+                            </div>  
                             
                         </form>
                     </div>
@@ -272,6 +360,47 @@
                 </div>
             </div>
         </div>
+
+
+        <!-- LOGIN MODAL -->
+        <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="signin" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                    <!-- BODY -->
+                    <div class="modal-body">
+                        <form class="form-horizontal" role="form">
+                            <!-- Email -->
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <input type="text" class="form-control" id="usernamelogin" name="UserNameLogin"
+                                    placeholder="Email">
+                                </div>
+                            </div>
+
+                            <!-- Password -->
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <input type="password" class="form-control" id="passwordlogin" name="PasswordLogin"
+                                    placeholder="Password">
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+
+                    <!-- FOOTER -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-default" onclick="login()">Login</button>
+                        <div class="alert alert-danger">
+                            <strong>Error:</strong> Invalid username and password pair. Please try again.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 
         <!-- JAVASCRIPT FUNCTIONS -->
         <script type="text/javascript">

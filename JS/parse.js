@@ -21,12 +21,14 @@ query.find({
       console.log(time);
       var driver = results[i].get('Name');
       var seats = results[i].get('OpenSeats');
+      var cost = results[i].get('TripCost');
+      var costtype = results[i].get('CostType');
       counter += 1;
       // var btn1 = "<a href='#'><i class='fa fa-link btn-email'>  connect with driver</i></a>";
       // var btn2 = "<a href='#' id='join' onclick='badgesystem();'><i class='fa fa-plus-square btn-sign'>  join ride</i></a>";
       var btn2 = ""
       // var DateTime = date + " " + results[i].get('TravelTime');
-      q.append('<div class="ride" data-date="'+tripdate+'" data-time="'+time+'" data-start="'+results[i].get('StartAddress')+'" data-end="'+results[i].get('EndAddress')+'" data-attribute="'+results[i].id+ '"><div class="count">'+counter+'</div><div class="content-shown"><p class="end">'+results[i].get('Destination')+'<span>'+btn2+'</span></p><p class="start"><span>Leaving From: </span>'+results[i].get('StartAddress')+'</p><p class="date"><span>Trip Date: </span>'+tripdate+'</p><p class="time"><span>Time: </span>'+time+'</p><p class="driver"><span>Driver: </span>'+driver+'</p><p class="seats"><span>Available seats: </span>'+seats+'</p><a class="more">click to display more info</a></div><div class="timeline"><div class="waypoint"><div class="circle"></div><p>Start</p></div><div class="line line-drive"><div class="piece"></div><p></p></div><div class="waypoint"><div class="circle"></div><p>Arrive</p></div><div class="line line-dest"><div class="piece"></div><p></p></div><div class="waypoint"><div class="circle"></div><p>Leave</p></div><div class="line line-drive"><div class="piece"></div><p></p></div><div class="waypoint"><div class="circle"></div><p>End</p></div></div></div>');  
+      q.append('<div class="ride" data-date="'+tripdate+'" data-time="'+time+'" data-start="'+results[i].get('StartAddress')+'" data-end="'+results[i].get('EndAddress')+'" data-attribute="'+results[i].id+ '"><div class="count">'+counter+'</div><div class="content-shown"><p class="end">'+results[i].get('Destination')+'<span>'+btn2+'</span></p><p class="start"><span>Leaving From: </span>'+results[i].get('StartAddress')+'</p><p class="date"><span>Trip Date: </span>'+tripdate+'</p><p class="time"><span>Time: </span>'+time+'</p><p class="driver"><span>Driver: </span>'+driver+'</p><p class="seats"><span>Available seats: </span>'+seats+'</p><p class="cost"><span>Trip Cost: </span>'+cost+' ('+costtype+')</p><a class="more">click to display more info</a></div><div class="timeline"><div class="waypoint"><div class="circle"></div><p>Start</p></div><div class="line line-drive"><div class="piece"></div><p></p></div><div class="waypoint"><div class="circle"></div><p>Arrive</p></div><div class="line line-dest"><div class="piece"></div><p></p></div><div class="waypoint"><div class="circle"></div><p>Leave</p></div><div class="line line-drive"><div class="piece"></div><p></p></div><div class="waypoint"><div class="circle"></div><p>End</p></div></div></div>');  
     }
 
 
@@ -111,7 +113,7 @@ function filter(form) {
           $(this).hide();
         }
         else {
-          $(this).show();
+          // $(this).show();
           $( ".count" ).empty();
           $( ".count" ).append( "<i class='fa fa-circle'></i> " ).css('font-size', '1.5em' );
         }
@@ -125,7 +127,7 @@ function filter(form) {
           $(this).hide();
         }
         else {
-          $(this).show();
+          // $(this).show();
           $( ".count" ).empty();
           $( ".count" ).append( "<i class='fa fa-circle'></i> " ).css('font-size', '1.5em' );
         }
@@ -140,7 +142,7 @@ function filter(form) {
           $(this).hide();
         }
         else {
-          $(this).show();
+          // $(this).show();
           $( ".count" ).empty();
           $( ".count" ).append( "<i class='fa fa-circle'></i> " ).css('font-size', '1.5em' );
         }
@@ -163,6 +165,26 @@ function clearfilter() {
     $( ".ride" ).show();
   }
 }
+
+
+// log in
+function login(){
+    var username = $("input[name=UserNameLogin]").val();
+    var password = $("input[name=PasswordLogin]").val();
+
+    Parse.User.logIn(username, password, {
+       success: function(user){
+           console.log("Login succeeded");
+           $('#login').modal('hide');
+           $('#users').html('<p>Welcome, ' + user.get('Name') + '</p>');
+       },
+       error: function(user, error){
+           console.log("Error: ", error);
+           $(".alert").show();
+       },
+    });
+}
+
 
 // function for when "join this ride" is clicked;
 // it will update the badge count number
@@ -206,10 +228,27 @@ $(document).ready(function() {
 
     else if(!currentUser) {
       $('.avatar').hide();
-      $('#profile').append('<p class="prompt">please login</p>');
+      $('#profile').append('<p class="prompt"><a href="#" onclick="snapper.close();" data-toggle="modal" data-target="#login">Click Here</a> to login in a view your profile</p>');
       $('.links').hide();
     }
 });
+
+// function login(){
+//     var username = $("input[name=UserNameLogin]").val();
+//     var password = $("input[name=PasswordLogin]").val();
+
+//     Parse.User.logIn(username, password, {
+//        success: function(user){
+//            console.log("Login succeeded");
+//            $('#login').modal('hide');
+//            window.location.replace("rides.html");
+//        },
+//        error: function(user, error){
+//            console.log("Error: ", error);
+//            $(".alert").show();
+//        },
+//     });
+// }
 
 // to automatically display the rating in stars
 function star(x) {
