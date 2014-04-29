@@ -113,10 +113,7 @@ function filter(form) {
           $(this).hide();
         }
         else {
-<<<<<<< HEAD
           // $(this).show();
-=======
->>>>>>> FETCH_HEAD
           $( ".count" ).empty();
           $( ".count" ).append( "<i class='fa fa-circle'></i> " ).css('font-size', '1.5em' );
         }
@@ -130,10 +127,7 @@ function filter(form) {
           $(this).hide();
         }
         else {
-<<<<<<< HEAD
           // $(this).show();
-=======
->>>>>>> FETCH_HEAD
           $( ".count" ).empty();
           $( ".count" ).append( "<i class='fa fa-circle'></i> " ).css('font-size', '1.5em' );
         }
@@ -148,10 +142,7 @@ function filter(form) {
           $(this).hide();
         }
         else {
-<<<<<<< HEAD
           // $(this).show();
-=======
->>>>>>> FETCH_HEAD
           $( ".count" ).empty();
           $( ".count" ).append( "<i class='fa fa-circle'></i> " ).css('font-size', '1.5em' );
         }
