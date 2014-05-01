@@ -109,10 +109,10 @@ function filter(form) {
   if (location != "") {
     $( ".ride" ).each(function() {
         var destination = $(this).find('.end').text();
-        var spaceDest = destination.replace('-', " ");
+        var hyphenDest = destination.replace('-', " ");
         var apostDest = destination.replace("'", "");
         var lowerLoc = location.toLowerCase();
-        if (location != destination && (spaceDest.toLowerCase().indexOf(lowerLoc) < 0) && (apostDest.toLowerCase().indexOf(lowerLoc))) {
+        if (location != destination && (hyphenDest.toLowerCase().indexOf(lowerLoc) < 0) && (apostDest.toLowerCase().indexOf(lowerLoc))) {
           $(this).hide();
         }
         else {
