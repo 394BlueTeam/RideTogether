@@ -172,7 +172,7 @@ function login(){
     var username = $("input[name=UserNameLogin]").val();
     var password = $("input[name=PasswordLogin]").val();
 
-    Parse.User.logIn(username, password, {
+    Parse.User.logIn(username.toLowerCase(), password, {
        success: function(user){
            console.log("Login succeeded");
            $('#login').modal('hide');

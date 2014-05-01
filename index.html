@@ -64,9 +64,7 @@
                     var num = Math.floor((Math.random()*4)+1);
 
                     var user = new Parse.User();    
-                    user.signUp({username: email, password: password, email: email, 
-                                 Name: name, CarType: cartype, HomeAddress: homeaddress,
-                                 DriverRating: num, Avatar: num}, {
+                    user.signUp({username: email.toLowerCase(), password: password.toLowerCase(), email: email.toLowerCase(), Name: name, CarType: cartype, HomeAddress: homeaddress, DriverRating: num, Avatar: num}, {
                         success: function(rideposter){
                             console.log("save succeeded");
                             alert('Success! To verify your account, please look for an email from "no-reply@parseapps.com" and click the link in the email.');
@@ -165,28 +163,28 @@
                             <form class="form-horizontal" role="form">
                                 <!-- email -->
                                 <div class="form-group">
-                                    <div class="col-sm-10">
+                                    <div class="col-sm-12">
                                         <input type="email" class="form-control" id="email" name="Email" placeholder="Email">
                                     </div>
                                 </div>
 
                                 <!-- password -->
                                 <div class="form-group">
-                                    <div class="col-sm-10">
+                                    <div class="col-sm-12">
                                         <input type="password" class="form-control" id="password" name="Password" placeholder="Password">
                                     </div>
                                 </div>
 
                                 <!-- name -->
                                 <div class="form-group">
-                                    <div class="col-sm-10">
+                                    <div class="col-sm-12">
                                         <input type="text" class="form-control" id="name" name="Name" placeholder="Name">
                                     </div>
                                 </div>
 
                                 <!-- car type -->
                                 <div class="form-group">
-                                    <div class="col-sm-10">
+                                    <div class="col-sm-12">
                                         <select class="form-control" id="seats" name="CarType">
                                             <option>Car Type - choose one only if you plan to offer rides</option>
                                             <option>Sedan</option>
@@ -199,7 +197,7 @@
 
                                 <!-- home address -->
                                 <div class="form-group">
-                                    <div class="col-sm-10">
+                                    <div class="col-sm-12">
                                         <input type="text" class="form-control" id="home" name="HomeAddress" placeholder="Home Address">
                                     </div>
                                 </div>
