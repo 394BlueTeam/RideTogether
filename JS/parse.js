@@ -25,8 +25,8 @@ query.find({
       var costtype = results[i].get('CostType');
       counter += 1;
       // var btn1 = "<a href='#'><i class='fa fa-link btn-email'>  connect with driver</i></a>";
-      // var btn2 = "<a href='#' id='join' onclick='badgesystem();'><i class='fa fa-plus-square btn-sign'>  join ride</i></a>";
-      var btn2 = ""
+      var btn2 = "<a href='#' class='join'><i class='fa fa-plus-square btn-sign'>  join ride</i></a>";
+      // var btn2 = ""
       // var DateTime = date + " " + results[i].get('TravelTime');
       q.append('<div class="ride" data-date="'+tripdate+'" data-time="'+time+'" data-start="'+results[i].get('StartAddress')+'" data-end="'+results[i].get('EndAddress')+'" data-attribute="'+results[i].id+ '"><div class="count">'+counter+'</div><div class="content-shown"><p class="end">'+results[i].get('Destination')+'<span>'+btn2+'</span></p><p class="start"><span>Leaving From: </span>'+results[i].get('StartAddress')+'</p><p class="date"><span>Trip Date: </span>'+tripdate+'</p><p class="time"><span>Time: </span>'+time+'</p><p class="driver"><span>Driver: </span>'+driver+'</p><p class="seats"><span>Available seats: </span>'+seats+'</p><p class="cost"><span>Trip Cost: </span>'+cost+' ('+costtype+')</p><a class="more">click to display more info</a></div><div class="timeline"><div class="waypoint"><div class="circle"></div><p>Start</p></div><div class="line line-drive"><div class="piece"></div><p></p></div><div class="waypoint"><div class="circle"></div><p>Arrive</p></div><div class="line line-dest"><div class="piece"></div><p></p></div><div class="waypoint"><div class="circle"></div><p>Leave</p></div><div class="line line-drive"><div class="piece"></div><p></p></div><div class="waypoint"><div class="circle"></div><p>End</p></div></div></div>');  
     }
@@ -98,6 +98,13 @@ function insertInfo(more, driver, email, seats, sAdd, eAdd, date, TravelTime, De
   return 0;
 }
 
+
+// function customerSupport() {
+//   var query = Parse.Query('User');
+//   var message="Hi "+driver+",%0D%0DI'd like to join your ride from "+sAdd+" to "+Destination+" on "+truncDate +
+//   " at " + TravelTime + " " + ampm + ". Please let me know if I can join.%0D%0DThanks,%0D";
+//   more.html('<a class="join-button" href="mailto:'+email+'?subject=I\'d like to join your ride!&body='+message+'">Join this ride</a>');
+// }
 
 // filter function
 function filter(form) {
@@ -171,22 +178,34 @@ function clearfilter() {
 
 
 // log in
-function login(){
-    var username = $("input[name=UserNameLogin]").val();
-    var password = $("input[name=PasswordLogin]").val();
+function login() {
+  var username = $("input[name=UserNameLogin]").val();
+  var password = $("input[name=PasswordLogin]").val();
+  
+  Parse.User.logIn(username.toLowerCase(), password.toLowerCase(), {
+      success: function(user) {
+        var isVerified = user.get("emailVerified");
+        console.log("Login succeeded");
+        
+        if (isVerified == true) {
+          $('#login').modal('hide');
+          window.location.reload();
+          $('#users').html('<p>Welcome, ' + user.get('Name') + '</p>');
+        }
 
-    Parse.User.logIn(username.toLowerCase(), password, {
-       success: function(user){
-           console.log("Login succeeded");
-           $('#login').modal('hide');
-           window.location.reload();
-           $('#users').html('<p>Welcome, ' + user.get('Name') + '</p>');
-       },
-       error: function(user, error){
-           console.log("Error: ", error);
-           $(".alert").show();
-       },
-    });
+        else if (isVerified == false) {
+          $("#alert2").show();
+          Parse.User.logOut();
+          setTimeout( "jQuery('#login').modal('hide'); window.location.reload();", 8000 );
+        }
+        
+      },
+      error: function(user, error){
+        console.log("Error: ", error);
+        $("#alert3").show();
+        setTimeout( "jQuery('#alert3').hide();", 7000 );
+      },
+  });
 }
 
 
@@ -216,6 +235,7 @@ $(document).ready(function() {
     if(currentUser) {
       var tag = $('#profile');
       var links = $('.links');
+      var link = document.getElementById('post');
       var name = currentUser.get('Name');
       var email = currentUser.get('email');
       var rating = Number(currentUser.get('DriverRating'));
@@ -235,6 +255,19 @@ $(document).ready(function() {
       $('#profile').append('<p class="prompt"><a href="#" onclick="snapper.close();" data-toggle="modal" data-target="#login">Click Here</a> to login in and view your profile</p>');
       $('.links').hide();
     }
+
+    $(link).on('click', function(){
+        var Fname = $("input[name=txtName]").val(name);
+        var Femail = $("input[name=txtEmail]").val(email);
+        var Fhome = $("input[name=txtStartAddress]").val(home);
+    });
+
+    // var frontlink = document.getElementById('front-post');
+    // $(frontlink).on('click', function(){
+    //     var Pname = $("input[name=txtName]").val(name);
+    //     var Pemail = $("input[name=txtEmail]").val(email);
+    //     var Phome = $("input[name=txtStartAddress]").val(home);
+    // });
 });
 
 // function login(){

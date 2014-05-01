@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML Basic 1.1//EN" "http://www.w3.org/TR/xhtml-basic/xhtml-basic11.dtd">
+<!DOCTYPE html>
 <html>
     <head>
         <!-- files to be loaded first -->
@@ -24,10 +24,14 @@
         <script type="text/javascript">
           Parse.initialize("b0jfwJsQkNWPdoKnDgd8KJLufCLWNJpmc5vBTkqr", "X90Jzs3gzKceNOdkFmCle8ZiwsE0HGhyNF4N3Wcj");
             $(document).ready(function() {
+                $('#users').html('<a href="#" data-toggle="modal" data-target="#register">Register</a>' +
+                                     '  |  ' + '<a href="#" data-toggle="modal" data-target="#login">Login</a>');
+
                 var currentUser = Parse.User.current();
+                var verified = currentUser.get('emailVerified');
                 console.log(currentUser);
 
-                if (currentUser) {
+                if (currentUser && verified == true) {
                     $('#users').html('<p>Welcome, ' + currentUser.get('Name') + '    ' +
                         '<a href="#" id="logout" onclick="logout();">Logout</a>' + '</p>');
                 } 
@@ -49,11 +53,13 @@
                 var ending = email.slice(pos, len);     // supposed to be the @u.northw.... ending
 
                 if (email == "") {
-                    $(".alert").show();
+                    $('#alert1').show();
+                    setTimeout( "jQuery('#alert1').hide();", 7000 );
                 }
 
                 else if (ending != end) {
-                    $(".alert").show();
+                    $('#alert1').show();
+                    setTimeout( "jQuery('#alert1').hide();", 7000 );
                 }
 
                 else {
@@ -67,11 +73,22 @@
                     user.signUp({username: email.toLowerCase(), password: password.toLowerCase(), email: email.toLowerCase(), Name: name, CarType: cartype, HomeAddress: homeaddress, DriverRating: num, Avatar: num}, {
                         success: function(rideposter){
                             console.log("save succeeded");
-                            alert('Success! To verify your account, please look for an email from "no-reply@parseapps.com" and click the link in the email.');
-                            $('#register').modal('hide')
+                            $('#register-form').hide();
+                            $('#submit-close').hide();
+                            $('#s-alert1').show();
+                            setTimeout( "jQuery('#register').modal('hide');", 7000 );
                         },
                         error: function(rideposter, error){
                             console.log("Error: ", error);
+                            if (error.code == '202') {
+                                $('#alert4').show();
+                                setTimeout( "jQuery('#alert4').hide();", 7000 );
+                            }
+
+                            if (error.code == '-1') {
+                                $('#alert5').show();
+                                setTimeout( "jQuery('#alert5').hide();", 7000 );
+                            }
                         }
                     });
                 }
@@ -147,7 +164,13 @@
                             <button type="submit" class="btn btn-default" onclick="login();">Login</button>
                             <div class="alert alert-danger">
                                 <strong>Error:</strong> Invalid username and password pair. Please try again.
-                            </div>  
+                            </div>
+                            <div id="alert2" class="alert alert-danger">
+                                <strong>Error:</strong> User's account isn't verified. Please look for an email from "no-reply@parseapps.com" and click the link in the email
+                            </div> 
+                            <div id="alert3" class="alert alert-danger">
+                                <strong>Error:</strong> Invalid login parameters. Please check that you have registered for an account and that your email address has been verified. Then, try again.
+                            </div> 
                         </div>
                     </div>
                 </div>
@@ -160,7 +183,7 @@
 
                         <!-- BODY -->
                         <div class="modal-body">
-                            <form class="form-horizontal" role="form">
+                            <form id="register-form" class="form-horizontal" role="form">
                                 <!-- email -->
                                 <div class="form-group">
                                     <div class="col-sm-12">
@@ -201,16 +224,29 @@
                                         <input type="text" class="form-control" id="home" name="HomeAddress" placeholder="Home Address">
                                     </div>
                                 </div>
-
                             </form>
+
+                            <div id="s-alert1" class="alert alert-success">
+                                <strong>Success!</strong> To verify your account, please look for an email from "no-reply@parseapps.com" and click the link in the email.
+                            </div>
                         </div>
 
                         <!-- FOOTER -->
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-default" onclick="enroll()">Sign Up</button>
-                            <div class="alert alert-danger">
+                            <button type="submit" id="submit-close" class="btn btn-default" onclick="enroll()">Sign Up</button>
+                            <div id="alert1" class="alert alert-danger">
                                 <strong>Error:</strong> Please enter a @u.northwestern.edu email address and try again.
+                            </div>
+                            <div id="alert4" class="alert alert-danger">
+                                <strong>Error:</strong> Username/email is already registered 
+                                <ul style="text-align: left; padding-left: 15px; ">
+                                    <li><strong>Forgot your password? </strong><a href="#">Click here</a> to send it to your email address</li>
+                                    <li><strong>Not your account? </strong>If you have reason to believe an account was falsely created under your name, <a href="#">contact us here</a></li>
+                                </ul>
+                            </div>
+                            <div id="alert5" class="alert alert-danger">
+                                <strong>Error:</strong> Please enter a password
                             </div>
                         </div>
                     </div>

@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML Basic 1.1//EN" "http://www.w3.org/TR/xhtml-basic/xhtml-basic11.dtd">
+<!DOCTYPE html>
 <html>
     <head>
         <!-- files to be loaded first -->
@@ -19,9 +19,9 @@
         <link rel="stylesheet" href="Plugins/FontAwesome/css/font-awesome.min.css" />
         <link rel="stylesheet" href="Plugins/Bootstrap/css/bootstrap.min.css">
 
+        <script type="text/javascript" src="JS/autocomplete.js"></script>
         <script type='application/javascript' src='JS/fastclick.js'></script>
         <script type="text/javascript" src="Plugins/Bootstrap/js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="JS/autocomplete.js"></script>
         <script type="text/javascript" src="JS/timeline.js"></script>
 
         <script type="text/javascript">
@@ -30,9 +30,23 @@
             var origin;
             var destination;
 
-
             function enroll(frm){
-              if (frm.txtName.value == "")
+              var email = $("input[name=txtEmail]").val();
+              var end = "@u.northwestern.edu";
+              var len = email.length;                 // length of inputted email
+              var len2 = end.length;                  // length of u.northw.....
+              var pos = len - len2;                   // start of slice - the part with @u.....
+              var ending = email.slice(pos, len);     // supposed to be the @u.northw.... ending
+
+              if (email == "") {
+                alert("Please enter a valid u.northwestern.edu email address");
+              }
+
+              else if (ending != end) {
+                alert("Please enter a valid u.northwestern.edu email address");
+              }
+
+              else if (frm.txtName.value == "")
                   alert("Required field");
               else if (frm.txtOpenSeats.value == "")
                   alert("Required field");
@@ -141,7 +155,7 @@
 
         <!-- POST RIDE FORM -->
         <div class="signup">
-            <form class="form-horizontal" role="form">
+            <form class="form-horizontal" role="form" id="postrideForm">
                 <!-- name -->
                 <div class="form-group">
                     <label for="name" class="col-sm-2 control-label">Name</label>
