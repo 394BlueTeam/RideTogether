@@ -112,7 +112,7 @@ function filter(form) {
         var hyphenDest = destination.replace('-', " ");
         var apostDest = destination.replace("'", "");
         var lowerLoc = location.toLowerCase();
-        if (location != destination && (hyphenDest.toLowerCase().indexOf(lowerLoc) < 0) && (apostDest.toLowerCase().indexOf(lowerLoc))) {
+        if (location != destination && (hyphenDest.toLowerCase().indexOf(lowerLoc) < 0) && (apostDest.toLowerCase().indexOf(lowerLoc) < 0)) {
           $(this).hide();
         }
         else {
