@@ -1,9 +1,9 @@
 //var destinationIcon = 'https://chart.googleapis.com/chart?chst=d_map_pin_letter&chld=D|FF0000|000000';
 //var originIcon = 'https://chart.googleapis.com/chart?chst=d_map_pin_letter&chld=O|FFFF00|000000';
 
-function calculateDistances(origin, destination, destTime) {
-  console.log(origin)
-  console.log(destination)
+function calculateDistances(obj, origin, destination, destTime) {
+
+
   var service = new google.maps.DistanceMatrixService();
   service.getDistanceMatrix(
     {
@@ -13,10 +13,10 @@ function calculateDistances(origin, destination, destTime) {
       unitSystem: google.maps.UnitSystem.METRIC,
       avoidHighways: false,
       avoidTolls: false
-    }, function (response, status){callback(response, status, destTime)});
+    }, function (response, status){callback(obj, response, status, destTime)});
 }
 
-function callback(response, status, destTime) {
+function callback(obj, response, status, destTime) {
   if (status != google.maps.DistanceMatrixStatus.OK) {
     alert('Error was: ' + status);
     return
@@ -35,18 +35,19 @@ function callback(response, status, destTime) {
       }
     }
     totaltime = Math.round(totaltime)
-    drawTimeline(destTime, totaltime);
+    drawTimeline(obj, destTime, totaltime);
     $(window).resize(function(){
-            drawTimeline(destTime, totaltime);
+            drawTimeline(obj, destTime, totaltime);
         });
   }
 }
 
 
 
-function drawTimeline(destTime, rideTime){
-    var timeline = $('.timeline');
-    var screenWidth = $('.timeline').width();
+function drawTimeline(obj, destTime, rideTime){
+    console.log(obj.attr('data-time'))
+    var timeline = obj.find('.timeline');
+    var screenWidth = obj.find('.timeline').width();
     if (screenWidth > 795){
         screenWidth = 795;
     }
@@ -62,11 +63,11 @@ function drawTimeline(destTime, rideTime){
     var driveWidth = rideTime/fullTime;
 
 
-    $('.line-drive').css('width',  (timeWidth*driveWidth)-1+'px')
-    $('.line-dest').css('width',  (destWidth*timeWidth)-1+'px')
+    obj.find('.line-drive').css('width',  (timeWidth*driveWidth)-1+'px')
+    obj.find('.line-dest').css('width',  (destWidth*timeWidth)-1+'px')
 
-    $('.line-drive p').html(""+rideTime+' mins');
-    $('.line-dest p').html(""+destTime+' mins');
+    obj.find('.line-drive p').html(""+rideTime+' mins');
+    obj.find('.line-dest p').html(""+destTime+' mins');
 
 }
 
