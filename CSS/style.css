@@ -494,7 +494,32 @@ h2, p, ol, ul, li {
 /* ------------------------------ POST RIDE  ------------------------------- */
 /* ========================================================================= */
 
+#register-form-post{
+    display: none;
+    overflow: hidden;
+        float: right;
+}
 
+#login-form-post, #register-form-post{
+    margin: 0 auto;
+    max-width:800px; 
+}
+
+#register-form-post .col-sm-10{
+    margin-bottom: 10px;
+}
+#register-form-post h2{
+    display: inline-block;
+    width: auto;
+}
+
+#register-form-post .col-sm-offset-2.col-sm-10{
+    margin-left: 0;
+}
+
+#login-form-post{
+    display: none;
+}
 
 /* ------------------------------- SIDEBAR  -------------------------------- */
 /* ========================================================================= */
@@ -721,3 +746,6 @@ h2, p, ol, ul, li {
     text-align: center;
     width: 100%;
 }
+
+
+

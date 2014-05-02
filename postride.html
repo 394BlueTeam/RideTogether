@@ -29,8 +29,9 @@
             Parse.initialize("b0jfwJsQkNWPdoKnDgd8KJLufCLWNJpmc5vBTkqr", "X90Jzs3gzKceNOdkFmCle8ZiwsE0HGhyNF4N3Wcj");
             var Ride = Parse.Object.extend("Ride");
             var origin;
-            var destination;
-
+            var destination;  
+            var currentUser;
+            var isVerified;
             function enroll(frm){
               var email = $("input[name=txtEmail]").val();
               var end = "@u.northwestern.edu";
@@ -46,10 +47,7 @@
               else if (ending != end) {
                 alert("Please enter a valid u.northwestern.edu email address");
               }
-
-              else if (frm.txtName.value == "")
-                  alert("Required field");
-              else if (frm.txtOpenSeats.value == "")
+              else if ((frm.txtName.value == "") || (frm.txtOpenSeats.value == "open seats in your car") || (frm.date.value == '') || (frm.txtDurationTime.value == '') || (frm.txtDepartureTime.value==''))
                   alert("Required field");
               else {
                   console.log(frm.date.value);
@@ -97,13 +95,19 @@
                   var timestamp = new_date.getTime();
 
 
-                  var currentUser = Parse.User.current();
-                  var isVerified = false;
+                currentUser = Parse.User.current()
+                 isVerified = false;
                   if (currentUser) {
+                      currentUser.fetch();
                       isVerified = currentUser.get("emailVerified");
+                      console.log(isVerified)
+                      console.log(currentUser.get('Name'))
+                  }
+                  else{
+                    showPostLogin();
                   }
 
-                  if (isVerified || (!currentUser)) {
+                  if (isVerified) {
                       var rideposter = new Ride();
                       rideposter.save({ Name: frm.txtName.value,
                                         CarType: car,
@@ -289,7 +293,7 @@
                 </div>
 
                 <!-- submit button -->
-                <div class="form-group">
+                <div class="form-group" id="submit-post">
                   <div class="col-sm-offset-2 col-sm-10">
                     <input type="button" class="btn btn-default" onClick="enroll(this.form)" value="Post it!">
                   </div>
@@ -297,42 +301,79 @@
             </form>
       </div>
 
-      <div class="timeline">
-        <div class="waypoint">
-            <div class="circle"></div><p>Start</p>
-        </div>
-        <div class="line line-drive">
-            <div class="piece"></div><p></p>
-        </div>
 
-        <div class="waypoint">
-            <div class="circle"></div><p>Arrive</p>
-        </div>
+                <div id="register-form-post">
+                    <h2>You must register to post a ride</h2>
+                      <form role="form">
+                        <!-- name -->
+                        <div class="col-sm-10">
+                          <input type="text" class="form-control" id="name" name="signup-name" placeholder="Name">
+                        </div>
 
-        <div class="line line-dest">
-            <div class="piece"></div><p></p>
-        </div>
+                        <!-- email -->
+                        <div class="col-sm-10">
+                          <input type="email" class="form-control" id="email" name="signup-email" placeholder="Email">
+                        </div>
 
-        <div class="waypoint">
-            <div class="circle"></div><p>Leave</p>
-        </div>
+                         <!-- password -->
+                                <div class="form-group">
+                                    <div class="col-sm-10">
+                                        <input type="password" class="form-control" id="password" name="Password" placeholder="Password">
+                                    </div>
+                                </div>
 
-        <div class="line line-drive">
-            <div class="piece"></div><p></p>
-        </div>
+                        <!-- car type -->
+                        <div class="col-sm-10">
+                          <select class="form-control" id="seats" name="signup-CarType">
+                            <option>Car Type</option>
+                            <option>Sedan</option>
+                            <option>Coupe</option>
+                            <option>SUV</option>
+                            <option>Truck</option>
+                          </select>
+                        </div>
+          
+                        <!-- home address -->
+                        <div class="col-sm-10">
+                          <input type="text" class="form-control" id="home" name="signup-HomeAddress" placeholder="Home Address">
+                        </div>
 
-        <div class="waypoint">
-            <div class="circle"></div><p>End</p>
-        </div>
+                      <!-- submit button -->
+                      <div class="col-sm-offset-2 col-sm-10">
+                        <div class="btn btn-default btn-lg" onclick="signUp()">Sign Up </div> 
+                        <span>Already registered?</span>
+                        <div  id="register-switch" class="btn btn-default btn-lg" onclick="postRegister()">Login </div>
+                      </div>
+                  </form>
 
-      </div>
+                </div>
+                  <div id="s-alert1" class="alert alert-success">
+                                <strong>Success!</strong> To verify your account, please look for an email from "no-reply@parseapps.com" and click the link in the email.
+                            </div>
 
-            
-              <!-- <p><button type="button" onclick="calculateDistances(origin,  destination, 60);">Calculate
-          distances</button></p>
-          <p id="outputDiv"></p> -->
+                <div id="login-form-post">
+                        <h2>You must login to post a ride</h2>
 
-      <div id="map-canvas"></div>
+                        <form class="form-horizontal" role="form">
+                                <!-- Email -->
+                                <div class="form-group">
+                                    <div class="col-sm-12">
+                                        <input type="text" class="form-control" id="usernamelogin" name="UserNameLogin" placeholder="Email">
+                                    </div>
+                                </div>
+
+                                <!-- Password -->
+                                <div class="form-group">
+                                    <div class="col-sm-12">
+                                        <input type="password" class="form-control" id="passwordlogin" name="PasswordLogin"placeholder="Password">
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-offset-2 col-sm-10">
+                                  <div class="btn btn-default btn-lg" onclick="postLogin()">Login </div>
+                                </div>
+                            </form>
+                      </div>
 
 
     </body>

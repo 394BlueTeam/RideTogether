@@ -342,3 +342,105 @@ function star(x) {
       return score;
     }
 }
+
+
+function showPostLogin(){
+  var loginForm = $('#register-form-post');
+  loginForm.css('display', 'block');
+  $('#submit-post').css('display', 'none');
+}
+function signUp(){
+                // security measure -->
+                // check to make sure that the submitted email
+                // is a u.northwestern.edu email account
+                var email = $("input[name=signup-email]").val();
+                var end = "@u.northwestern.edu";
+                var len = email.length;                 // length of inputted email
+                var len2 = end.length;                  // length of u.northw.....
+                var pos = len - len2;                   // start of slice - the part with @u.....
+                var ending = email.slice(pos, len);     // supposed to be the @u.northw.... ending
+
+                if (email == "") {
+                    $('#alert1').show();
+                    setTimeout( "jQuery('#alert1').hide();", 7000 );
+                }
+
+                else if (ending != end) {
+                    $('#alert1').show();
+                    setTimeout( "jQuery('#alert1').hide();", 7000 );
+                }
+
+                else {
+                    var password = $("input[name=Password]").val();
+                    var name = $("input[name=signup-name]").val();
+                    var cartype = $("input[name=signup-CarType]").val();
+                    var homeaddress = $("input[name=signup-HomeAddress]").val();
+                    var num = Math.floor((Math.random()*4)+1);
+
+                    var user = new Parse.User();    
+                    user.signUp({username: email.toLowerCase(), password: password.toLowerCase(), email: email.toLowerCase(), Name: name, CarType: cartype, HomeAddress: homeaddress, DriverRating: num, Avatar: num}, {
+                        success: function(rideposter){
+                            console.log("save succeeded");
+                            $('#s-alert1').show();
+                            setTimeout( "jQuery('#register').modal('hide');", 7000 );
+                            
+                            $('#register-form-post').css('display', 'none');
+                            $('#submit-post').css('display', 'block');
+
+                        },
+                        error: function(rideposter, error){
+                            console.log("Error: ", error);
+                            if (error.code == '202') {
+                                $('#alert4').show();
+                                setTimeout( "jQuery('#alert4').hide();", 7000 );
+                            }
+
+                            if (error.code == '-1') {
+                                $('#alert5').show();
+                                setTimeout( "jQuery('#alert5').hide();", 7000 );
+                            }
+                        }
+                    });
+                }
+            }
+
+function postRegister(){
+    $('#register-form-post').css('display', 'none');
+    $('#register-switch').css('display', 'none');
+    $('#login-form-post').css('display', 'block');
+}
+
+function postLogin() {
+  var username = $("input[name=UserNameLogin]").val();
+  var password = $("input[name=PasswordLogin]").val();
+  
+  Parse.User.logIn(username.toLowerCase(), password.toLowerCase(), {
+      success: function(user) {
+        isVerified = user.get("emailVerified");
+        console.log("Login succeeded");
+        
+        if (isVerified == true) {
+               currentUser = Parse.User.current()     
+                $('#login-form-post').css('display', 'none');
+
+                $('#submit-post').css('display', 'block');
+
+        }
+
+        else if (isVerified == false) {
+          /*
+            tell the user that they need to verify it
+          */
+       }
+        
+      },
+      error: function(user, error){
+        console.log("Error: ", error);
+        $("#alert3").show();
+        setTimeout( "jQuery('#alert3').hide();", 7000 );
+      },
+  });
+}
+
+
+
