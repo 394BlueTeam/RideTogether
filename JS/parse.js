@@ -26,23 +26,23 @@ query.find({
       var destination = results[i].get('Destination');
       var dest = destination.split(',').slice(0,3).join();
       var start = results[i].get('StartAddress');
+      var star = start.split(',').slice(0,2).join();
       var end = results[i].get('EndAddress');
       var truncDate = String(tripdate);
       truncDate = truncDate.substr(0, 15);
       counter += 1;
       // var btn1 = "<a href='#'><i class='fa fa-link btn-email'>  connect with driver</i></a>";
-      var message="Hi "+driver+",%0D%0DI'd like to join your ride from "+start+" to "+destination+" on "+truncDate +" at " + time + " " + am_pm + ". Please let me know if I can join.%0D%0DThanks,%0D";
-      var btn2 = "<a href='mailto:"+email+"?subject=I'd like to join your ride!&body="+message+" class='join'><span><i class='fa fa-plus-square btn-sign'></i>  join ride</span></a>";
+      var message="Hi "+driver+",%0D%0DI'd like to join your ride from "+start.split(',').slice(0,3).join()+" to "+destination.split(',').slice(0,3).join()+" on "+truncDate +" at " + time +". Please let me know if I can join.%0D%0DThanks,%0D";
+      var btn2 = '<a href="mailto:'+email+'?subject=RideTogether - Id like to join your ride!&body='+message+'" class="join"><span><i class="fa fa-share-square-o"></i> join ride</span></a>';
       // var DateTime = date + " " + results[i].get('TravelTime'); 
-
-      q.append('<div class="ride" data-date="'+tripdate+'" data-time="'+time+'" data-start="'+start+'" data-end="'+end+'" data-attribute="'+results[i].id+ '"><div class="count">'+counter+'</div><div class="content-shown"><p class="end">'+dest+'<span>'+btn2+'</span></p><p class="start"><span>Leaving From: </span>'+start+'</p><p class="date"><span>Trip Date: </span>'+tripdate+'</p><p class="time"><span>Time: </span>'+time+'</p><p class="driver"><span>Driver: </span>'+driver+'</p><p class="seats"><span>Available seats: </span>'+seats+'</p><p class="cost"><span>Trip Cost: </span>'+cost+' ('+costtype+')</p><a class="more">click to display more info</a></div><div class="timeline"><div class="waypoint"><div class="circle"></div><p>Start</p></div><div class="line line-drive"><div class="piece"></div><p></p></div><div class="waypoint"><div class="circle"></div><p>Arrive</p></div><div class="line line-dest"><div class="piece"></div><p></p></div><div class="waypoint"><div class="circle"></div><p>Leave</p></div><div class="line line-drive"><div class="piece"></div><p></p></div><div class="waypoint"><div class="circle"></div><p>End</p></div></div></div>');  
+      q.append('<div class="ride" data-date="'+tripdate+'" data-time="'+time+'" data-start="'+start+'" data-end="'+destination+'" data-attribute="'+results[i].id+ '"><div class="count">'+counter+'</div><div class="content-shown"><p class="end">'+dest+'<span>'+btn2+'</span></p><p class="start"><span>Leaving From: </span>'+start+'</p><p class="date"><span>Trip Date: </span>'+tripdate+'</p><p class="time"><span>Time: </span>'+time+'</p><p class="driver"><span>Driver: </span>'+driver+'</p><p class="seats"><span>Available seats: </span>'+seats+'</p><p class="cost"><span>Trip Cost: </span>'+cost+' ('+costtype+')</p><a class="more">click to display more info</a></div><div class="timeline"><div class="waypoint"><div class="circle"></div><p>Start</p></div><div class="line line-drive"><div class="piece"></div><p></p></div><div class="waypoint"><div class="circle"></div><p>Arrive</p></div><div class="line line-dest"><div class="piece"></div><p></p></div><div class="waypoint"><div class="circle"></div><p>Leave</p></div><div class="line line-drive"><div class="piece"></div><p></p></div><div class="waypoint"><div class="circle"></div><p>End</p></div></div></div>');  
     }
 
 
     $('.ride').click( function(){
       var id = $(this).attr('data-attribute');
       var info = $(this).find('.content-hidden');
-      var join = $(this).find('.join');
+      // var join = $(this).find('.join');
       var s = $(this).attr('data-start');
       var e = $(this).attr('data-end');
       // console.log(s)
@@ -50,7 +50,7 @@ query.find({
       // console.log('#######')
 
       //if for some reason we end up with undefined variables
-      if(!id || !info) {
+      if(!id) {
         console.log("Error: could not set id or info variables.");
         return;
       }
@@ -64,7 +64,8 @@ query.find({
         //$(this).css('background-color', 'white');
         query.get(id, {
           success: function(object) {
-            insertInfo(more, object.get('Name'), object.get('Email'), object.get('OpenSeats'), object.get('StartAddress'), object.get('EndAddress'), object.get('Date'), object.get('TravelTime'), object.get('Destination'), object.get('DepartureAMPM'));
+            // insertInfo(more, object.get('Name'), object.get('Email'), object.get('OpenSeats'), object.get('StartAddress'), object.get('EndAddress'), object.get('Date'), object.get('TravelTime'), object.get('Destination'), object.get('DepartureAMPM'));
+            console.log('success');
           },
           error: function(object, error) {
             console.log('error')
