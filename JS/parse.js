@@ -26,11 +26,10 @@ query.find({
       var destination = results[i].get('Destination');
       var dest = destination.split(',').slice(0,2).join();
       counter += 1;
-      // var btn1 = "<a href='#'><i class='fa fa-link btn-email'>  connect with driver</i></a>";
+
       var btn2 = "<a href='#' class='join'><i class='fa fa-plus-square btn-sign'>  join ride</i></a>";
-      // var btn2 = ""
-      // var DateTime = date + " " + results[i].get('TravelTime');
-      q.append('<div class="ride" data-date="'+tripdate+'" data-time="'+time+'" data-start="'+results[i].get('StartAddress')+'" data-end="'+results[i].get('EndAddress')+'" data-attribute="'+results[i].id+ '"><div class="count">'+counter+'</div><div class="content-shown"><p class="end">'+dest+'<span>'+btn2+'</span></p><p class="start"><span>Leaving From: </span>'+results[i].get('StartAddress')+'</p><p class="date"><span>Trip Date: </span>'+tripdate+'</p><p class="time"><span>Time: </span>'+time+'</p><p class="driver"><span>Driver: </span>'+driver+'</p><p class="seats"><span>Available seats: </span>'+seats+'</p><p class="cost"><span>Trip Cost: </span>'+cost+' ('+costtype+')</p><a class="more">click to display more info</a></div><div class="timeline"><div class="waypoint"><div class="circle"></div><p>Start</p></div><div class="line line-drive"><div class="piece"></div><p></p></div><div class="waypoint"><div class="circle"></div><p>Arrive</p></div><div class="line line-dest"><div class="piece"></div><p></p></div><div class="waypoint"><div class="circle"></div><p>Leave</p></div><div class="line line-drive"><div class="piece"></div><p></p></div><div class="waypoint"><div class="circle"></div><p>End</p></div></div></div>');  
+
+      q.append('<div class="ride" data-date="'+tripdate+'" data-time="'+time+'" data-start="'+results[i].get('StartAddress')+'" data-end="'+results[i].get('Destination')+'" data-attribute="'+results[i].id+ '"><div class="count">'+counter+'</div><div class="content-shown"><p class="end">'+dest+'<span>'+btn2+'</span></p><p class="start"><span>Leaving From: </span>'+results[i].get('StartAddress')+'</p><p class="date"><span>Trip Date: </span>'+tripdate+'</p><p class="time"><span>Time: </span>'+time+'</p><p class="driver"><span>Driver: </span>'+driver+'</p><p class="seats"><span>Available seats: </span>'+seats+'</p><p class="cost"><span>Trip Cost: </span>'+cost+' ('+costtype+')</p><a class="more">click to display more info</a></div><div class="timeline"><div class="waypoint"><div class="circle"></div><p>Start</p></div><div class="line line-drive"><div class="piece"></div><p></p></div><div class="waypoint"><div class="circle"></div><p>Arrive</p></div><div class="line line-dest"><div class="piece"></div><p></p></div><div class="waypoint"><div class="circle"></div><p>Leave</p></div><div class="line line-drive"><div class="piece"></div><p></p></div><div class="waypoint"><div class="circle"></div><p>End</p></div></div></div>');  
     }
 
 
@@ -67,7 +66,7 @@ query.find({
 
       if (s != 'undefined'){
         if (e != 'undefined'){
-          calculateDistances(s,e,30)
+          calculateDistances($(this),s,e,30)
           $(this).find('.timeline').toggle();
         }
         else{
