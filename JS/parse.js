@@ -23,12 +23,14 @@ query.find({
       var seats = results[i].get('OpenSeats');
       var cost = results[i].get('TripCost');
       var costtype = results[i].get('CostType');
+      var destination = results[i].get('Destination');
+      var dest = destination.split(',').slice(0,2).join();
       counter += 1;
       // var btn1 = "<a href='#'><i class='fa fa-link btn-email'>  connect with driver</i></a>";
       var btn2 = "<a href='#' class='join'><i class='fa fa-plus-square btn-sign'>  join ride</i></a>";
       // var btn2 = ""
       // var DateTime = date + " " + results[i].get('TravelTime');
-      q.append('<div class="ride" data-date="'+tripdate+'" data-time="'+time+'" data-start="'+results[i].get('StartAddress')+'" data-end="'+results[i].get('EndAddress')+'" data-attribute="'+results[i].id+ '"><div class="count">'+counter+'</div><div class="content-shown"><p class="end">'+results[i].get('Destination')+'<span>'+btn2+'</span></p><p class="start"><span>Leaving From: </span>'+results[i].get('StartAddress')+'</p><p class="date"><span>Trip Date: </span>'+tripdate+'</p><p class="time"><span>Time: </span>'+time+'</p><p class="driver"><span>Driver: </span>'+driver+'</p><p class="seats"><span>Available seats: </span>'+seats+'</p><p class="cost"><span>Trip Cost: </span>'+cost+' ('+costtype+')</p><a class="more">click to display more info</a></div><div class="timeline"><div class="waypoint"><div class="circle"></div><p>Start</p></div><div class="line line-drive"><div class="piece"></div><p></p></div><div class="waypoint"><div class="circle"></div><p>Arrive</p></div><div class="line line-dest"><div class="piece"></div><p></p></div><div class="waypoint"><div class="circle"></div><p>Leave</p></div><div class="line line-drive"><div class="piece"></div><p></p></div><div class="waypoint"><div class="circle"></div><p>End</p></div></div></div>');  
+      q.append('<div class="ride" data-date="'+tripdate+'" data-time="'+time+'" data-start="'+results[i].get('StartAddress')+'" data-end="'+results[i].get('EndAddress')+'" data-attribute="'+results[i].id+ '"><div class="count">'+counter+'</div><div class="content-shown"><p class="end">'+dest+'<span>'+btn2+'</span></p><p class="start"><span>Leaving From: </span>'+results[i].get('StartAddress')+'</p><p class="date"><span>Trip Date: </span>'+tripdate+'</p><p class="time"><span>Time: </span>'+time+'</p><p class="driver"><span>Driver: </span>'+driver+'</p><p class="seats"><span>Available seats: </span>'+seats+'</p><p class="cost"><span>Trip Cost: </span>'+cost+' ('+costtype+')</p><a class="more">click to display more info</a></div><div class="timeline"><div class="waypoint"><div class="circle"></div><p>Start</p></div><div class="line line-drive"><div class="piece"></div><p></p></div><div class="waypoint"><div class="circle"></div><p>Arrive</p></div><div class="line line-dest"><div class="piece"></div><p></p></div><div class="waypoint"><div class="circle"></div><p>Leave</p></div><div class="line line-drive"><div class="piece"></div><p></p></div><div class="waypoint"><div class="circle"></div><p>End</p></div></div></div>');  
     }
 
 
@@ -172,6 +174,7 @@ function clearfilter() {
     $('#filter-location').val('');
     $('#filter-time').val('');
     $('#filter-date').val('');
+    $( ".count" ).show();
     $( ".ride" ).show();
   }
 }
@@ -230,24 +233,44 @@ function notify() {
 // with the pertinent information
 
 $(document).ready(function() {
+    // $('#users').html('<a href="#" data-toggle="modal" data-target="#register">Register</a>' +
+                                     // '  |  ' + '<a href="#" data-toggle="modal" data-target="#login">Login</a>');
     var currentUser = Parse.User.current();
     // console.log(currentUser);
     if(currentUser) {
-      var tag = $('#profile');
-      var links = $('.links');
-      var link = document.getElementById('post');
-      var name = currentUser.get('Name');
-      var email = currentUser.get('email');
-      var rating = Number(currentUser.get('DriverRating'));
-      var num = currentUser.get('Avatar');
-      var home = currentUser.get('HomeAddress');
+      var verified = currentUser.get('emailVerified');
 
-      var one = '<h3 class="profile-name">'+name+'</h3>';
-      var two = '<div class="rating">'+star(rating)+'</div>';
-      var three = '<p class="sub-title">'+home+'</p>';
-      var four = '<p class="sub-title">'+email+'</p>';
-      tag.append(one+three+two);
-      $('.avatar').append('<img src="Images/'+num+'.png" class="img-circle" />');
+      if (verified == true) {
+        console.log("user verified");
+        var tag = $('#profile');
+        var links = $('.links');
+        var link = document.getElementById('post');
+        var name = currentUser.get('Name');
+        var email = currentUser.get('email');
+        var rating = Number(currentUser.get('DriverRating'));
+        var num = currentUser.get('Avatar');
+        var home = currentUser.get('HomeAddress');
+        var car = currentUser.get('CarType');
+
+        var one = '<h3 class="profile-name">'+name+'</h3>';
+        var two = '<div class="rating">'+star(rating)+'</div>';
+        var three = '<p class="sub-title">'+home+'</p>';
+        var four = '<p class="sub-title">'+email+'</p>';
+        tag.append(one+three+two);
+        $('.avatar').append('<img src="Images/'+num+'.png" class="img-circle" />'); 
+      }
+
+      else {
+        $('.avatar').hide();
+        $('#profile').append('<p class="prompt">Please verify your account</p>');
+        $('.links').hide();
+      }
+
+      // autofill forms since the user is already logged in
+      $("input[name=txtName]").val(name);
+      $("input[name=txtEmail]").val(email);
+      $("input[name=txtStartAddress]").val(home);
+      $("#type").val(car);
     }
 
     else if(!currentUser) {
@@ -255,12 +278,6 @@ $(document).ready(function() {
       $('#profile').append('<p class="prompt"><a href="#" onclick="snapper.close();" data-toggle="modal" data-target="#login">Click Here</a> to login in and view your profile</p>');
       $('.links').hide();
     }
-
-    $(link).on('click', function(){
-        var Fname = $("input[name=txtName]").val(name);
-        var Femail = $("input[name=txtEmail]").val(email);
-        var Fhome = $("input[name=txtStartAddress]").val(home);
-    });
 
     // var frontlink = document.getElementById('front-post');
     // $(frontlink).on('click', function(){

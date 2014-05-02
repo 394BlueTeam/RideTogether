@@ -23,6 +23,7 @@
         <script type='application/javascript' src='JS/fastclick.js'></script>
         <script type="text/javascript" src="Plugins/Bootstrap/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="JS/timeline.js"></script>
+        <script type="text/javascript" src="JS/parse.js"></script>
 
         <script type="text/javascript">
             Parse.initialize("b0jfwJsQkNWPdoKnDgd8KJLufCLWNJpmc5vBTkqr", "X90Jzs3gzKceNOdkFmCle8ZiwsE0HGhyNF4N3Wcj");
@@ -53,6 +54,7 @@
               else {
                   console.log(frm.date.value);
                   var date = new Date(frm.date.value);
+                  var car = $("input[name=CarType]").val();
 
                   var startPoint = new Parse.GeoPoint({
                                        latitude: parseFloat(frm.txtStartPointLat.value),
@@ -104,6 +106,7 @@
                   if (isVerified || (!currentUser)) {
                       var rideposter = new Ride();
                       rideposter.save({ Name: frm.txtName.value,
+                                        CarType: car,
                                         OpenSeats: Number(frm.txtOpenSeats.value),
                                         TravelTime: frm.txtDepartureTime.value,
                                         Email: frm.txtEmail.value,
@@ -172,12 +175,26 @@
                     </div>
                 </div>
 
+                <!-- car type -->
+                <div class="form-group">
+                    <label for="type" class="col-sm-2 control-label" id="openseats">Car Type</label>
+                    <div class="col-sm-7">
+                        <select class="form-control" id="type" name="CarType">
+                            <option>size of your car</option>
+                            <option>Sedan</option>
+                            <option>Coupe</option>
+                            <option>SUV</option>
+                            <option>Truck</option>
+                        </select>
+                    </div>  
+                </div>
+
                 <!-- open seats -->
                 <div class="form-group">
                     <label for="seats" class="col-sm-2 control-label" id="openseats">Open Seats</label>
-                    <div class="col-xs-6">
+                    <div class="col-xs-7">
                       <select class="form-control" id="seats" name="txtOpenSeats">
-                        <option>Open seats in your car</option>
+                        <option>open seats in your car</option>
                         <option>1</option>
                         <option>2</option>
                         <option>3</option>

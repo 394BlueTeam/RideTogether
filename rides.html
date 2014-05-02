@@ -13,7 +13,6 @@
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
         <title>RideTogether</title>
-
         <link rel="stylesheet" href="CSS/mobile.css" media="handheld,only screen and (max-device-width:480px)" />
         <link rel="stylesheet" href="CSS/core.css" media="screen" />
         <link rel="stylesheet" href="Plugins/FontAwesome/css/font-awesome.min.css" />
@@ -28,104 +27,106 @@
 
         <script type="text/javascript">
           Parse.initialize("b0jfwJsQkNWPdoKnDgd8KJLufCLWNJpmc5vBTkqr", "X90Jzs3gzKceNOdkFmCle8ZiwsE0HGhyNF4N3Wcj");
+            $(document).ready(function() {
+                autoComplete();
+            });
+
             var Ride = Parse.Object.extend("Ride");
             var origin;
             var destination;
 
 
-            function enroll(frm){
-              if (frm.txtName.value == "")
-                  alert("Required field");
-              else if (frm.txtOpenSeats.value == "")
-                  alert("Required field");
+            function enroll(frm) {
+              var name = $("input[name=txtName]").val();
+              var email = $("input[name=txtEmail]").val();
+              var seats = $("input[name=txtOpenSeats]").val();
+              var start = $("input[name=txtStartAddress]").val();
+              var end = $("input[name=txtDestination]").val();
+              var departure = $("input[name=txtDepartureTime]").val();
+              var seats = $("input[name=txtOpenSeats]").val();
+              var duration = $("input[name=txtDurationTime]").val();
+              var durselect = $("input[name=durselect]:checked").val();
+              var cost = $("input[name=tripcost]").val();
+              var costtype = $("input[name=costtype]:checked").val(); 
+              var date = $("input[name=date]").val();
+              var startPointLat = $("input[name=txtStartPointLat]").val();
+              var startPointLong = $("input[name=txtStartPointLng]").val();
+              var endPointLat = $("input[name=txtEndPointLat]").val();
+              var endPointLong = $("input[name=txtEndPointLng]").val();
+
+
+              if (name == "" || seats == "") {
+                alert("Required field");
+              } 
+
               else {
-                  console.log(frm.date.value);
-                  var date = new Date(frm.date.value);
+                  // console.log(date);
+                  var realdate = new Date(date);
 
                   var startPoint = new Parse.GeoPoint({
-                                       latitude: parseFloat(frm.txtStartPointLat.value),
-                                       longitude: parseFloat(frm.txtStartPointLng.value)
+                                       latitude: parseFloat(startPointLat),
+                                       longitude: parseFloat(startPointLong)
                                    });
                   var endPoint = new Parse.GeoPoint({
-                                     latitude: parseFloat(frm.txtEndPointLat.value),
-                                     longitude: parseFloat(frm.txtEndPointLng.value)
+                                     latitude: parseFloat(endPointLat),
+                                     longitude: parseFloat(endPointLong)
                                    });
   
                   var durationRes, departureRes;
-                  var durationStr = frm.txtDurationTime.value;
-                  var departureStr = frm.txtDepartureTime.value;
-                  var datestr = frm.date.value;
-                  var datevals = datestr.split('-');
-                  var durselect = $("input[name=durselect]:checked").val();
-                  var cost = $("input[name=costtype]:checked").val();                 
-                   // console.log(durselect);
+                  var datestr = date
+                  var datevals = date.split('-');
+                                  
+                  // console.log(durselect);
 
-                  durationRes = durationStr.split(":");
-                  departureRes = departureStr.split(":");
-                  
-
-                  if(durselect == 'PM')
-                  {
-                    if(departureRes[0] != 12)
-                    {
+                  durationRes = duration.split(":");
+                  departureRes = departure.split(":");
+                  if (durselect == 'PM') {
+                    if(departureRes[0] != 12) {
                       departureRes[0] = 12 + Number(departureRes[0]);
                     }
                   }
-                  else
-                  {
-                    if(Number(departureRes[0]) == 12)
-                    {
+                  else {
+                    if(Number(departureRes[0]) == 12) {
                       departureRes[0] = 0;
                     }
                   }
-                  console.log(departureRes[0]);
+                  // console.log(departureRes[0]);
 
                   var new_date = new Date(Number(datevals[0]), Number(datevals[1]) - 1, Number(datevals[2]), departureRes[0], departureRes[1]);
                   var timestamp = new_date.getTime();
-
-
-                  var currentUser = Parse.User.current();
-                  var isVerified = false;
-                  if (currentUser) {
-                      isVerified = currentUser.get("emailVerified");
-                  }
-
-                  if (isVerified || (!currentUser)) {
-                      var rideposter = new Ride();
-                      rideposter.save({ Name: frm.txtName.value,
-                                        OpenSeats: Number(frm.txtOpenSeats.value),
-                                        TravelTime: frm.txtDepartureTime.value,
-                                        Email: frm.txtEmail.value,
-                                        StartAddress: frm.txtStartAddress.value, 
-                                        StartPoint: startPoint, 
-                                        Destination: frm.txtDestination.value,
-                                        EndPoint: endPoint,
-                                        DepartureTimeHR : Number(departureRes[0]),
-                                        DepartureTimeMin : Number(departureRes[1]),
-                                        DurationTimeHR : Number(durationRes[0]),
-                                        DurationTimeMin : Number(durationRes[1]),
-                                        DepartureAMPM : durselect,
-                                        TimeStamp : timestamp,
-                                        TripCost : frm.tripcost.value,
-                                        CostType : cost,
-                                        Date: date}, {
-                          success: function(rideposter){
-                              console.log("Save succeeded");
-                              $('#register-form').hide();
-                              $('#submit-close').hide();
-                              $('#alert1').show();
-                              setTimeout( "jQuery('#register').modal('hide');", 7000 );
-                              window.location.reload();
-                          },
-                          error: function(rideposter, error){
-                              console.log("Save failed with error: ", error);
-                              $('#alert2').show();
-                              setTimeout( "jQuery('#alert2').show();", 7000 );
-                          }
-                      });
-                  } else {
-                      alert('Your Email has not been verified.');
-                  }
+                  
+                  var rideposter = new Ride();
+                  rideposter.save({ Name: name,
+                                    OpenSeats: seats,
+                                    TravelTime: departure,
+                                    Email: email,
+                                    StartAddress: start, 
+                                    StartPoint: startPoint, 
+                                    Destination: end,
+                                    EndPoint: endPoint,
+                                    DepartureTimeHR : Number(departureRes[0]),
+                                    DepartureTimeMin : Number(departureRes[1]),
+                                    DurationTimeHR : Number(durationRes[0]),
+                                    DurationTimeMin : Number(durationRes[1]),
+                                    DepartureAMPM : durselect,
+                                    TimeStamp : timestamp,
+                                    TripCost : cost,
+                                    CostType : costtype,
+                                    Date: realdate}, {
+                      success: function(rideposter){
+                          console.log("Save succeeded");
+                          $('#post-form').hide();
+                          $('#submit-close').hide();
+                          $('#alert1').show();
+                          setTimeout( "jQuery('#register').modal('hide');", 7000 );
+                          window.location.reload();
+                      },
+                      error: function(rideposter, error){
+                          console.log("Save failed with error: ", error);
+                          $('#alert2').show();
+                          setTimeout( "jQuery('#alert2').show();", 7000 );
+                      }
+                  });
               }
             }
 
@@ -144,6 +145,31 @@
           function logout() {
               Parse.User.logOut();
               window.location.replace("rides.html");
+          }
+
+          // autocomplete for login modal
+          function autoComplete() {
+              autoCompleteStart = new google.maps.places.Autocomplete(
+                  (document.getElementById('start')),
+                  {types: []});
+              google.maps.event.addListener(autoCompleteStart, 'place_changed', function() {
+                  var startPlace = autoCompleteStart.getPlace();
+                  document.getElementById("startpointlat").value = startPlace.geometry.location.lat();
+                  document.getElementById("startpointlng").value = startPlace.geometry.location.lng();
+                  origin = "(" + document.getElementById("startpointlat").value  + ", " + document.getElementById("startpointlng").value + ")";   
+                  console.log(origin);      
+              });
+
+              autoCompleteEnd = new google.maps.places.Autocomplete(
+                 (document.getElementById('end')),
+                 {types: []});
+              google.maps.event.addListener(autoCompleteEnd, 'place_changed', function() {
+                  var endPlace = autoCompleteEnd.getPlace();
+                  document.getElementById("endpointlat").value = endPlace.geometry.location.lat();
+                  document.getElementById("endpointlng").value = endPlace.geometry.location.lng();
+                  destination = "(" + document.getElementById("endpointlat").value  + ", " + document.getElementById("endpointlng").value + ")";   
+                  console.log(destination);      
+              });
           }
         </script>
     </head>
@@ -249,7 +275,7 @@
 
                     <!-- BODY -->
                     <div class="modal-body">
-                        <form class="form-horizontal" role="form">
+                        <form class="form-horizontal" role="form" id="post-form">
                             <!-- name -->
                             <div class="form-group">
                                 <!-- <label for="name" class="col-sm-2 control-label">Name</label> -->
@@ -285,9 +311,9 @@
                             <div class="form-group">
                                 <!-- <label for="start" class="col-sm-2 control-label">Start Address</label> -->
                                 <div class="col-sm-12">
-                                  <input type="text" class="form-control" id="start2" name="txtStartAddress" placeholder="Start Address">
-                                  <input type="hidden" class="form-control" id="startpointlat2" name="txtStartPointLat">
-                                  <input type="hidden" class="form-control" id="startpointlng2" name="txtStartPointLng">
+                                  <input type="text" class="form-control" id="start" name="txtStartAddress" placeholder="Start Address">
+                                  <input type="hidden" class="form-control" id="startpointlat" name="txtStartPointLat">
+                                  <input type="hidden" class="form-control" id="startpointlng" name="txtStartPointLng">
                                 </div>
                             </div>
 
