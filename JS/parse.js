@@ -12,37 +12,42 @@ query.find({
     for (var i=0;i < results.length;i++){
       var tripdate = results[i].get('Date');
       tripdate.setHours(tripdate.getHours()+5);
-      console.log(tripdate);
+      // console.log(tripdate);
       tripdate = String(tripdate);
       tripdate = tripdate.substr(0, 15);
       var time = results[i].get('TravelTime');
       var am_pm = results[i].get('DepartureAMPM');
       time = time.concat(" " + am_pm);
-      console.log(time);
+      // console.log(time);
       var driver = results[i].get('Name');
+      var email = results[i].get('Email');
       var seats = results[i].get('OpenSeats');
       var cost = results[i].get('TripCost');
       var costtype = results[i].get('CostType');
       var destination = results[i].get('Destination');
-      var dest = destination.split(',').slice(0,2).join();
+      var dest = destination.split(',').slice(0,3).join();
+      var start = results[i].get('StartAddress');
+      var end = results[i].get('EndAddress');
+      var truncDate = String(tripdate);
+      truncDate = truncDate.substr(0, 15);
       counter += 1;
       // var btn1 = "<a href='#'><i class='fa fa-link btn-email'>  connect with driver</i></a>";
-      var btn2 = "<a href='#' class='join'><i class='fa fa-plus-square btn-sign'>  join ride</i></a>";
-      // var btn2 = ""
+      var message="Hi "+driver+",%0D%0DI'd like to join your ride from "+start+" to "+destination+" on "+truncDate +" at " + time + " " + am_pm + ". Please let me know if I can join.%0D%0DThanks,%0D";
+      var btn2 = "<a href='mailto:"+email+"?subject=I'd like to join your ride!&body="+message+" class='join'><span><i class='fa fa-plus-square btn-sign'></i>  join ride</span></a>";
       // var DateTime = date + " " + results[i].get('TravelTime');
-      q.append('<div class="ride" data-date="'+tripdate+'" data-time="'+time+'" data-start="'+results[i].get('StartAddress')+'" data-end="'+results[i].get('EndAddress')+'" data-attribute="'+results[i].id+ '"><div class="count">'+counter+'</div><div class="content-shown"><p class="end">'+dest+'<span>'+btn2+'</span></p><p class="start"><span>Leaving From: </span>'+results[i].get('StartAddress')+'</p><p class="date"><span>Trip Date: </span>'+tripdate+'</p><p class="time"><span>Time: </span>'+time+'</p><p class="driver"><span>Driver: </span>'+driver+'</p><p class="seats"><span>Available seats: </span>'+seats+'</p><p class="cost"><span>Trip Cost: </span>'+cost+' ('+costtype+')</p><a class="more">click to display more info</a></div><div class="timeline"><div class="waypoint"><div class="circle"></div><p>Start</p></div><div class="line line-drive"><div class="piece"></div><p></p></div><div class="waypoint"><div class="circle"></div><p>Arrive</p></div><div class="line line-dest"><div class="piece"></div><p></p></div><div class="waypoint"><div class="circle"></div><p>Leave</p></div><div class="line line-drive"><div class="piece"></div><p></p></div><div class="waypoint"><div class="circle"></div><p>End</p></div></div></div>');  
+      q.append('<div class="ride" data-date="'+tripdate+'" data-time="'+time+'" data-start="'+start+'" data-end="'+end+'" data-attribute="'+results[i].id+ '"><div class="count">'+counter+'</div><div class="content-shown"><p class="end">'+dest+'<span>'+btn2+'</span></p><p class="start"><span>Leaving From: </span>'+start+'</p><p class="date"><span>Trip Date: </span>'+tripdate+'</p><p class="time"><span>Time: </span>'+time+'</p><p class="driver"><span>Driver: </span>'+driver+'</p><p class="seats"><span>Available seats: </span>'+seats+'</p><p class="cost"><span>Trip Cost: </span>'+cost+' ('+costtype+')</p><a class="more">click to display more info</a></div><div class="timeline"><div class="waypoint"><div class="circle"></div><p>Start</p></div><div class="line line-drive"><div class="piece"></div><p></p></div><div class="waypoint"><div class="circle"></div><p>Arrive</p></div><div class="line line-dest"><div class="piece"></div><p></p></div><div class="waypoint"><div class="circle"></div><p>Leave</p></div><div class="line line-drive"><div class="piece"></div><p></p></div><div class="waypoint"><div class="circle"></div><p>End</p></div></div></div>');  
     }
 
 
     $('.ride').click( function(){
       var id = $(this).attr('data-attribute');
       var info = $(this).find('.content-hidden');
-      var more = $(this).find('.more');
+      var join = $(this).find('.join');
       var s = $(this).attr('data-start');
       var e = $(this).attr('data-end');
-      console.log(s)
-      console.log(e)
-      console.log('#######')
+      // console.log(s)
+      // console.log(e)
+      // console.log('#######')
       //if for some reason we end up with undefined variables
       if(!id || !info) {
         console.log("Error: could not set id or info variables.");
@@ -89,16 +94,16 @@ query.find({
 
 //adds the chosen information into the appropriate div
 //error checking should be
-function insertInfo(more, driver, email, seats, sAdd, eAdd, date, TravelTime, Destination, ampm){
-  var truncDate = String(date);
-  truncDate = truncDate.substr(0, 15);
-  var message="Hi "+driver+",%0D%0DI'd like to join your ride from "+sAdd+" to "+Destination+" on "+truncDate +
-  " at " + TravelTime + " " + ampm + ". Please let me know if I can join.%0D%0DThanks,%0D";
-  more.html('<a class="join-button" href="mailto:'+email+'?subject=I\'d like to join your ride!&body='+message+'">Join this ride</a>');
-  // info.html('<p class="driverName">Driver: ' + driver +'</p><p class="seats">Open Seats: '
-  //           +seats +'</p><a class="join-button" href="mailto:'+email+'?subject=I\'d like to join your ride!&body='+message+'">Join this ride</a>');
-  return 0;
-}
+// function insertInfo(more, driver, email, seats, sAdd, eAdd, date, TravelTime, Destination, ampm){
+//   var truncDate = String(date);
+//   truncDate = truncDate.substr(0, 15);
+//   var message="Hi "+driver+",%0D%0DI'd like to join your ride from "+sAdd+" to "+Destination+" on "+truncDate +
+//   " at " + TravelTime + " " + ampm + ". Please let me know if I can join.%0D%0DThanks,%0D";
+//   more.html('<a class="join-button" href="mailto:'+email+'?subject=I\'d like to join your ride!&body='+message+'">Join this ride</a>');
+//   // info.html('<p class="driverName">Driver: ' + driver +'</p><p class="seats">Open Seats: '
+//   //           +seats +'</p><a class="join-button" href="mailto:'+email+'?subject=I\'d like to join your ride!&body='+message+'">Join this ride</a>');
+//   return 0;
+// }
 
 
 // function customerSupport() {
