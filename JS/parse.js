@@ -12,13 +12,13 @@ query.find({
     for (var i=0;i < results.length;i++){
       var tripdate = results[i].get('Date');
       tripdate.setHours(tripdate.getHours()+5);
-      console.log(tripdate);
+
       tripdate = String(tripdate);
       tripdate = tripdate.substr(0, 15);
       var time = results[i].get('TravelTime');
       var am_pm = results[i].get('DepartureAMPM');
       time = time.concat(" " + am_pm);
-      console.log(time);
+
       var driver = results[i].get('Name');
       var seats = results[i].get('OpenSeats');
       var cost = results[i].get('TripCost');
@@ -40,9 +40,8 @@ query.find({
       var more = $(this).find('.more');
       var s = $(this).attr('data-start');
       var e = $(this).attr('data-end');
-      console.log(s)
-      console.log(e)
-      console.log('#######')
+
+
       //if for some reason we end up with undefined variables
       if(!id || !info) {
         console.log("Error: could not set id or info variables.");

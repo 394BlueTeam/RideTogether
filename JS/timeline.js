@@ -2,8 +2,7 @@
 //var originIcon = 'https://chart.googleapis.com/chart?chst=d_map_pin_letter&chld=O|FFFF00|000000';
 
 function calculateDistances(origin, destination, destTime) {
-  console.log(origin)
-  console.log(destination)
+
   var service = new google.maps.DistanceMatrixService();
   service.getDistanceMatrix(
     {
