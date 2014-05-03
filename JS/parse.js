@@ -408,9 +408,9 @@ function postRegister(){
     $('#register-form-post').css('display', 'none');
     $('#register-switch').css('display', 'none');
     $('#login-form-post').css('display', 'block');
-    $('#post-login-button').css('position', 'absolute');
-    $('#post-login-button').css('width', '80%');
-    $('#post-login-button').css('right', '17%');
+    // $('#post-login-button').css('position', 'absolute');
+    // $('#post-login-button').css('width', '80%');
+    // $('#post-login-button').css('right', '17%');
 }
 
 function postLogin() {

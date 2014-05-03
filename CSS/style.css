@@ -498,21 +498,20 @@ h2, p, ol, ul, li {
     display: none;
     overflow: hidden;
     position: absolute;
-    left: 25%;
-        /*float: right;*/
 }
 
 #login-form-post, #register-form-post{
     margin: 0 auto;
-    max-width:800px; 
+    margin-left: 7%;
+    margin-right: 7%;
 }
 
 #register-form-post .col-sm-10{
     margin-bottom: 10px;
 }
 #register-form-post h2{
-    text-align: center;
-    width: 85%;
+    /*text-align: center;*/
+    /*width: 85%;*/
 }
 
 #register-form-post .col-sm-offset-2.col-sm-10{
@@ -524,7 +523,7 @@ h2, p, ol, ul, li {
 }
 
 #register-form-post form{
-    left: 5%;
+    /*left: 5%;*/
 }
 
 #post-login-button {
