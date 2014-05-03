@@ -83,8 +83,9 @@
                         success: function(rideposter){
                             console.log("save succeeded");
                             $('#register-form').hide();
+                            $('#submit-close').hide();
                             $('#s-alert1').show();
-                            setTimeout( "jQuery('#s-alert1').hide();", 7000 );
+                            setTimeout( "jQuery('#signup').modal('hide');", 7000 );
                         },
                         error: function(rideposter, error){
                             console.log("Error: ", error);
