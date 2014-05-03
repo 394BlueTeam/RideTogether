@@ -74,7 +74,7 @@
                 else {
                     var password = $("input[name=Password]").val();
                     var name = $("input[name=Name]").val();
-                    var cartype = $("input[name=CarType]").val();
+                    var cartype = $("#type").val();
                     var homeaddress = $("input[name=HomeAddress]").val();
                     var num = Math.floor((Math.random()*4)+1);
 
@@ -83,9 +83,8 @@
                         success: function(rideposter){
                             console.log("save succeeded");
                             $('#register-form').hide();
-                            $('#submit-close').hide();
                             $('#s-alert1').show();
-                            setTimeout( "jQuery('#register').modal('hide');", 7000 );
+                            setTimeout( "jQuery('#s-alert1').hide();", 7000 );
                         },
                         error: function(rideposter, error){
                             console.log("Error: ", error);
@@ -227,7 +226,7 @@
                                 <!-- car type -->
                                 <div class="form-group">
                                     <div class="col-sm-12">
-                                        <select class="form-control" id="seats" name="CarType">
+                                        <select class="form-control" id="type" name="CarType">
                                             <option>Car Type - choose one only if you plan to offer rides</option>
                                             <option>Sedan</option>
                                             <option>Coupe</option>

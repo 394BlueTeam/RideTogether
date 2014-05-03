@@ -32,6 +32,7 @@
             var destination;  
             var currentUser;
             var isVerified;
+
             function enroll(frm){
               var email = $("input[name=txtEmail]").val();
               var end = "@u.northwestern.edu";
@@ -39,20 +40,31 @@
               var len2 = end.length;                  // length of u.northw.....
               var pos = len - len2;                   // start of slice - the part with @u.....
               var ending = email.slice(pos, len);     // supposed to be the @u.northw.... ending
+              var name = $("input[name=txtName]").val();
+              var car = $("#cartype").val();
 
               if (email == "") {
-                alert("Please enter a valid u.northwestern.edu email address");
+                alert('Please enter a @u.northwestern.edu email address and try again.');
               }
 
               else if (ending != end) {
-                alert("Please enter a valid u.northwestern.edu email address");
+                alert('Please enter a @u.northwestern.edu email address and try again.');
               }
-              else if ((frm.txtName.value == "") || (frm.txtOpenSeats.value == "open seats in your car") || (frm.date.value == '') || (frm.txtDurationTime.value == '') || (frm.txtDepartureTime.value==''))
-                  alert("Required field");
+
+              else if ((frm.txtName.value == "") || (frm.txtOpenSeats.value == "open seats in your car") || (frm.date.value == '') || (frm.txtDurationTime.value == '') || (frm.txtDepartureTime.value=='')) {
+                alert('Required field');
+              }      
+              
               else {
+                  // autofill forms since the user is already logged in
+                  $("input[name=signup-name]").val(name);
+                  $("input[name=signup-email]").val(email);
+                  $("input[name=UserNameLogin]").val(email);
+                  $("#type2").val(car);
+
                   console.log(frm.date.value);
                   var date = new Date(frm.date.value);
-                  var car = $("input[name=CarType]").val();
+                  
 
                   var startPoint = new Parse.GeoPoint({
                                        latitude: parseFloat(frm.txtStartPointLat.value),
@@ -109,7 +121,7 @@
 
                   if (isVerified) {
                       var rideposter = new Ride();
-                      rideposter.save({ Name: frm.txtName.value,
+                      rideposter.save({ Name: name,
                                         CarType: car,
                                         OpenSeats: Number(frm.txtOpenSeats.value),
                                         TravelTime: frm.txtDepartureTime.value,
@@ -137,7 +149,10 @@
                           }
                       });
                   } else {
-                      alert('Your Email has not been verified.');
+                      alert('To continue, please login or register.           Already registered? Please check your email address has been verified. Then, login.');
+                      Parse.User.logOut();
+                      var loginForm = $('#register-form-post');
+                      loginForm.css('display', 'block');
                   }
               }
             }
@@ -183,7 +198,7 @@
                 <div class="form-group">
                     <label for="type" class="col-sm-2 control-label" id="openseats">Car Type</label>
                     <div class="col-sm-7">
-                        <select class="form-control" id="type" name="CarType">
+                        <select class="form-control" id="cartype" name="CarType">
                             <option>size of your car</option>
                             <option>Sedan</option>
                             <option>Coupe</option>
@@ -233,10 +248,6 @@
                     <label for="departuretime" class="col-sm-2 control-label">Departure Time</label>
                     <div class="col-sm-10">
                       <input type="text" class="form-control" id="departuretime" name="txtDepartureTime" placeholder="ex: 1:00">
-                      <!-- <select class="form-control" id="durselect" name="durselect">
-                        <option value="AM">AM</option>
-                        <option selected value="PM">PM</option>
-                      </select> -->
 
                       <!-- radio buttons -->
                       <div class="radio radio-inline">
@@ -299,84 +310,110 @@
                   </div>
                 </div>
             </form>
-      </div>
+        </div>
 
-
-                <div id="register-form-post">
-                  <div id="register-form-heading">
-                    <h2>You must register to post a ride</h2>
-                  </div>
-                      <form role="form">
-                        <!-- name -->
-                        <div class="col-sm-10">
-                          <input type="text" class="form-control" id="name" name="signup-name" placeholder="Name">
-                        </div>
-
-                        <!-- email -->
-                        <div class="col-sm-10">
-                          <input type="email" class="form-control" id="email" name="signup-email" placeholder="Email">
-                        </div>
-
-                         <!-- password -->
-                                <div class="form-group">
-                                    <div class="col-sm-10">
-                                        <input type="password" class="form-control" id="password" name="Password" placeholder="Password">
-                                    </div>
-                                </div>
-
-                        <!-- car type -->
-                        <div class="col-sm-10">
-                          <select class="form-control" id="seats" name="signup-CarType">
-                            <option>Car Type</option>
-                            <option>Sedan</option>
-                            <option>Coupe</option>
-                            <option>SUV</option>
-                            <option>Truck</option>
-                          </select>
-                        </div>
+        <!-- --------- REGISTRATION FORM ------------- -->
+        <div id="register-form-post">
+          <div id="register-form-heading"><h2>You must register to post a ride</h2></div>
           
-                        <!-- home address -->
-                        <div class="col-sm-10">
-                          <input type="text" class="form-control" id="home" name="signup-HomeAddress" placeholder="Home Address">
-                        </div>
-
-                      <!-- submit button -->
-                      <div class="col-sm-offset-2 col-sm-10">
-                        <div class="btn btn-default btn-lg" onclick="signUp()">Sign Up </div> 
-                        <span>Already registered?</span>
-                        <div  id="register-switch" class="btn btn-default btn-lg" onclick="postRegister()">Login </div>
-                      </div>
-                  </form>
-
+          <form role="form" id="register-form">
+                <!-- name -->
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="name" name="signup-name" placeholder="Name">
                 </div>
-                  <div id="s-alert1" class="alert alert-success">
-                                <strong>Success!</strong> To verify your account, please look for an email from "no-reply@parseapps.com" and click the link in the email.
-                            </div>
 
-                <div id="login-form-post">
-                        <h2>You must login to post a ride</h2>
+                <!-- email -->
+                <div class="col-sm-10">
+                  <input type="email" class="form-control" id="email" name="signup-email" placeholder="Email">
+                </div>
 
-                        <form class="form-horizontal" role="form">
-                                <!-- Email -->
-                                <div class="form-group">
-                                    <div class="col-sm-12">
-                                        <input type="text" class="form-control" id="usernamelogin" name="UserNameLogin" placeholder="Email">
-                                    </div>
-                                </div>
+                <!-- password -->
+                <div class="col-sm-10">
+                    <input type="password" class="form-control" id="password" name="Password" placeholder="Password">
+                </div>
 
-                                <!-- Password -->
-                                <div class="form-group">
-                                    <div class="col-sm-12">
-                                        <input type="password" class="form-control" id="passwordlogin" name="PasswordLogin"placeholder="Password">
-                                    </div>
-                                </div>
+                <!-- car type -->
+                <div class="col-sm-10">
+                  <select class="form-control" id="type2" name="signup-CarType">
+                    <option>Car Type</option>
+                    <option>Sedan</option>
+                    <option>Coupe</option>
+                    <option>SUV</option>
+                    <option>Truck</option>
+                  </select>
+                </div>
+  
+                <!-- home address -->
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="home" name="signup-HomeAddress" placeholder="Home Address">
+                </div>
 
-                                <div class="col-sm-offset-2 col-sm-10">
-                                  <div id="post-login-button" class="btn btn-default btn-lg" onclick="postLogin()">Login </div>
-                                </div>
-                            </form>
-                      </div>
+                <!-- alerts -->
+                <div id="alert1" class="alert alert-danger col-sm-10">
+                    <strong>Error:</strong> Please enter a @u.northwestern.edu email address and try again.
+                </div>
 
+                <div id="alert4" class="alert alert-danger col-sm-10">
+                    <strong>Error:</strong> Username/email is already registered 
+                    <ul style="text-align: left; padding-left: 15px; ">
+                        <li><strong>Forgot your password? </strong><a href="#">Click here</a> to send it to your email address</li>
+                        <li><strong>Not your account? </strong>If you have reason to believe an account was falsely created under your name, <a href="#">contact us here</a></li>
+                    </ul>
+                </div>
+
+                <div id="alert5" class="alert alert-danger col-sm-10">
+                    <strong>Error:</strong> Please enter a password
+                </div>
+
+                <!-- form footer -->
+                <div class="col-sm-offset-2 col-sm-10" id="form-buttons">
+                  <div class="btn btn-default btn-lg" onclick="signUp()">Sign Up </div> 
+                  <span>Already registered?</span>
+                  <div  id="register-switch" class="btn btn-default btn-lg" onclick="postRegister()">Login </div>
+                </div>
+          </form>
+
+           <div id="s-alert1" class="alert alert-success col-sm-10">
+              <strong>Success!</strong> To verify your account, please look for an email from "no-reply@parseapps.com" and click the link in the email.
+          </div>
+
+        </div>
+
+        <div id="login-form-post">
+          <h2>You must login to post a ride</h2>
+
+          <form class="form-horizontal" role="form">
+              <!-- Email -->
+              <div class="form-group">
+                  <div class="col-sm-12">
+                      <input type="text" class="form-control" id="usernamelogin" name="UserNameLogin" placeholder="Email">
+                  </div>
+              </div>
+
+              <!-- Password -->
+              <div class="form-group">
+                  <div class="col-sm-12">
+                      <input type="password" class="form-control" id="passwordlogin" name="PasswordLogin"placeholder="Password">
+                  </div>
+              </div>
+
+              <!-- alerts -->
+              <div id="alert6" class="alert alert-danger">
+                <strong>Error:</strong> User's account isn't verified. Please look for an email from "no-reply@parseapps.com" and click the link in the email
+              </div>
+
+              <div id="alert3" class="alert alert-danger">
+                <strong>Error:</strong> Invalid login parameters. Please check that you have registered for an account and that your email address has been verified. Then, try again.
+              </div>
+
+              <!-- Submit buttons -->
+              <div class="form-group" id="submit-post">
+                <div class="col-sm-offset-2 col-sm-10">
+                  <input id="post-login-button" type="button" class="btn btn-default" onclick="postLogin()" value="Login">
+                </div>
+              </div>
+          </form>
+        </div>
 
     </body>
 </html>
