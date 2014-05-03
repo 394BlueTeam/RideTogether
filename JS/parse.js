@@ -276,12 +276,8 @@ $(document).ready(function() {
       // autofill forms since the user is already logged in
       $("input[name=txtName]").val(name);
       $("input[name=txtEmail]").val(email);
-<<<<<<< HEAD
-      $("input[name=txtStartAddress]").val(home);
-=======
       //$("input[name=txtStartAddress]").val(home);
       $("#type").val(car);
->>>>>>> FETCH_HEAD
     }
 
     else if(!currentUser) {
